@@ -167,6 +167,47 @@
 | FORMAL-V3-4LEVEL-HYBRID | 51.10 | 混合模型四级量化平均准确率（%） | 同上 | 同上 | 95% CI 47.82–54.38 | 42–44 | 同上 | 2026-09-17 |
 | FORMAL-V3-PAIRED-ROBUST-CLEAN | -1.72 | 鲁棒 D2NN 减基准 D2NN 干净准确率（百分点） | `results/formal_fashion_mnist_v3/robustness_summary/paired_comparisons.jsonl` | 同上 | 由 `baseline minus robust=+1.72` 变换方向；95% CI -3.33 至 -0.10 | 42–44 | 同上 | 2026-09-17；干净代价方向与 MNIST 一致 |
 
+## C2-b. 量化感知训练的三条前向路径（外部评估意见 #4）
+
+**问题**：QAT checkpoint 的验证/测试条件是 `clean_continuous`，因此此前引用的"干净准确率 61.74%"
+测量的是**未量化的潜在参数**，而该配置不会被部署。评估方要求把前向路径分别命名并核查。
+
+**核查方式**：
+- P1（潜在连续测试）与 P2（四级标称测试）由 `simulator/probe_forward_paths.py` 实测
+  （`results/formal_mnist_v2/forward_path_probe.json`，完整 10 000 测试集）。
+- P3（四级受扰测试）由冻结的逐样本预测直接复算
+  （`results/formal_mnist_v2/p3_four_level_disturbed.json`），未做新的前向计算。
+
+| Metric ID | 数值 | 单位 | 数据文件 | 配置 | 种子 |
+|---|---:|---|---|---|---|
+| FORMAL-QAT-PATHS-001 | 61.74 | QAT 混合模型潜在连续测试准确率（%） | `results/formal_mnist_v2/forward_path_probe.json` | 学习连续相位，无量化、无扰动 | 42–46 |
+| FORMAL-QAT-PATHS-002 | 94.10 | QAT 混合模型四级标称测试准确率（%） | 同上 | 由学习相位重建的四级掩模，无错位/噪声 | 42–46 |
+| FORMAL-QAT-PATHS-003 | 94.10 | QAT 混合模型四级受扰测试准确率（%） | `results/formal_mnist_v2/p3_four_level_disturbed.json` | 四级掩模 + 部署采样；与 P2 逐种子相同 | 42–46 |
+| FORMAL-QAT-PATHS-004 | 95.68 / 67.69 | 混合模型的 P1 / P2（%） | 同上两个文件 | 同上 | 42–46 |
+| FORMAL-QAT-PATHS-005 | 89.56 / 59.51 | 基准 D²NN 的 P1 / P2（%） | 同上 | 同上 | 42–46 |
+
+**结论**：P2 与 P3 在全部方法、全部种子上完全一致，说明本文的四级扰动仅改变相位取值，
+错位/传播距离误差/探测器噪声在该条件下贡献为零。量化感知训练的 61.74% 对应其非部署配置；
+在其部署配置下为 94.10%。因此"以干净准确率换取量化收益"的表述已被替换为
+"不同部署假设下的最优选择不同"。
+
+**实现细节**（评估方要求交代）：量化先对相位取 $2\pi$ 余数，再按步长 $\Delta=2\pi/4$ 四舍五入；
+训练时使用直通估计（`d2nn.py` 中 `straight_through=self.training`），评估时关闭；
+该模型的 checkpoint 按**连续相位**验证准确率选择，选择准则与部署条件不一致，已在正文披露。
+
+## C2-c. 训练曲线与三 epoch 预算（外部评估意见 #7）
+
+由 checkpoint manifest 的 `history` 字段提取，无需新训练。
+
+| Metric ID | 数值 | 单位 | 数据文件 |
+|---|---:|---|---|
+| FORMAL-CURVES-001 | 3.71 | QAT 混合模型第三个 epoch 的验证准确率单轮增益（百分点） | `results/training_curves/training_curves_summary.json` |
+| FORMAL-CURVES-002 | 0.98 | 鲁棒 D²NN 末期增益（百分点） | 同上 |
+| FORMAL-CURVES-003 | -2.05 | 相位滤波 D²NN 末期增益（百分点，验证准确率单调下降） | 同上 |
+
+多数方法在第三个 epoch 仍在上升，Fashion-MNIST 上三种方法末期增益为 0.59 至 1.41 个百分点。
+因此全部比较限定为"三个 epoch 预算下"的结果，不能推断架构能力上界。
+
 ## C4. 正式 MNIST v4 消融与鲁棒方法对照（外部评审意见 #5/#6）
 
 协议：`FORMAL_EXPERIMENT_PROTOCOL_V4.json`，`supersedes` v2；MNIST，训练种子 42–44（n=3），

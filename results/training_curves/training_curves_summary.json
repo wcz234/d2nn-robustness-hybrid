@@ -1,0 +1,160 @@
+{
+  "mnist_v1_n3": {
+    "baseline_d2nn": {
+      "n_seeds": 3,
+      "val_accuracy_by_epoch": [
+        87.013,
+        87.98,
+        88.253
+      ],
+      "final_epoch_gain_pp": 0.273,
+      "still_improving": false
+    },
+    "robust_d2nn": {
+      "n_seeds": 3,
+      "val_accuracy_by_epoch": [
+        85.167,
+        86.333,
+        87.007
+      ],
+      "final_epoch_gain_pp": 0.673,
+      "still_improving": true
+    },
+    "hybrid": {
+      "n_seeds": 2,
+      "val_accuracy_by_epoch": [
+        92.73,
+        94.7,
+        95.4
+      ],
+      "final_epoch_gain_pp": 0.7,
+      "still_improving": true
+    },
+    "electronic": {
+      "n_seeds": 3,
+      "val_accuracy_by_epoch": [
+        92.58,
+        93.827,
+        94.22
+      ],
+      "final_epoch_gain_pp": 0.393,
+      "still_improving": false
+    }
+  },
+  "mnist_v2_n5": {
+    "baseline_d2nn": {
+      "n_seeds": 5,
+      "val_accuracy_by_epoch": [
+        87.228,
+        88.152,
+        88.408
+      ],
+      "final_epoch_gain_pp": 0.256,
+      "still_improving": false
+    },
+    "robust_d2nn": {
+      "n_seeds": 5,
+      "val_accuracy_by_epoch": [
+        85.176,
+        86.204,
+        87.188
+      ],
+      "final_epoch_gain_pp": 0.984,
+      "still_improving": true
+    },
+    "hybrid": {
+      "n_seeds": 5,
+      "val_accuracy_by_epoch": [
+        93.052,
+        94.928,
+        95.2
+      ],
+      "final_epoch_gain_pp": 0.272,
+      "still_improving": false
+    },
+    "hybrid_qat": {
+      "n_seeds": 5,
+      "val_accuracy_by_epoch": [
+        51.352,
+        56.54,
+        60.252
+      ],
+      "final_epoch_gain_pp": 3.712,
+      "still_improving": true
+    },
+    "lenet5": {
+      "n_seeds": 5,
+      "val_accuracy_by_epoch": [
+        97.288,
+        97.96,
+        97.912
+      ],
+      "final_epoch_gain_pp": -0.048,
+      "still_improving": false
+    }
+  },
+  "mnist_v4_n3": {
+    "phase_filtered_d2nn": {
+      "n_seeds": 3,
+      "val_accuracy_by_epoch": [
+        77.34,
+        75.293,
+        73.247
+      ],
+      "final_epoch_gain_pp": -2.047,
+      "still_improving": false
+    },
+    "hybrid_linear_head": {
+      "n_seeds": 3,
+      "val_accuracy_by_epoch": [
+        93.647,
+        95.533,
+        96.473
+      ],
+      "final_epoch_gain_pp": 0.94,
+      "still_improving": true
+    },
+    "hybrid_pool4": {
+      "n_seeds": 3,
+      "val_accuracy_by_epoch": [
+        92.7,
+        94.92,
+        96.073
+      ],
+      "final_epoch_gain_pp": 1.153,
+      "still_improving": true
+    }
+  },
+  "fashion_mnist_v3_n3": {
+    "baseline_d2nn": {
+      "n_seeds": 3,
+      "val_accuracy_by_epoch": [
+        76.293,
+        77.953,
+        79.16
+      ],
+      "final_epoch_gain_pp": 1.207,
+      "still_improving": true
+    },
+    "robust_d2nn": {
+      "n_seeds": 3,
+      "val_accuracy_by_epoch": [
+        74.773,
+        76.8,
+        77.387
+      ],
+      "final_epoch_gain_pp": 0.587,
+      "still_improving": true
+    },
+    "hybrid": {
+      "n_seeds": 3,
+      "val_accuracy_by_epoch": [
+        78.513,
+        81.46,
+        82.867
+      ],
+      "final_epoch_gain_pp": 1.407,
+      "still_improving": true
+    }
+  }
+}

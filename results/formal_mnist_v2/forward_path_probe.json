@@ -1,0 +1,603 @@
+{
+  "levels": 4,
+  "device": "cpu",
+  "groups": {
+    "hybrid_qat": {
+      "per_checkpoint": [
+        {
+          "method_id": "hybrid_qat",
+          "checkpoint": "D:\\项目\\基于D2NN\\artifacts\\formal_mnist_v2\\best_mnist.formal_mnist_v2_hybrid_qat_seed42.pth",
+          "training_seed": 42,
+          "sample_scope": {
+            "selection": "full_test",
+            "sample_count": 10000,
+            "full_test_samples": 10000
+          },
+          "latent_continuous_test": 0.6413999795913696,
+          "quantized_nominal_test": 0.9429000020027161,
+          "gap_nominal_minus_latent": 0.30150002241134644,
+          "phase_statistics": {
+            "layer_1": {
+              "phase_std_rad": 0.976443350315094,
+              "quantization_residual_mean_rad": 1.534071445465088,
+              "quantization_residual_max_rad": 7.065702438354492,
+              "total_variation_rad_per_pixel": 0.6172215938568115
+            },
+            "layer_2": {
+              "phase_std_rad": 0.705498218536377,
+              "quantization_residual_mean_rad": 1.1420528888702393,
+              "quantization_residual_max_rad": 7.067800045013428,
+              "total_variation_rad_per_pixel": 0.3236626386642456
+            },
+            "layer_3": {
+              "phase_std_rad": 0.5697136521339417,
+              "quantization_residual_mean_rad": 0.8665300607681274,
+              "quantization_residual_max_rad": 6.587926387786865,
+              "total_variation_rad_per_pixel": 0.2329862117767334
+            }
+          }
+        },
+        {
+          "method_id": "hybrid_qat",
+          "checkpoint": "D:\\项目\\基于D2NN\\artifacts\\formal_mnist_v2\\best_mnist.formal_mnist_v2_hybrid_qat_seed43.pth",
+          "training_seed": 43,
+          "sample_scope": {
+            "selection": "full_test",
+            "sample_count": 10000,
+            "full_test_samples": 10000
+          },
+          "latent_continuous_test": 0.6833999752998352,
+          "quantized_nominal_test": 0.9488000273704529,
+          "gap_nominal_minus_latent": 0.2654000520706177,
+          "phase_statistics": {
+            "layer_1": {
+              "phase_std_rad": 0.9304724931716919,
+              "quantization_residual_mean_rad": 1.460984230041504,
+              "quantization_residual_max_rad": 7.066906929016113,
+              "total_variation_rad_per_pixel": 0.5850545167922974
+            },
+            "layer_2": {
+              "phase_std_rad": 0.7001242637634277,
+              "quantization_residual_mean_rad": 1.1174359321594238,
+              "quantization_residual_max_rad": 7.06442928314209,
+              "total_variation_rad_per_pixel": 0.3222489655017853
+            },
+            "layer_3": {
+              "phase_std_rad": 0.5902049541473389,
+              "quantization_residual_mean_rad": 1.0304983854293823,
+              "quantization_residual_max_rad": 6.926801681518555,
+              "total_variation_rad_per_pixel": 0.23313817381858826
+            }
+          }
+        },
+        {
+          "method_id": "hybrid_qat",
+          "checkpoint": "D:\\项目\\基于D2NN\\artifacts\\formal_mnist_v2\\best_mnist.formal_mnist_v2_hybrid_qat_seed44.pth",
+          "training_seed": 44,
+          "sample_scope": {
+            "selection": "full_test",
+            "sample_count": 10000,
+            "full_test_samples": 10000
+          },
+          "latent_continuous_test": 0.5784000158309937,
+          "quantized_nominal_test": 0.920199990272522,
+          "gap_nominal_minus_latent": 0.3417999744415283,
+          "phase_statistics": {
+            "layer_1": {
+              "phase_std_rad": 0.7573099136352539,
+              "quantization_residual_mean_rad": 1.2655497789382935,
+              "quantization_residual_max_rad": 6.970032215118408,
+              "total_variation_rad_per_pixel": 0.45728665590286255
+            },
+            "layer_2": {
+              "phase_std_rad": 0.6377266645431519,
+              "quantization_residual_mean_rad": 0.9919527173042297,
+              "quantization_residual_max_rad": 6.887700080871582,
+              "total_variation_rad_per_pixel": 0.2909015715122223
+            },
+            "layer_3": {
+              "phase_std_rad": 0.491301029920578,
+              "quantization_residual_mean_rad": 0.679308295249939,
+              "quantization_residual_max_rad": 6.335712432861328,
+              "total_variation_rad_per_pixel": 0.19244612753391266
+            }
+          }
+        },
+        {
+          "method_id": "hybrid_qat",
+          "checkpoint": "D:\\项目\\基于D2NN\\artifacts\\formal_mnist_v2\\best_mnist.formal_mnist_v2_hybrid_qat_seed45.pth",
+          "training_seed": 45,
+          "sample_scope": {
+            "selection": "full_test",
+            "sample_count": 10000,
+            "full_test_samples": 10000
+          },
+          "latent_continuous_test": 0.5909000039100647,
+          "quantized_nominal_test": 0.9434999823570251,
+          "gap_nominal_minus_latent": 0.35259997844696045,
+          "phase_statistics": {
+            "layer_1": {
+              "phase_std_rad": 0.8681374192237854,
+              "quantization_residual_mean_rad": 1.3897178173065186,
+              "quantization_residual_max_rad": 7.067854881286621,
+              "total_variation_rad_per_pixel": 0.5469027161598206
+            },
+            "layer_2": {
+              "phase_std_rad": 0.6790266036987305,
+              "quantization_residual_mean_rad": 1.1068222522735596,
+              "quantization_residual_max_rad": 7.028263568878174,
+              "total_variation_rad_per_pixel": 0.31424176692962646
+            },
+            "layer_3": {
+              "phase_std_rad": 0.5371846556663513,
+              "quantization_residual_mean_rad": 0.8400115966796875,
+              "quantization_residual_max_rad": 6.822237014770508,
+              "total_variation_rad_per_pixel": 0.2190329134464264
+            }
+          }
+        },
+        {
+          "method_id": "hybrid_qat",
+          "checkpoint": "D:\\项目\\基于D2NN\\artifacts\\formal_mnist_v2\\best_mnist.formal_mnist_v2_hybrid_qat_seed46.pth",
+          "training_seed": 46,
+          "sample_scope": {
+            "selection": "full_test",
+            "sample_count": 10000,
+            "full_test_samples": 10000
+          },
+          "latent_continuous_test": 0.5931000113487244,
+          "quantized_nominal_test": 0.949400007724762,
+          "gap_nominal_minus_latent": 0.3562999963760376,
+          "phase_statistics": {
+            "layer_1": {
+              "phase_std_rad": 0.94422847032547,
+              "quantization_residual_mean_rad": 1.527201771736145,
+              "quantization_residual_max_rad": 7.068492889404297,
+              "total_variation_rad_per_pixel": 0.576242208480835
+            },
+            "layer_2": {
+              "phase_std_rad": 0.6705291867256165,
+              "quantization_residual_mean_rad": 1.102253794670105,
+              "quantization_residual_max_rad": 7.068336486816406,
+              "total_variation_rad_per_pixel": 0.3125753402709961
+            },
+            "layer_3": {
+              "phase_std_rad": 0.6044677495956421,
+              "quantization_residual_mean_rad": 1.0012528896331787,
+              "quantization_residual_max_rad": 6.83034610748291,
+              "total_variation_rad_per_pixel": 0.23520544171333313
+            }
+          }
+        }
+      ],
+      "latent_continuous_test": {
+        "mean": 61.74399971961975,
+        "sd": 4.4004902475428676,
+        "values": [
+          64.13999795913696,
+          68.33999752998352,
+          57.840001583099365,
+          59.09000039100647,
+          59.31000113487244
+        ],
+        "ci95_t": [
+          53.276555274126395,
+          70.21144416511311
+        ]
+      },
+      "quantized_nominal_test": {
+        "mean": 94.09600019454956,
+        "sd": 1.1978030739576901,
+        "values": [
+          94.2900002002716,
+          94.88000273704529,
+          92.0199990272522,
+          94.34999823570251,
+          94.9400007724762
+        ],
+        "ci95_t": [
+          91.79118177322908,
+          96.40081861587004
+        ]
+      }
+    },
+    "hybrid": {
+      "per_checkpoint": [
+        {
+          "method_id": "hybrid",
+          "checkpoint": "D:\\项目\\基于D2NN\\artifacts\\formal_mnist_v2\\best_mnist.formal_mnist_v2_hybrid_seed42.pth",
+          "training_seed": 42,
+          "sample_scope": {
+            "selection": "full_test",
+            "sample_count": 10000,
+            "full_test_samples": 10000
+          },
+          "latent_continuous_test": 0.9538999795913696,
+          "quantized_nominal_test": 0.7846999764442444,
+          "gap_nominal_minus_latent": -0.16920000314712524,
+          "phase_statistics": {
+            "layer_1": {
+              "phase_std_rad": 0.8491078615188599,
+              "quantization_residual_mean_rad": 1.2385265827178955,
+              "quantization_residual_max_rad": 7.046814918518066,
+              "total_variation_rad_per_pixel": 0.5265542268753052
+            },
+            "layer_2": {
+              "phase_std_rad": 0.6700969338417053,
+              "quantization_residual_mean_rad": 0.9884049296379089,
+              "quantization_residual_max_rad": 7.002359390258789,
+              "total_variation_rad_per_pixel": 0.31673288345336914
+            },
+            "layer_3": {
+              "phase_std_rad": 0.4764695167541504,
+              "quantization_residual_mean_rad": 0.625956654548645,
+              "quantization_residual_max_rad": 6.968845367431641,
+              "total_variation_rad_per_pixel": 0.1972171813249588
+            }
+          }
+        },
+        {
+          "method_id": "hybrid",
+          "checkpoint": "D:\\项目\\基于D2NN\\artifacts\\formal_mnist_v2\\best_mnist.formal_mnist_v2_hybrid_seed43.pth",
+          "training_seed": 43,
+          "sample_scope": {
+            "selection": "full_test",
+            "sample_count": 10000,
+            "full_test_samples": 10000
+          },
+          "latent_continuous_test": 0.9613000154495239,
+          "quantized_nominal_test": 0.8428000211715698,
+          "gap_nominal_minus_latent": -0.1184999942779541,
+          "phase_statistics": {
+            "layer_1": {
+              "phase_std_rad": 0.8258686065673828,
+              "quantization_residual_mean_rad": 1.2557833194732666,
+              "quantization_residual_max_rad": 7.06031608581543,
+              "total_variation_rad_per_pixel": 0.5030790567398071
+            },
+            "layer_2": {
+              "phase_std_rad": 0.6531931161880493,
+              "quantization_residual_mean_rad": 0.9318736791610718,
+              "quantization_residual_max_rad": 7.022628307342529,
+              "total_variation_rad_per_pixel": 0.2890917658805847
+            },
+            "layer_3": {
+              "phase_std_rad": 0.43654710054397583,
+              "quantization_residual_mean_rad": 0.5271518230438232,
+              "quantization_residual_max_rad": 6.661649703979492,
+              "total_variation_rad_per_pixel": 0.1774694323539734
+            }
+          }
+        },
+        {
+          "method_id": "hybrid",
+          "checkpoint": "D:\\项目\\基于D2NN\\artifacts\\formal_mnist_v2\\best_mnist.formal_mnist_v2_hybrid_seed44.pth",
+          "training_seed": 44,
+          "sample_scope": {
+            "selection": "full_test",
+            "sample_count": 10000,
+            "full_test_samples": 10000
+          },
+          "latent_continuous_test": 0.9556000232696533,
+          "quantized_nominal_test": 0.6162999868392944,
+          "gap_nominal_minus_latent": -0.3393000364303589,
+          "phase_statistics": {
+            "layer_1": {
+              "phase_std_rad": 0.8686528205871582,
+              "quantization_residual_mean_rad": 1.3197944164276123,
+              "quantization_residual_max_rad": 7.0469465255737305,
+              "total_variation_rad_per_pixel": 0.5047750473022461
+            },
+            "layer_2": {
+              "phase_std_rad": 0.6071063280105591,
+              "quantization_residual_mean_rad": 0.8697032928466797,
+              "quantization_residual_max_rad": 7.024470329284668,
+              "total_variation_rad_per_pixel": 0.2651447355747223
+            },
+            "layer_3": {
+              "phase_std_rad": 0.44725093245506287,
+              "quantization_residual_mean_rad": 0.558905839920044,
+              "quantization_residual_max_rad": 6.492241859436035,
+              "total_variation_rad_per_pixel": 0.18184241652488708
+            }
+          }
+        },
+        {
+          "method_id": "hybrid",
+          "checkpoint": "D:\\项目\\基于D2NN\\artifacts\\formal_mnist_v2\\best_mnist.formal_mnist_v2_hybrid_seed45.pth",
+          "training_seed": 45,
+          "sample_scope": {
+            "selection": "full_test",
+            "sample_count": 10000,
+            "full_test_samples": 10000
+          },
+          "latent_continuous_test": 0.9539999961853027,
+          "quantized_nominal_test": 0.48539999127388,
+          "gap_nominal_minus_latent": -0.46860000491142273,
+          "phase_statistics": {
+            "layer_1": {
+              "phase_std_rad": 0.787670910358429,
+              "quantization_residual_mean_rad": 1.2214405536651611,
+              "quantization_residual_max_rad": 7.029569625854492,
+              "total_variation_rad_per_pixel": 0.47001200914382935
+            },
+            "layer_2": {
+              "phase_std_rad": 0.5647623538970947,
+              "quantization_residual_mean_rad": 0.8353660106658936,
+              "quantization_residual_max_rad": 6.73211669921875,
+              "total_variation_rad_per_pixel": 0.2573496103286743
+            },
+            "layer_3": {
+              "phase_std_rad": 0.396986186504364,
+              "quantization_residual_mean_rad": 0.43610018491744995,
+              "quantization_residual_max_rad": 6.249764919281006,
+              "total_variation_rad_per_pixel": 0.17554837465286255
+            }
+          }
+        },
+        {
+          "method_id": "hybrid",
+          "checkpoint": "D:\\项目\\基于D2NN\\artifacts\\formal_mnist_v2\\best_mnist.formal_mnist_v2_hybrid_seed46.pth",
+          "training_seed": 46,
+          "sample_scope": {
+            "selection": "full_test",
+            "sample_count": 10000,
+            "full_test_samples": 10000
+          },
+          "latent_continuous_test": 0.9591000080108643,
+          "quantized_nominal_test": 0.6550999879837036,
+          "gap_nominal_minus_latent": -0.30400002002716064,
+          "phase_statistics": {
+            "layer_1": {
+              "phase_std_rad": 0.8594131469726562,
+              "quantization_residual_mean_rad": 1.3411157131195068,
+              "quantization_residual_max_rad": 7.064719200134277,
+              "total_variation_rad_per_pixel": 0.5304681062698364
+            },
+            "layer_2": {
+              "phase_std_rad": 0.663289487361908,
+              "quantization_residual_mean_rad": 1.087403416633606,
+              "quantization_residual_max_rad": 6.768500328063965,
+              "total_variation_rad_per_pixel": 0.30107635259628296
+            },
+            "layer_3": {
+              "phase_std_rad": 0.47933125495910645,
+              "quantization_residual_mean_rad": 0.5892488956451416,
+              "quantization_residual_max_rad": 6.506826877593994,
+              "total_variation_rad_per_pixel": 0.1895769089460373
+            }
+          }
+        }
+      ],
+      "latent_continuous_test": {
+        "mean": 95.67800045013428,
+        "sd": 0.3287410100760416,
+        "values": [
+          95.38999795913696,
+          96.13000154495239,
+          95.56000232696533,
+          95.39999961853027,
+          95.91000080108643
+        ],
+        "ci95_t": [
+          95.04543542142446,
+          96.3105654788441
+        ]
+      },
+      "quantized_nominal_test": {
+        "mean": 67.68599927425385,
+        "sd": 14.138909028306967,
+        "values": [
+          78.46999764442444,
+          84.28000211715698,
+          61.62999868392944,
+          48.539999127388,
+          65.50999879837036
+        ],
+        "ci95_t": [
+          40.47984269114975,
+          94.89215585735795
+        ]
+      }
+    },
+    "baseline_d2nn": {
+      "per_checkpoint": [
+        {
+          "method_id": "baseline_d2nn",
+          "checkpoint": "D:\\项目\\基于D2NN\\artifacts\\formal_mnist_v2\\best_mnist.formal_mnist_v2_baseline_d2nn_seed42.pth",
+          "training_seed": 42,
+          "sample_scope": {
+            "selection": "full_test",
+            "sample_count": 10000,
+            "full_test_samples": 10000
+          },
+          "latent_continuous_test": 0.8925999999046326,
+          "quantized_nominal_test": 0.5774999856948853,
+          "gap_nominal_minus_latent": -0.3151000142097473,
+          "phase_statistics": {
+            "layer_1": {
+              "phase_std_rad": 0.6650594472885132,
+              "quantization_residual_mean_rad": 0.9420843124389648,
+              "quantization_residual_max_rad": 7.016579627990723,
+              "total_variation_rad_per_pixel": 0.5139169692993164
+            },
+            "layer_2": {
+              "phase_std_rad": 0.6787792444229126,
+              "quantization_residual_mean_rad": 1.0123642683029175,
+              "quantization_residual_max_rad": 6.829968452453613,
+              "total_variation_rad_per_pixel": 0.4677656292915344
+            },
+            "layer_3": {
+              "phase_std_rad": 0.46547645330429077,
+              "quantization_residual_mean_rad": 0.5695870518684387,
+              "quantization_residual_max_rad": 6.410113334655762,
+              "total_variation_rad_per_pixel": 0.31921857595443726
+            }
+          }
+        },
+        {
+          "method_id": "baseline_d2nn",
+          "checkpoint": "D:\\项目\\基于D2NN\\artifacts\\formal_mnist_v2\\best_mnist.formal_mnist_v2_baseline_d2nn_seed43.pth",
+          "training_seed": 43,
+          "sample_scope": {
+            "selection": "full_test",
+            "sample_count": 10000,
+            "full_test_samples": 10000
+          },
+          "latent_continuous_test": 0.8977000117301941,
+          "quantized_nominal_test": 0.6322000026702881,
+          "gap_nominal_minus_latent": -0.265500009059906,
+          "phase_statistics": {
+            "layer_1": {
+              "phase_std_rad": 0.7101469039916992,
+              "quantization_residual_mean_rad": 1.00874924659729,
+              "quantization_residual_max_rad": 7.04830265045166,
+              "total_variation_rad_per_pixel": 0.5408574342727661
+            },
+            "layer_2": {
+              "phase_std_rad": 0.6941303610801697,
+              "quantization_residual_mean_rad": 1.009218692779541,
+              "quantization_residual_max_rad": 7.0003485679626465,
+              "total_variation_rad_per_pixel": 0.4866042137145996
+            },
+            "layer_3": {
+              "phase_std_rad": 0.4806598424911499,
+              "quantization_residual_mean_rad": 0.6242559552192688,
+              "quantization_residual_max_rad": 6.601001739501953,
+              "total_variation_rad_per_pixel": 0.32560181617736816
+            }
+          }
+        },
+        {
+          "method_id": "baseline_d2nn",
+          "checkpoint": "D:\\项目\\基于D2NN\\artifacts\\formal_mnist_v2\\best_mnist.formal_mnist_v2_baseline_d2nn_seed44.pth",
+          "training_seed": 44,
+          "sample_scope": {
+            "selection": "full_test",
+            "sample_count": 10000,
+            "full_test_samples": 10000
+          },
+          "latent_continuous_test": 0.8988000154495239,
+          "quantized_nominal_test": 0.6327000260353088,
+          "gap_nominal_minus_latent": -0.2660999894142151,
+          "phase_statistics": {
+            "layer_1": {
+              "phase_std_rad": 0.7031735777854919,
+              "quantization_residual_mean_rad": 1.0001561641693115,
+              "quantization_residual_max_rad": 7.040727615356445,
+              "total_variation_rad_per_pixel": 0.5360659956932068
+            },
+            "layer_2": {
+              "phase_std_rad": 0.7081102132797241,
+              "quantization_residual_mean_rad": 1.0604362487792969,
+              "quantization_residual_max_rad": 7.051982879638672,
+              "total_variation_rad_per_pixel": 0.5013524889945984
+            },
+            "layer_3": {
+              "phase_std_rad": 0.48169252276420593,
+              "quantization_residual_mean_rad": 0.6010592579841614,
+              "quantization_residual_max_rad": 6.550324440002441,
+              "total_variation_rad_per_pixel": 0.32465726137161255
+            }
+          }
+        },
+        {
+          "method_id": "baseline_d2nn",
+          "checkpoint": "D:\\项目\\基于D2NN\\artifacts\\formal_mnist_v2\\best_mnist.formal_mnist_v2_baseline_d2nn_seed45.pth",
+          "training_seed": 45,
+          "sample_scope": {
+            "selection": "full_test",
+            "sample_count": 10000,
+            "full_test_samples": 10000
+          },
+          "latent_continuous_test": 0.894599974155426,
+          "quantized_nominal_test": 0.6018999814987183,
+          "gap_nominal_minus_latent": -0.29269999265670776,
+          "phase_statistics": {
+            "layer_1": {
+              "phase_std_rad": 0.6997610330581665,
+              "quantization_residual_mean_rad": 0.9876400232315063,
+              "quantization_residual_max_rad": 7.0520477294921875,
+              "total_variation_rad_per_pixel": 0.5305144786834717
+            },
+            "layer_2": {
+              "phase_std_rad": 0.7066793441772461,
+              "quantization_residual_mean_rad": 1.0527021884918213,
+              "quantization_residual_max_rad": 7.021823406219482,
+              "total_variation_rad_per_pixel": 0.4962584972381592
+            },
+            "layer_3": {
+              "phase_std_rad": 0.4860028326511383,
+              "quantization_residual_mean_rad": 0.5969579219818115,
+              "quantization_residual_max_rad": 6.446525573730469,
+              "total_variation_rad_per_pixel": 0.3273491859436035
+            }
+          }
+        },
+        {
+          "method_id": "baseline_d2nn",
+          "checkpoint": "D:\\项目\\基于D2NN\\artifacts\\formal_mnist_v2\\best_mnist.formal_mnist_v2_baseline_d2nn_seed46.pth",
+          "training_seed": 46,
+          "sample_scope": {
+            "selection": "full_test",
+            "sample_count": 10000,
+            "full_test_samples": 10000
+          },
+          "latent_continuous_test": 0.89410001039505,
+          "quantized_nominal_test": 0.5310999751091003,
+          "gap_nominal_minus_latent": -0.3630000352859497,
+          "phase_statistics": {
+            "layer_1": {
+              "phase_std_rad": 0.7000221014022827,
+              "quantization_residual_mean_rad": 0.9775879383087158,
+              "quantization_residual_max_rad": 6.922284126281738,
+              "total_variation_rad_per_pixel": 0.533332109451294
+            },
+            "layer_2": {
+              "phase_std_rad": 0.7003691792488098,
+              "quantization_residual_mean_rad": 1.0711445808410645,
+              "quantization_residual_max_rad": 7.0504536628723145,
+              "total_variation_rad_per_pixel": 0.4928157329559326
+            },
+            "layer_3": {
+              "phase_std_rad": 0.48100411891937256,
+              "quantization_residual_mean_rad": 0.6021177768707275,
+              "quantization_residual_max_rad": 6.588871002197266,
+              "total_variation_rad_per_pixel": 0.3279402256011963
+            }
+          }
+        }
+      ],
+      "latent_continuous_test": {
+        "mean": 89.55600023269653,
+        "sd": 0.25928830552052506,
+        "values": [
+          89.25999999046326,
+          89.77000117301941,
+          89.88000154495239,
+          89.4599974155426,
+          89.410001039505
+        ],
+        "ci95_t": [
+          89.05707643128893,
+          90.05492403410413
+        ]
+      },
+      "quantized_nominal_test": {
+        "mean": 59.507999420166016,
+        "sd": 4.255048058715195,
+        "values": [
+          57.749998569488525,
+          63.22000026702881,
+          63.270002603530884,
+          60.189998149871826,
+          53.109997510910034
+        ],
+        "ci95_t": [
+          51.32041553216779,
+          67.69558330816423
+        ]
+      }
+    }
+  }
+}
