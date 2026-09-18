@@ -1,0 +1,5 @@
+method_id,trainable_parameters,feature_schema_id,representation_elements,n_training_seeds
+baseline_d2nn,12288,class_detector_energy:10,10,3
+robust_d2nn,12288,class_detector_energy:10,10,3
+hybrid,14698,pooled_intensity:8x8,64,3
+electronic,14320,flattened_input:1x28x28,784,3

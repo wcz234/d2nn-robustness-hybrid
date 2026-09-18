@@ -1,0 +1,88 @@
+{
+  "artifacts": {
+    "method_summary": {
+      "path": "method_summary.jsonl",
+      "row_count": 1,
+      "sha256": "af648e975abe447df0ce02a5303406fe8e14705f099671d5846bccf16cec30e5",
+      "size_bytes": 1693
+    },
+    "paired_comparisons": {
+      "path": "paired_comparisons.jsonl",
+      "row_count": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "seed_metrics": {
+      "path": "seed_metrics.jsonl",
+      "row_count": 3,
+      "sha256": "51240ea89c5724d993b37ab416097592995b2fb334f9bf7b2015b409ec50ff07",
+      "size_bytes": 1015
+    }
+  },
+  "created_at_utc": "2026-08-01T09:29:32.309431+00:00",
+  "evidence": {
+    "dataset_evidence_status": "protocol_bound_full_test_evaluations",
+    "inference_status": "cross_training_seed_summary_with_t_intervals",
+    "input_evidence_statuses": [
+      "protocol_bound_full_test_single_seed_requires_cross_training_seed_summary"
+    ]
+  },
+  "formal_protocol": {
+    "path": "D:\\\u9879\u76ee\\\u57fa\u4e8eD2NN\\FORMAL_EXPERIMENT_PROTOCOL.json",
+    "protocol_id": "formal-mnist-v1-20260729",
+    "sha256": "0c1d48d864fc02bbea64ae53c59d92f921cadf2edaee2cb6b73462a0bf386fe1"
+  },
+  "input_evaluations": [
+    {
+      "evaluation_id": "clean-evaluation-97dbaf8b1420488dfef6",
+      "path": "D:\\\u9879\u76ee\\\u57fa\u4e8eD2NN\\results\\formal_mnist_v1\\clean\\electronic_seed42\\evaluation_manifest.json",
+      "sha256": "7d4c7bcd03bceaf7bca792f4e7f1ffe5feb50b6cc7c87a9c17b88dd8bb572a8c"
+    },
+    {
+      "evaluation_id": "clean-evaluation-423f33f2ae95d0e8ca9d",
+      "path": "D:\\\u9879\u76ee\\\u57fa\u4e8eD2NN\\results\\formal_mnist_v1\\clean\\electronic_seed43\\evaluation_manifest.json",
+      "sha256": "e338bc3e3ef6c7909c839be0f1ca35de0b912fad800cddbfe7e894241e5c4017"
+    },
+    {
+      "evaluation_id": "clean-evaluation-84a409e49a10ea74aa75",
+      "path": "D:\\\u9879\u76ee\\\u57fa\u4e8eD2NN\\results\\formal_mnist_v1\\clean\\electronic_seed44\\evaluation_manifest.json",
+      "sha256": "369de7993cf57ab4b59b9a1ea5a5179d1b3100e5d1147fcddb73d7e463e4755f"
+    }
+  ],
+  "manifest_payload_sha256": "af4ee676f0d8515354665d68e361945dd35445967288b207cd0ec5a57d7e96f3",
+  "sample_scope": {
+    "full_test_samples": 10000,
+    "sample_count": 10000,
+    "selection": "full_test"
+  },
+  "schema_version": "clean-summary/v1",
+  "scope": "numerical_simulation_only",
+  "software": {
+    "python": "3.11.7 (tags/v3.11.7:fa7a6f2, Dec  4 2023, 19:24:49) [MSC v.1937 64 bit (AMD64)]",
+    "scipy": "1.17.1"
+  },
+  "statistics": {
+    "hypothesis_tests": "not_performed",
+    "independent_unit": "training_seed",
+    "interval": "two_sided_95_percent_Student_t_CI_across_training_seeds",
+    "method_comparison": "paired_by_training_seed",
+    "metric_fields": [
+      "accuracy",
+      "mean_cross_entropy",
+      "mean_contrast",
+      "macro_f1",
+      "cpu_median_seconds"
+    ],
+    "timing_repeat_role": "runtime_precision_only_not_independent_replicates"
+  },
+  "summary_source_files_sha256": {
+    "clean_evaluation.py": "19187a5cf649a7d56752f70fba21dce65ba356b804d85e70e02a939850c53325",
+    "clean_evaluation_manifest.py": "f85c72a471f8a7b725686e94388a26785d78a4e0cb95c5c557fe1b657a037077",
+    "clean_summary_input.py": "57c2e55b37b83a7c5249781dbeca648ee99ea98fbcbab642bfcc271a2edda4f1",
+    "robustness_io.py": "f2fd1342dff3ecd8d821708069351bbf5c3e5a90dd02e389a32d1e0762c258a0",
+    "robustness_records.py": "8a2b9c9cc7da903cd49b7b7bb78ca34d9eebe640ff77ce327eee0d8fb6db6ed0",
+    "summarize_clean.py": "b502718210ef444d1ae4ad45f97070d02a6d38c64bd7282cf17a439abe3162d4",
+    "training_provenance.py": "9a23224fe36886ca52ed5471b6fa7491492be2309d39364e6af1d62785543259"
+  },
+  "timing_claim_boundary": "CPU software simulation overhead; not physical hardware latency or energy"
+}

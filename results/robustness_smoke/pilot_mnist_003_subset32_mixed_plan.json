@@ -1,0 +1,80 @@
+{
+  "cohort": {
+    "compatible_model_variants": [
+      "d2nn",
+      "hybrid"
+    ],
+    "dataset_key": "mnist",
+    "full_test_samples": 10000,
+    "input_shape": [
+      1,
+      28,
+      28
+    ],
+    "model_version": "rs_v1",
+    "optical_config": {
+      "input_distance": 0.03,
+      "layer_distance": 0.03,
+      "num_layers": 3,
+      "output_distance": 0.03,
+      "pixel_size": 0.0004,
+      "size": 64,
+      "wavelength": 0.00075
+    },
+    "optical_draw_dtype": "float32",
+    "task": "classification"
+  },
+  "conditions": [
+    {
+      "condition_id": "engineering_smoke_mixed",
+      "draws": [
+        {
+          "detector_seed": 2333644027863304109,
+          "draw_id": 0,
+          "optical_seed": 9103060060897601729
+        },
+        {
+          "detector_seed": 2994812549157086332,
+          "draw_id": 1,
+          "optical_seed": 4364461808185791896
+        }
+      ],
+      "perturbation_config": {
+        "detector_noise_std_relative": 0.01,
+        "gap_spacing_error_max_m": 0.0001,
+        "lateral_shift_max_px": 0.25,
+        "phase_noise_std_rad": 0.02,
+        "phase_quantization_levels": null
+      },
+      "seed_protocol": {
+        "master_detector_seed": 42002,
+        "master_optical_seed": 42001,
+        "name": "sha256_derived_independent_streams/v1"
+      }
+    }
+  ],
+  "created_at_utc": "2026-07-26T02:22:07.769016+00:00",
+  "plan_id": "robustness-plan-fd1b53a517e3ae0946bb",
+  "reference_checkpoint": {
+    "model_variant": "d2nn",
+    "sha256": "571e87ca47319575e7457a0671c6e7ca9597540d465689991d64d00a861b683d",
+    "training_seed": 42
+  },
+  "sample_scope": {
+    "full_test_samples": 10000,
+    "sample_count": 32,
+    "selection": "test_prefix_subset"
+  },
+  "sampling_protocol": {
+    "detector_noise_scope": "per_sample_feature_table",
+    "detector_noise_semantics": "synthetic_relative_additive_simulation_noise",
+    "feature_schema_pairing": "optical_draws_are_paired; detector_tables_are_feature_schema_specific",
+    "optical_draw_scope": "one_fixed_draw_per_draw_id_across_selected_test_scope"
+  },
+  "schema_version": "robustness-plan/v1",
+  "scope": "numerical_simulation_only",
+  "statistics": {
+    "draw_role": "deployment_perturbation_variability_not_independent_training_replicates",
+    "independent_unit": "training_seed"
+  }
+}

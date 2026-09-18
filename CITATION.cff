@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+message: "If you use this code or the accompanying numerical results, please cite the manuscript and this repository."
+title: "Protocol-bound numerical evaluation of D2NN robustness and hybrid optoelectronic inference"
+abstract: >-
+  Code, frozen experiment protocols, result summaries and manuscript sources for a
+  protocol-bound numerical comparison of a baseline diffractive deep neural network, a
+  perturbation-aware trained variant, a hybrid optoelectronic model and pure-electronic
+  references on MNIST and Fashion-MNIST. Numerical simulation only; no physical optical
+  bench or edge-device measurement is included.
+type: software
+license: MIT
+# TODO(authors): replace the placeholders below before publication.
+authors:
+  - family-names: "TODO"
+    given-names: "TODO"
+    affiliation: "TODO"
+repository-code: "https://github.com/<OWNER>/<REPO>"
+keywords:
+  - diffractive deep neural network
+  - optoelectronic computing
+  - robustness
+  - phase quantization
+  - numerical simulation
+  - reproducible research

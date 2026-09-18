@@ -1,0 +1,217 @@
+{
+  "artifacts": {
+    "method_summary": {
+      "path": "method_summary.jsonl",
+      "row_count": 5,
+      "sha256": "297ecb3be45c6b79c3ff18c06ec4dc133eb1417befad1f38b263621c488ee51f",
+      "size_bytes": 10714
+    },
+    "paired_comparisons": {
+      "path": "paired_comparisons.jsonl",
+      "row_count": 10,
+      "sha256": "9af72e828ff0bdfa65ee68aabae7bccecf0483dac90648d2e92ff4b6cb68f8c6",
+      "size_bytes": 23449
+    },
+    "seed_metrics": {
+      "path": "seed_metrics.jsonl",
+      "row_count": 25,
+      "sha256": "6f1124d3b71aa120ba498836ab1703a3946d261fec3b1e2f4cb5884960521261",
+      "size_bytes": 8439
+    }
+  },
+  "created_at_utc": "2026-09-17T06:43:17.110951+00:00",
+  "evidence": {
+    "dataset_evidence_status": "protocol_bound_full_test_evaluations",
+    "inference_status": "cross_training_seed_summary_with_t_intervals",
+    "input_evidence_statuses": [
+      "protocol_bound_full_test_single_seed_requires_cross_training_seed_summary"
+    ]
+  },
+  "formal_protocol": {
+    "path": "D:\\\u9879\u76ee\\\u57fa\u4e8eD2NN\\tmp\\FORMAL_EXPERIMENT_PROTOCOL_V2_localcpu.json",
+    "protocol_id": "formal-mnist-v2-20260917-localcpu-metrics",
+    "sha256": "9801f501578236ee20bbbdddda4fd4063460ad6b5697da4f439195bc1f5b5d6b"
+  },
+  "input_evaluations": [
+    {
+      "evaluation_id": "clean-evaluation-3706d6226a592b22ec10",
+      "path": "D:\\\u9879\u76ee\\\u57fa\u4e8eD2NN\\results\\formal_mnist_v2\\clean\\baseline_d2nn_seed42\\evaluation_manifest.json",
+      "sha256": "af5c48305a14fd64817f7650b7c76bf51cd622e0ceba2d73a6c88e68e7ec0f5c"
+    },
+    {
+      "evaluation_id": "clean-evaluation-9a230b2cb8f95ef6689c",
+      "path": "D:\\\u9879\u76ee\\\u57fa\u4e8eD2NN\\results\\formal_mnist_v2\\clean\\baseline_d2nn_seed43\\evaluation_manifest.json",
+      "sha256": "107ff7bd7295c544d6410a263e4aca87302e1646bd2d12561d8fd22b26ee17b4"
+    },
+    {
+      "evaluation_id": "clean-evaluation-b0dd18054d6a8777b918",
+      "path": "D:\\\u9879\u76ee\\\u57fa\u4e8eD2NN\\results\\formal_mnist_v2\\clean\\baseline_d2nn_seed44\\evaluation_manifest.json",
+      "sha256": "16092402dc455bb0f636702b4d1cc98846bea238caf0a8e2fa6299e37156be4e"
+    },
+    {
+      "evaluation_id": "clean-evaluation-098abb4e2b3244a36081",
+      "path": "D:\\\u9879\u76ee\\\u57fa\u4e8eD2NN\\results\\formal_mnist_v2\\clean\\baseline_d2nn_seed45\\evaluation_manifest.json",
+      "sha256": "1c79a61b8bfd51c35f39caeeb372dfb3e8918ee220a0f24ae5d8c3137fcb1ae5"
+    },
+    {
+      "evaluation_id": "clean-evaluation-50427cca7d9f4c94a670",
+      "path": "D:\\\u9879\u76ee\\\u57fa\u4e8eD2NN\\results\\formal_mnist_v2\\clean\\baseline_d2nn_seed46\\evaluation_manifest.json",
+      "sha256": "2ed8f959f146df1f1138a72151afa097751aff4e8bdee2f2c97c11da5ec661fe"
+    },
+    {
+      "evaluation_id": "clean-evaluation-8f02d0cad77094e09dc1",
+      "path": "D:\\\u9879\u76ee\\\u57fa\u4e8eD2NN\\results\\formal_mnist_v2\\clean\\robust_d2nn_seed42\\evaluation_manifest.json",
+      "sha256": "fbadb31af2047dcd2e1b6d37f2e4a856d2151e2711484e68cfd4485660fb8ff2"
+    },
+    {
+      "evaluation_id": "clean-evaluation-1878328a82f11dd73d55",
+      "path": "D:\\\u9879\u76ee\\\u57fa\u4e8eD2NN\\results\\formal_mnist_v2\\clean\\robust_d2nn_seed43\\evaluation_manifest.json",
+      "sha256": "4a441e2074d7180f14df80f0e69a3a6fe7d88902c6196c57ccd28df51b00b29f"
+    },
+    {
+      "evaluation_id": "clean-evaluation-33d76311f06eb14ed19d",
+      "path": "D:\\\u9879\u76ee\\\u57fa\u4e8eD2NN\\results\\formal_mnist_v2\\clean\\robust_d2nn_seed44\\evaluation_manifest.json",
+      "sha256": "fab1a0aaea4829e995dbb01297afd5507f5f4f6d9f6054f298c35c80e40f2f99"
+    },
+    {
+      "evaluation_id": "clean-evaluation-46a46e4b06cc93973221",
+      "path": "D:\\\u9879\u76ee\\\u57fa\u4e8eD2NN\\results\\formal_mnist_v2\\clean\\robust_d2nn_seed45\\evaluation_manifest.json",
+      "sha256": "ce81031e0de954b79fcd33262189bdd3f37a4417d958b35d2f1bc7947e3a7510"
+    },
+    {
+      "evaluation_id": "clean-evaluation-ee1179454c3ea8ec1c9f",
+      "path": "D:\\\u9879\u76ee\\\u57fa\u4e8eD2NN\\results\\formal_mnist_v2\\clean\\robust_d2nn_seed46\\evaluation_manifest.json",
+      "sha256": "148d10bbb4cce77a7df790666b77c7e20b6d61517285a656a64abfdd07fbf1bb"
+    },
+    {
+      "evaluation_id": "clean-evaluation-c753f81954db202f7364",
+      "path": "D:\\\u9879\u76ee\\\u57fa\u4e8eD2NN\\results\\formal_mnist_v2\\clean\\hybrid_seed42\\evaluation_manifest.json",
+      "sha256": "6b9af858faf08aa2e8575bb112ed67d356c41bcc5ab0831a7ea9743d0c068d4a"
+    },
+    {
+      "evaluation_id": "clean-evaluation-92f33706a00f8ea1ecf0",
+      "path": "D:\\\u9879\u76ee\\\u57fa\u4e8eD2NN\\results\\formal_mnist_v2\\clean\\hybrid_seed43\\evaluation_manifest.json",
+      "sha256": "3a4da370e5b930f307ab5e150f48bf8fad4e67f7b135723464175d54dd8e7626"
+    },
+    {
+      "evaluation_id": "clean-evaluation-c704f21e2239fc9d5f70",
+      "path": "D:\\\u9879\u76ee\\\u57fa\u4e8eD2NN\\results\\formal_mnist_v2\\clean\\hybrid_seed44\\evaluation_manifest.json",
+      "sha256": "adb27ba2df56aef82c44a80fd21b02d23b1f407226731cfbcf202a6a54b41b4c"
+    },
+    {
+      "evaluation_id": "clean-evaluation-c9349088605b9a097b5d",
+      "path": "D:\\\u9879\u76ee\\\u57fa\u4e8eD2NN\\results\\formal_mnist_v2\\clean\\hybrid_seed45\\evaluation_manifest.json",
+      "sha256": "d7b5b41428784562754c54bfd5dadeb7fbaeaf5f2b8254070a93b9a2e83c5c6a"
+    },
+    {
+      "evaluation_id": "clean-evaluation-d30c8ea1b1554695476b",
+      "path": "D:\\\u9879\u76ee\\\u57fa\u4e8eD2NN\\results\\formal_mnist_v2\\clean\\hybrid_seed46\\evaluation_manifest.json",
+      "sha256": "c8bf2264919e2e35fb96e908d08f514a56c6a9ba2a0c595f3c35513bd34d5e6b"
+    },
+    {
+      "evaluation_id": "clean-evaluation-548b13248ba621482946",
+      "path": "D:\\\u9879\u76ee\\\u57fa\u4e8eD2NN\\results\\formal_mnist_v2\\clean\\hybrid_qat_seed42\\evaluation_manifest.json",
+      "sha256": "fbb4156740fd0dea284655d5de197f8e9c364d90bf348690f578b126eb890700"
+    },
+    {
+      "evaluation_id": "clean-evaluation-d2750f352271beaf5dc3",
+      "path": "D:\\\u9879\u76ee\\\u57fa\u4e8eD2NN\\results\\formal_mnist_v2\\clean\\hybrid_qat_seed43\\evaluation_manifest.json",
+      "sha256": "81bdde3f0a56bff95981dab3e156c4db26198fbc07f418d80f98ce17146bf2d0"
+    },
+    {
+      "evaluation_id": "clean-evaluation-c4cdd1dee0c2c74e7665",
+      "path": "D:\\\u9879\u76ee\\\u57fa\u4e8eD2NN\\results\\formal_mnist_v2\\clean\\hybrid_qat_seed44\\evaluation_manifest.json",
+      "sha256": "a8c38f8fece48bc3928ccd183352b980f840c7641faaec47b283c9c12ea12eb0"
+    },
+    {
+      "evaluation_id": "clean-evaluation-8ac33f375b8492aa53a5",
+      "path": "D:\\\u9879\u76ee\\\u57fa\u4e8eD2NN\\results\\formal_mnist_v2\\clean\\hybrid_qat_seed45\\evaluation_manifest.json",
+      "sha256": "32f3151032ee09921bdf8b93b70441120dd81fb3db41338eda4d85d948b80fb4"
+    },
+    {
+      "evaluation_id": "clean-evaluation-bc5b0d44270a20b60b9a",
+      "path": "D:\\\u9879\u76ee\\\u57fa\u4e8eD2NN\\results\\formal_mnist_v2\\clean\\hybrid_qat_seed46\\evaluation_manifest.json",
+      "sha256": "68e02c0394ed1284ca1eb14b1ecbcee60fc736b9cb6783ac94410531e9d87871"
+    },
+    {
+      "evaluation_id": "clean-evaluation-3343830af6fcab2561b4",
+      "path": "D:\\\u9879\u76ee\\\u57fa\u4e8eD2NN\\results\\formal_mnist_v2\\clean\\lenet5_seed42\\evaluation_manifest.json",
+      "sha256": "65b05c1d20d185e1da94bd2f17131d026260569cc3f3f3f21435f0dabca15b83"
+    },
+    {
+      "evaluation_id": "clean-evaluation-663b32950599076b9907",
+      "path": "D:\\\u9879\u76ee\\\u57fa\u4e8eD2NN\\results\\formal_mnist_v2\\clean\\lenet5_seed43\\evaluation_manifest.json",
+      "sha256": "29d5cd664c90d4dbf57ea138329d2372442fa210c5bd015fdf6e0cf5e9b43f46"
+    },
+    {
+      "evaluation_id": "clean-evaluation-9206e209fee816dd4782",
+      "path": "D:\\\u9879\u76ee\\\u57fa\u4e8eD2NN\\results\\formal_mnist_v2\\clean\\lenet5_seed44\\evaluation_manifest.json",
+      "sha256": "3bbf5221bdbfbe07168b9e2e4181bdae1d6d7a2ebf81e7615e28ca66a3372e0a"
+    },
+    {
+      "evaluation_id": "clean-evaluation-30ca2e6ddaa6438bc1d3",
+      "path": "D:\\\u9879\u76ee\\\u57fa\u4e8eD2NN\\results\\formal_mnist_v2\\clean\\lenet5_seed45\\evaluation_manifest.json",
+      "sha256": "54da2ed5fea1d5ea2b531d02d37b5ca29c1c0ced8d094cd77d263f8c51c28d2d"
+    },
+    {
+      "evaluation_id": "clean-evaluation-d459d073df592399ec0e",
+      "path": "D:\\\u9879\u76ee\\\u57fa\u4e8eD2NN\\results\\formal_mnist_v2\\clean\\lenet5_seed46\\evaluation_manifest.json",
+      "sha256": "73f15b317025c85fabb47461bd4f2b1b6c9f18a54f658427bf5e9d4ecedaddb8"
+    }
+  ],
+  "manifest_payload_sha256": "9c37a9b2559207cf4d08c3247c0180f235caf035410d0fb5d96229fa1d7c229b",
+  "protocol_revision_tolerance": {
+    "applied": true,
+    "metrics_devices_present": [
+      "cpu",
+      "cuda"
+    ],
+    "parity_evidence": "cpu_and_cuda_clean_and_robustness_metrics_verified_bit_identical_on_this_cohort_delta_0.00e+00",
+    "reason": "evaluation device is a per-run property recorded per evaluation; the tolerated revisions differ only in the declared metrics device"
+  },
+  "protocol_revisions_used": [
+    {
+      "protocol_id": "formal-mnist-v2-20260917",
+      "sha256": "9da8b0e0a95c022c82d66b533737ff2ddb7c2832d4c0e2c2f6d05869f10472b6"
+    },
+    {
+      "protocol_id": "formal-mnist-v2-20260917-localcpu-metrics",
+      "sha256": "9801f501578236ee20bbbdddda4fd4063460ad6b5697da4f439195bc1f5b5d6b"
+    }
+  ],
+  "sample_scope": {
+    "full_test_samples": 10000,
+    "sample_count": 10000,
+    "selection": "full_test"
+  },
+  "schema_version": "clean-summary/v1",
+  "scope": "numerical_simulation_only",
+  "software": {
+    "python": "3.11.7 (tags/v3.11.7:fa7a6f2, Dec  4 2023, 19:24:49) [MSC v.1937 64 bit (AMD64)]",
+    "scipy": "1.17.1"
+  },
+  "statistics": {
+    "hypothesis_tests": "not_performed",
+    "independent_unit": "training_seed",
+    "interval": "two_sided_95_percent_Student_t_CI_across_training_seeds",
+    "method_comparison": "paired_by_training_seed",
+    "metric_fields": [
+      "accuracy",
+      "mean_cross_entropy",
+      "mean_contrast",
+      "macro_f1",
+      "cpu_median_seconds"
+    ],
+    "timing_repeat_role": "runtime_precision_only_not_independent_replicates"
+  },
+  "summary_source_files_sha256": {
+    "clean_evaluation.py": "c3e2480210ac7be33c7e1648a0d789f6e8bc1d5775bd7b1563ac953f937042b6",
+    "clean_evaluation_manifest.py": "13ec41f2ff4ebe59462706f03dd7d26ed03880139ef0ef23934470093b93ccaf",
+    "clean_summary_input.py": "4676e938d9c1fb00a103e30700468e9f0aca07b3de0d35ec293a6e47e3d86f1e",
+    "robustness_io.py": "f2fd1342dff3ecd8d821708069351bbf5c3e5a90dd02e389a32d1e0762c258a0",
+    "robustness_records.py": "8a2b9c9cc7da903cd49b7b7bb78ca34d9eebe640ff77ce327eee0d8fb6db6ed0",
+    "summarize_clean.py": "742323ca7644f94ec999160f9556770310ed5391b698fe08919b8b57e3edc7ff",
+    "training_provenance.py": "9a23224fe36886ca52ed5471b6fa7491492be2309d39364e6af1d62785543259"
+  },
+  "timing_claim_boundary": "CPU software simulation overhead; not physical hardware latency or energy"
+}

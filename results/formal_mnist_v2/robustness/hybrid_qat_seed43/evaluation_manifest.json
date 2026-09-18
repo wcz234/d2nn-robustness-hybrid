@@ -1,0 +1,333 @@
+{
+  "artifacts": {
+    "draw_metrics": {
+      "path": "draw_metrics.jsonl",
+      "row_count": 34,
+      "sha256": "33476a2d75c45f18a34c9a350bc199fd46565f77f1b1269c87d8d91341760fd4",
+      "size_bytes": 60101
+    },
+    "predictions": {
+      "path": "predictions.jsonl",
+      "row_count": 340000,
+      "sha256": "5ed96d09d9369000c58d8e13da17c9efbdba683eda500980bbd30a2eeb81896e",
+      "size_bytes": 247955853
+    }
+  },
+  "checkpoint": {
+    "path": "/root/d2nn/artifacts/formal_mnist_v2/best_mnist.formal_mnist_v2_hybrid_qat_seed43.pth",
+    "sha256": "f8e8fabe7095e2b0d406c8bee1fde4ea76c6fd2d19a084463c5c16672da8a5f9"
+  },
+  "cli_configuration": {
+    "batch_size": 128,
+    "checkpoint": "/root/d2nn/artifacts/formal_mnist_v2/best_mnist.formal_mnist_v2_hybrid_qat_seed43.pth",
+    "command": "run",
+    "data_dir": "/root/d2nn/simulator/data",
+    "device": "cuda",
+    "include_scores": false,
+    "method_id": "hybrid_qat",
+    "num_workers": 0,
+    "output_dir": "/root/d2nn/results/formal_mnist_v2/robustness/hybrid_qat_seed43",
+    "plan": "/root/d2nn/results/formal_mnist_v2/robustness_plan.json"
+  },
+  "cohort": {
+    "compatible_model_variants": [
+      "d2nn",
+      "hybrid"
+    ],
+    "dataset_key": "mnist",
+    "full_test_samples": 10000,
+    "input_shape": [
+      1,
+      28,
+      28
+    ],
+    "model_version": "rs_v1",
+    "optical_config": {
+      "input_distance": 0.03,
+      "layer_distance": 0.03,
+      "num_layers": 3,
+      "output_distance": 0.03,
+      "pixel_size": 0.0004,
+      "size": 64,
+      "wavelength": 0.00075
+    },
+    "optical_draw_dtype": "float32",
+    "task": "classification"
+  },
+  "condition_summaries": [
+    {
+      "accuracy_max": 0.6834,
+      "accuracy_mean": 0.6834,
+      "accuracy_min": 0.6834,
+      "accuracy_sd_across_draws": null,
+      "condition_id": "clean_continuous",
+      "contrast_mean": 0.3483399104118347,
+      "contrast_sd_across_draws": null,
+      "draw_count": 1,
+      "statistical_unit_note": "draw variability for one trained model; not an independent training replicate"
+    },
+    {
+      "accuracy_max": 0.6814,
+      "accuracy_mean": 0.6664333333333333,
+      "accuracy_min": 0.6532,
+      "accuracy_sd_across_draws": 0.014179680297289268,
+      "condition_id": "lateral_shift_0p25px",
+      "contrast_mean": 0.3177984237035116,
+      "contrast_sd_across_draws": 0.02708531993562658,
+      "draw_count": 3,
+      "statistical_unit_note": "draw variability for one trained model; not an independent training replicate"
+    },
+    {
+      "accuracy_max": 0.6919,
+      "accuracy_mean": 0.6816,
+      "accuracy_min": 0.6722,
+      "accuracy_sd_across_draws": 0.009880789442144763,
+      "condition_id": "lateral_shift_0p50px",
+      "contrast_mean": 0.35019027252197266,
+      "contrast_sd_across_draws": 0.017418554390318777,
+      "draw_count": 3,
+      "statistical_unit_note": "draw variability for one trained model; not an independent training replicate"
+    },
+    {
+      "accuracy_max": 0.6842,
+      "accuracy_mean": 0.6838333333333334,
+      "accuracy_min": 0.6831,
+      "accuracy_sd_across_draws": 0.0006350852961085825,
+      "condition_id": "gap_error_0p1mm",
+      "contrast_mean": 0.34849855635960897,
+      "contrast_sd_across_draws": 0.0005521219748097699,
+      "draw_count": 3,
+      "statistical_unit_note": "draw variability for one trained model; not an independent training replicate"
+    },
+    {
+      "accuracy_max": 0.6833,
+      "accuracy_mean": 0.6828333333333333,
+      "accuracy_min": 0.6824,
+      "accuracy_sd_across_draws": 0.0004509249752822972,
+      "condition_id": "gap_error_0p3mm",
+      "contrast_mean": 0.34729480997721357,
+      "contrast_sd_across_draws": 0.0015030469537412655,
+      "draw_count": 3,
+      "statistical_unit_note": "draw variability for one trained model; not an independent training replicate"
+    },
+    {
+      "accuracy_max": 0.6863,
+      "accuracy_mean": 0.6849666666666666,
+      "accuracy_min": 0.6828,
+      "accuracy_sd_across_draws": 0.0018929694486001123,
+      "condition_id": "phase_noise_0p02rad",
+      "contrast_mean": 0.35183723011016843,
+      "contrast_sd_across_draws": 0.0035473692311735836,
+      "draw_count": 3,
+      "statistical_unit_note": "draw variability for one trained model; not an independent training replicate"
+    },
+    {
+      "accuracy_max": 0.6865,
+      "accuracy_mean": 0.6828666666666666,
+      "accuracy_min": 0.6802,
+      "accuracy_sd_across_draws": 0.0032593455375785653,
+      "condition_id": "phase_noise_0p05rad",
+      "contrast_mean": 0.34826087970733643,
+      "contrast_sd_across_draws": 0.006287235003331057,
+      "draw_count": 3,
+      "statistical_unit_note": "draw variability for one trained model; not an independent training replicate"
+    },
+    {
+      "accuracy_max": 0.6838,
+      "accuracy_mean": 0.6835,
+      "accuracy_min": 0.6829,
+      "accuracy_sd_across_draws": 0.0005196152422706701,
+      "condition_id": "detector_noise_0p01",
+      "contrast_mean": 0.348278365834554,
+      "contrast_sd_across_draws": 0.0002952344413253363,
+      "draw_count": 3,
+      "statistical_unit_note": "draw variability for one trained model; not an independent training replicate"
+    },
+    {
+      "accuracy_max": 0.6834,
+      "accuracy_mean": 0.6823,
+      "accuracy_min": 0.6809,
+      "accuracy_sd_across_draws": 0.0012767145334803994,
+      "condition_id": "detector_noise_0p03",
+      "contrast_mean": 0.3471849285761515,
+      "contrast_sd_across_draws": 0.00036950439619278143,
+      "draw_count": 3,
+      "statistical_unit_note": "draw variability for one trained model; not an independent training replicate"
+    },
+    {
+      "accuracy_max": 0.6727,
+      "accuracy_mean": 0.6727,
+      "accuracy_min": 0.6727,
+      "accuracy_sd_across_draws": null,
+      "condition_id": "phase_quantization_16",
+      "contrast_mean": 0.3325177882194519,
+      "contrast_sd_across_draws": null,
+      "draw_count": 1,
+      "statistical_unit_note": "draw variability for one trained model; not an independent training replicate"
+    },
+    {
+      "accuracy_max": 0.7536,
+      "accuracy_mean": 0.7536,
+      "accuracy_min": 0.7536,
+      "accuracy_sd_across_draws": null,
+      "condition_id": "phase_quantization_8",
+      "contrast_mean": 0.49023396587371826,
+      "contrast_sd_across_draws": null,
+      "draw_count": 1,
+      "statistical_unit_note": "draw variability for one trained model; not an independent training replicate"
+    },
+    {
+      "accuracy_max": 0.9488,
+      "accuracy_mean": 0.9488,
+      "accuracy_min": 0.9488,
+      "accuracy_sd_across_draws": null,
+      "condition_id": "phase_quantization_4",
+      "contrast_mean": 0.8593432083129883,
+      "contrast_sd_across_draws": null,
+      "draw_count": 1,
+      "statistical_unit_note": "draw variability for one trained model; not an independent training replicate"
+    },
+    {
+      "accuracy_max": 0.6934,
+      "accuracy_mean": 0.6735333333333333,
+      "accuracy_min": 0.6558,
+      "accuracy_sd_across_draws": 0.018890562017402572,
+      "condition_id": "mixed_nominal",
+      "contrast_mean": 0.3356289580980937,
+      "contrast_sd_across_draws": 0.03342711124757548,
+      "draw_count": 3,
+      "statistical_unit_note": "draw variability for one trained model; not an independent training replicate"
+    },
+    {
+      "accuracy_max": 0.6585,
+      "accuracy_mean": 0.6425333333333333,
+      "accuracy_min": 0.6321,
+      "accuracy_sd_across_draws": 0.014042910429584492,
+      "condition_id": "mixed_stress",
+      "contrast_mean": 0.27451354304949444,
+      "contrast_sd_across_draws": 0.030587154182752763,
+      "draw_count": 3,
+      "statistical_unit_note": "draw variability for one trained model; not an independent training replicate"
+    }
+  ],
+  "created_at_utc": "2026-09-17T04:11:20.928574+00:00",
+  "environment": {
+    "captured_at_utc": "2026-09-17T04:11:20.931398+00:00",
+    "packages": {
+      "Pillow": "11.0.0",
+      "matplotlib": "3.11.2",
+      "numpy": "2.2.4",
+      "torch": "2.5.1+cu124",
+      "torchvision": "0.20.1+cu124"
+    },
+    "platform": {
+      "cpu_count": 36,
+      "machine": "x86_64",
+      "processor": "x86_64",
+      "release": "5.15.0-143-generic",
+      "system": "Linux"
+    },
+    "python": {
+      "executable": "/usr/local/bin/python3",
+      "version": "3.11.11 (main, Dec  4 2024, 08:55:07) [GCC 11.4.0]"
+    },
+    "repository": {
+      "commit": null,
+      "diagnostics": {
+        "commit": {
+          "available": false,
+          "returncode": 128
+        },
+        "status": {
+          "available": false,
+          "returncode": 128
+        }
+      },
+      "dirty": null
+    },
+    "source_files_sha256": {
+      "artifacts.py": "0c4c498b2e809340eaf45c64ce87ecbb9d30b581e798542e1063d0bff442a792",
+      "d2nn.py": "d85ed13925015fb6423c829b2687c7754878cdde89a359f6e1f0aa1466b45e22",
+      "model_variants.py": "49c0fbd3c71c1a2a6e07ca5e07eaaa5025586dfcbafc1e7819448903be463077",
+      "perturbations.py": "58c64882bff1e2276c247d9a4a20b6d7102b38ebaa47e3692dde53493f6d2a21",
+      "tasks.py": "b21e4d57bd91b80e567bd8d9d39ea11cc15f93a376fa934d1b8c35ae5eac77a4",
+      "train.py": "f1b98b97a4d5c4b0be6f6eb0c7fda806014f95dc34b3bae061c5f7ab57eed5ad",
+      "train_core.py": "0ae025984630fd1cdf03984c64a3a9b73b6f08d6a2640cb14c69bf9444229217",
+      "training_provenance.py": "9a23224fe36886ca52ed5471b6fa7491492be2309d39364e6af1d62785543259",
+      "training_runtime.py": "3b45ac057ac238da0e5a6524d4b0a464afaf3ba555aa4f4a1493d1e5af8e9101"
+    },
+    "torch_runtime": {
+      "cuda_available": true,
+      "cuda_device_name": "NVIDIA GeForce RTX 4060 Ti",
+      "cuda_version": "12.4",
+      "cudnn_benchmark": false,
+      "cudnn_deterministic": false,
+      "deterministic_algorithms": true,
+      "device": "cuda",
+      "num_interop_threads": 18,
+      "num_threads": 18
+    }
+  },
+  "evaluation_id": "robustness-evaluation-68101743d7dc43e1e680",
+  "evaluation_source_files_sha256": {
+    "artifacts.py": "0c4c498b2e809340eaf45c64ce87ecbb9d30b581e798542e1063d0bff442a792",
+    "d2nn.py": "d85ed13925015fb6423c829b2687c7754878cdde89a359f6e1f0aa1466b45e22",
+    "evaluate_robustness.py": "54a4f010686d3755035039ff4b835ec88921f274696fecc7e928fffaeff24766",
+    "model_variants.py": "49c0fbd3c71c1a2a6e07ca5e07eaaa5025586dfcbafc1e7819448903be463077",
+    "perturbations.py": "58c64882bff1e2276c247d9a4a20b6d7102b38ebaa47e3692dde53493f6d2a21",
+    "robustness_cohort.py": "794f84bdf64609c412394209722e3522a402b0c2f66332a999866ed6248fd729",
+    "robustness_evaluation.py": "f412e607e27a4408304d441b3f5b162c079ee0474308ddf418eb936aa0c6d659",
+    "robustness_io.py": "f2fd1342dff3ecd8d821708069351bbf5c3e5a90dd02e389a32d1e0762c258a0",
+    "robustness_plan.py": "ef287eea45b6432f6d1b51edbb170f9ca8a9b07856e2e23fff22435eb1ed489b",
+    "robustness_records.py": "8a2b9c9cc7da903cd49b7b7bb78ca34d9eebe640ff77ce327eee0d8fb6db6ed0",
+    "robustness_run_manifest.py": "568922f297cd1e281e81857ff49c1db4fa4d0f86a651e1d965e0dc12a58700cc",
+    "robustness_target.py": "54731210640af2568fb567823fbecfb906af6d3ec96aca497ba5f538001770d9",
+    "tasks.py": "b21e4d57bd91b80e567bd8d9d39ea11cc15f93a376fa934d1b8c35ae5eac77a4",
+    "training_provenance.py": "9a23224fe36886ca52ed5471b6fa7491492be2309d39364e6af1d62785543259"
+  },
+  "evidence_status": "full_test_evaluation_requires_cross_training_seed_summary",
+  "manifest_payload_sha256": "aadd6d0d136cff7c08909da164c4f81cf2d10721ec80a5895117af8b37748bbf",
+  "method_id": "hybrid_qat",
+  "model": {
+    "activation_hparams": {},
+    "activation_positions": [],
+    "activation_type": "none",
+    "class_name": "HybridD2NNClassifier",
+    "detector_feature_count": 64,
+    "feature_schema_id": "pooled_intensity:8x8",
+    "propagation_backend": "fft",
+    "propagation_chunk_size": null,
+    "score_semantics": "softmax_probability",
+    "training_seed": 43,
+    "variant": "hybrid"
+  },
+  "plan": {
+    "path": "/root/d2nn/results/formal_mnist_v2/robustness_plan.json",
+    "plan_id": "robustness-plan-62aae73d8284e7fd25a4",
+    "sha256": "ec42ae9abaea6fcc104c9a80880dc3bee16ae5fd67c1480c929b875c7d4ca35b"
+  },
+  "runtime": {
+    "batch_size": 128,
+    "deterministic_algorithms": true,
+    "device": "cuda",
+    "include_scores": false,
+    "num_workers": 0
+  },
+  "sample_scope": {
+    "full_test_samples": 10000,
+    "sample_count": 10000,
+    "selection": "full_test"
+  },
+  "sampling_protocol": {
+    "detector_noise_scope": "per_sample_feature_table",
+    "detector_noise_semantics": "synthetic_relative_additive_simulation_noise",
+    "feature_schema_pairing": "optical_draws_are_paired; detector_tables_are_feature_schema_specific",
+    "optical_draw_scope": "one_fixed_draw_per_draw_id_across_selected_test_scope"
+  },
+  "schema_version": "robustness-evaluation/v2",
+  "scope": "numerical_simulation_only",
+  "statistics": {
+    "draw_role": "deployment_perturbation_variability_not_independent_training_replicates",
+    "independent_unit": "training_seed"
+  }
+}

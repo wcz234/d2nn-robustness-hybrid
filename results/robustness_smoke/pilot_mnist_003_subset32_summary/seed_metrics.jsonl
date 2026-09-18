@@ -1,0 +1,1 @@
+{"condition_id":"engineering_smoke_mixed","draw_count":2,"draw_ids":[0,1],"method_id":"baseline_d2nn_pilot","metrics":{"accuracy":0.96875,"mean_contrast":0.512141577899456,"mean_cross_entropy":0.6515414118766785},"training_seed":42,"unit_note":"one independently trained model; draws were aggregated before cross-seed inference"}

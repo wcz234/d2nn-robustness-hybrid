@@ -1,0 +1,378 @@
+%0 Journal Article
+%T Object detection on low-compute edge SoCs: a reproducible benchmark and deployment guidelines
+%A Kong, Chang
+%A Li, Feng
+%A Yan, Xiaohu
+%A Yang, Jinfeng
+%A Mo, Peng
+%A Luo, Qiuming
+%A Mao, Rui
+%J Scientific Reports
+%V 16
+%N 1
+%P 5875
+%D 2026
+%@ 2045-2322
+%R 10.1038/s41598-026-36862-y
+%U https://doi.org/10.1038/s41598-026-36862-y
+
+%0 Journal Article
+%T Programmable space-frequency linear transformations in photonic interlacing architectures
+%A Friedman, Jonathan
+%A Zelaya, Kevin
+%A Honari-Latifpour, Mostafa
+%A Miri, Mohammad-Ali
+%J Scientific Reports
+%V 15
+%N 1
+%P 35173
+%D 2025
+%@ 2045-2322
+%R 10.1038/s41598-025-19176-3
+%U https://doi.org/10.1038/s41598-025-19176-3
+
+%0 Journal Article
+%T Programmable diffractive deep neural networks enabled by integrated rewritable metasurfaces
+%A Zarei, Sanaz
+%J Scientific Reports
+%V 15
+%N 1
+%P 35624
+%D 2025
+%@ 2045-2322
+%R 10.1038/s41598-025-19638-8
+%U https://doi.org/10.1038/s41598-025-19638-8
+
+%0 Journal Article
+%T Direct retrieval of Zernike-based pupil functions using integrated diffractive deep neural networks
+%A Goi, Elena
+%A Schoenhardt, Steffen
+%A Gu, Min
+%J Nature Communications
+%V 13
+%N 1
+%P 7531
+%D 2022
+%@ 2041-1723
+%R 10.1038/s41467-022-35349-4
+%U https://doi.org/10.1038/s41467-022-35349-4
+
+%0 Journal Article
+%T Realization of optical logic gates using on-chip diffractive optical neural networks
+%A Zarei, Sanaz
+%A Khavasi, Amin
+%J Scientific Reports
+%V 12
+%N 1
+%P 15747
+%D 2022
+%@ 2045-2322
+%R 10.1038/s41598-022-19973-0
+%U https://doi.org/10.1038/s41598-022-19973-0
+
+%0 Journal Article
+%T Cascadable all-optical NAND gates using diffractive networks
+%A Luo, Yi
+%A Mengu, Deniz
+%A Ozcan, Aydogan
+%J Scientific Reports
+%V 12
+%N 1
+%P 7121
+%D 2022
+%@ 2045-2322
+%R 10.1038/s41598-022-11331-4
+%U https://doi.org/10.1038/s41598-022-11331-4
+
+%0 Journal Article
+%T High-precision integrated diffractive optical networks enabling regression analysis
+%A Chen, Chao
+%A Ding, Hanting
+%A Yu, Yu
+%A Zhang, Xinliang
+%J Nature Communications
+%V 17
+%N 1
+%P 9870
+%D 2026
+%@ 2041-1723
+%R 10.1038/s41467-026-76933-2
+%U https://doi.org/10.1038/s41467-026-76933-2
+
+%0 Journal Article
+%T Wavefront-aberration-tolerant diffractive deep neural networks using volume holographic optical elements
+%A Hoshi, Ikuo
+%A Wakunami, Koki
+%A Ichihashi, Yasuyuki
+%A Oi, Ryutaro
+%J Scientific Reports
+%V 15
+%N 1
+%P 1104
+%D 2025
+%@ 2045-2322
+%R 10.1038/s41598-024-82791-z
+%U https://doi.org/10.1038/s41598-024-82791-z
+
+%0 Journal Article
+%T Causal-aware training with counterfactual supervision and structural causal models improves the robustness of LLM-based vulnerability detection
+%A Abdelhaliem, Amr H.
+%A Alomari, Tariq
+%A Tawfik, Mohammed
+%A Fathi, Islam S.
+%J Scientific Reports
+%D 2026
+%@ 2045-2322
+%R 10.1038/s41598-026-69332-6
+%U https://doi.org/10.1038/s41598-026-69332-6
+
+%0 Journal Article
+%T Fitting mathematical models of biochemical pathways to steady state perturbation response data without simulating perturbation experiments
+%A Santra, Tapesh
+%J Scientific Reports
+%V 8
+%N 1
+%P 11679
+%D 2018
+%@ 2045-2322
+%R 10.1038/s41598-018-30118-0
+%U https://doi.org/10.1038/s41598-018-30118-0
+
+%0 Journal Article
+%T Large language models robustness against perturbation
+%A Alahmari, Saeed S.
+%A Hall, Lawrence
+%A Mouton, Peter R.
+%A Goldgof, Dmitry
+%J Scientific Reports
+%V 16
+%N 1
+%P 346
+%D 2025
+%@ 2045-2322
+%R 10.1038/s41598-025-29770-0
+%U https://doi.org/10.1038/s41598-025-29770-0
+
+%0 Journal Article
+%T Physical neural networks using sharpness-aware training
+%A Xu, Tengji
+%A Luo, Zeyu
+%A Liu, Shaojie
+%A Fan, Li
+%A Xiao, Qiarong
+%A Wang, Benshan
+%A Wang, Dongliang
+%A Huang, Chaoran
+%J Nature Communications
+%V 17
+%N 1
+%P 1766
+%D 2026
+%@ 2041-1723
+%R 10.1038/s41467-026-68470-9
+%U https://doi.org/10.1038/s41467-026-68470-9
+
+%0 Journal Article
+%T Error-aware probabilistic training for memristive neural networks
+%A Liu, Jinchang
+%A Lu, Jian
+%A Tang, Shuangzhu
+%A Zhou, Ruixi
+%A Ma, Huiqin
+%A Lyu, Bo
+%A Tian, Yang
+%A Shi, Tuo
+%A Liu, Qi
+%J Nature Communications
+%V 16
+%N 1
+%P 11494
+%D 2025
+%@ 2041-1723
+%R 10.1038/s41467-025-66240-7
+%U https://doi.org/10.1038/s41467-025-66240-7
+
+%0 Journal Article
+%T Hybrid optical-electronic convolutional neural networks with optimized diffractive optics for image classification
+%A Chang, Julie
+%A Sitzmann, Vincent
+%A Dun, Xiong
+%A Heidrich, Wolfgang
+%A Wetzstein, Gordon
+%J Scientific Reports
+%V 8
+%N 1
+%P 12324
+%D 2018
+%@ 2045-2322
+%R 10.1038/s41598-018-30619-y
+%U https://doi.org/10.1038/s41598-018-30619-y
+
+%0 Journal Article
+%T Design of waveguide with double layer diffractive optical elements for augmented reality displays
+%A Zhang, Jiahang
+%A Liu, Siqi
+%A Zhang, Wei
+%A Jiang, Sijia
+%A Ma, Ding
+%A Xu, Liang
+%A Yang, Mingyu
+%A Jiao, Qingbin
+%A Tan, Xin
+%J Scientific Reports
+%V 14
+%N 1
+%P 24310
+%D 2024
+%@ 2045-2322
+%R 10.1038/s41598-024-75766-7
+%U https://doi.org/10.1038/s41598-024-75766-7
+
+%0 Journal Article
+%T Large-scale neuromorphic optoelectronic computing with a reconfigurable diffractive processing unit
+%A Zhou, Tiankuang
+%A Lin, Xing
+%A Wu, Jiamin
+%A Chen, Yitong
+%A Xie, Hao
+%A Li, Yipeng
+%A Fan, Jingtao
+%A Wu, Huaqiang
+%A Fang, Lu
+%A Dai, Qionghai
+%J Nature Photonics
+%V 15
+%N 5
+%P 367-373
+%D 2021
+%@ 1749-4885
+%R 10.1038/s41566-021-00796-w
+%U https://doi.org/10.1038/s41566-021-00796-w
+
+%0 Journal Article
+%T A fully reconfigurable waveguide Bragg grating for programmable photonic signal processing
+%A Zhang, Weifeng
+%A Yao, Jianping
+%J Nature Communications
+%V 9
+%N 1
+%P 1396
+%D 2018
+%@ 2041-1723
+%R 10.1038/s41467-018-03738-3
+%U https://doi.org/10.1038/s41467-018-03738-3
+
+%0 Journal Article
+%T Multi-mode optoelectronic devices enable compact and versatile in-sensor computing
+%A Feng, Guangdi
+%A Tian, Bobo
+%J Nature Sensors
+%V 1
+%N 7
+%P 571-572
+%D 2026
+%@ 3059-4499
+%R 10.1038/s44460-026-00083-7
+%U https://doi.org/10.1038/s44460-026-00083-7
+
+%0 Journal Article
+%T An optical neural network using less than 1 photon per multiplication
+%A Wang, Tianyu
+%A Ma, Shi-Yuan
+%A Wright, Logan G.
+%A Onodera, Tatsuhiro
+%A Richard, Brian C.
+%A McMahon, Peter L.
+%J Nature Communications
+%V 13
+%N 1
+%P 123
+%D 2022
+%@ 2041-1723
+%R 10.1038/s41467-021-27774-8
+%U https://doi.org/10.1038/s41467-021-27774-8
+
+%0 Journal Article
+%T Orbital angular momentum multiplexing diffractive neural networks for high-capacity optical inference
+%A He, Cong
+%A Li, Xin
+%A Wang, Hongbo
+%A Li, Jiaqin
+%A Zhang, Zian
+%A Liu, Shendong
+%A Jiang, Qiang
+%A Zhang, Nan
+%A Wang, Yongtian
+%A Huang, Lingling
+%J Nature Photonics
+%V 20
+%N 8
+%P 896-904
+%D 2026
+%@ 1749-4885
+%R 10.1038/s41566-026-01930-2
+%U https://doi.org/10.1038/s41566-026-01930-2
+
+%0 Journal Article
+%T Photonic Stochastic Emergent Storage for deep classification by scattering-intrinsic patterns
+%A Leonetti, Marco
+%A Gosti, Giorgio
+%A Ruocco, Giancarlo
+%J Nature Communications
+%V 15
+%N 1
+%P 505
+%D 2024
+%@ 2041-1723
+%R 10.1038/s41467-023-44498-z
+%U https://doi.org/10.1038/s41467-023-44498-z
+
+%0 Journal Article
+%T Hundred-layer photonic deep learning
+%A Zhou, Tiankuang
+%A Jiang, Yizhou
+%A Xu, Zhihao
+%A Xue, Zhiwei
+%A Fang, Lu
+%J Nature Communications
+%V 16
+%N 1
+%P 10382
+%D 2025
+%@ 2041-1723
+%R 10.1038/s41467-025-65356-0
+%U https://doi.org/10.1038/s41467-025-65356-0
+
+%0 Journal Article
+%T Low-Loss Photonic Reservoir Computing with Multimode Photonic Integrated Circuits
+%A Katumba, Andrew
+%A Heyvaert, Jelle
+%A Schneider, Bendix
+%A Uvin, Sarah
+%A Dambre, Joni
+%A Bienstman, Peter
+%J Scientific Reports
+%V 8
+%N 1
+%P 2653
+%D 2018
+%@ 2045-2322
+%R 10.1038/s41598-018-21011-x
+%U https://doi.org/10.1038/s41598-018-21011-x
+
+%0 Journal Article
+%T High-throughput parameter estimation from experimental data using Bayesian Inference with accelerated sampling
+%A Das, Basita
+%A Heymann, William E.
+%A Wang, Yueming
+%A Rau, Uwe
+%A Kirchartz, Thomas
+%A Buonassisi, Tonio
+%J npj Computational Materials
+%V 12
+%N 1
+%P 220
+%D 2026
+%@ 2057-3960
+%R 10.1038/s41524-026-01995-1
+%U https://doi.org/10.1038/s41524-026-01995-1

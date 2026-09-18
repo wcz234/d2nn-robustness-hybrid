@@ -1,0 +1,118 @@
+{
+  "claim_boundary": "diagnostic signal scale, not physical-device performance",
+  "comparisons": {
+    "d2nn2018_thz_to_paper_data_loss_phase_gradient_abs_mean_ratio": 78492.83144465116,
+    "d2nn2018_thz_to_paper_mean_output_intensity_ratio": 1814153431871.5344
+  },
+  "configuration": {
+    "batch_size": 10,
+    "layers": 3,
+    "loss": {
+      "alpha": 1.0,
+      "beta": 0.1,
+      "data_gradient_excludes_phase_regularization": true,
+      "gamma": 0.01,
+      "name": "classification_composite_loss"
+    },
+    "num_threads": 1,
+    "presets": [
+      "paper",
+      "d2nn2018_thz"
+    ],
+    "rs_backend": "fft",
+    "seed": 42,
+    "size": 64,
+    "synthetic_input": {
+      "class_counts": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "distribution": "torch.rand uniform on [0, 1)",
+      "shape": [
+        10,
+        1,
+        28,
+        28
+      ],
+      "targets": "cyclic class indices arange(batch_size) mod 10"
+    },
+    "synthetic_input_seed": 43
+  },
+  "generated_at_utc": "2026-07-25T01:47:56.702229+00:00",
+  "interpretation_notes": [
+    "Data-loss gradients use the current normalized-detector implementation, including its 1e-8 numerical floor.",
+    "Mean output intensity is comparable only within runs sharing batch size and grid resolution."
+  ],
+  "presets": {
+    "d2nn2018_thz": {
+      "dimensionless": {
+        "input_plane_fresnel_number": 7.281777777777778,
+        "inter_layer_fresnel_number": 7.281777777777778,
+        "output_plane_fresnel_number": 7.281777777777778
+      },
+      "metrics": {
+        "classification_mse_loss": 0.09006456285715103,
+        "composite_loss": 0.3206115663051605,
+        "composite_phase_gradient_abs_max": 9.314357885159552e-05,
+        "composite_phase_gradient_abs_mean": 1.0512269909668248e-05,
+        "cross_entropy_loss": 2.304969549179077,
+        "data_loss_phase_gradient_abs_max": 9.331628825748339e-05,
+        "data_loss_phase_gradient_abs_mean": 1.051078288583085e-05,
+        "finite_output": true,
+        "finite_phase_gradients": true,
+        "mean_detector_score": 0.6662200093269348,
+        "mean_output_intensity": 0.02194351702928543,
+        "phase_regularization_loss": 0.0050035626627504826
+      },
+      "optical_config": {
+        "input_distance": 0.03,
+        "layer_distance": 0.03,
+        "num_layers": 3,
+        "output_distance": 0.03,
+        "pixel_size": 0.0004,
+        "size": 64,
+        "wavelength": 0.00075
+      }
+    },
+    "paper": {
+      "dimensionless": {
+        "input_plane_fresnel_number": 0.002446311910540361,
+        "inter_layer_fresnel_number": 0.040062597809076686,
+        "output_plane_fresnel_number": 0.002089117986790115
+      },
+      "metrics": {
+        "classification_mse_loss": 0.09999612718820572,
+        "composite_loss": 0.33030471205711365,
+        "composite_phase_gradient_abs_max": 7.911331749710371e-07,
+        "composite_phase_gradient_abs_mean": 1.4532314196458174e-07,
+        "cross_entropy_loss": 2.3025853633880615,
+        "data_loss_phase_gradient_abs_max": 7.500245979841225e-10,
+        "data_loss_phase_gradient_abs_mean": 1.3390755171371893e-10,
+        "finite_output": true,
+        "finite_phase_gradients": true,
+        "mean_detector_score": 1.9353171409192127e-13,
+        "mean_output_intensity": 1.2095733824810974e-14,
+        "phase_regularization_loss": 0.0050035626627504826
+      },
+      "optical_config": {
+        "input_distance": 0.491302,
+        "layer_distance": 0.03,
+        "num_layers": 3,
+        "output_distance": 0.575304,
+        "pixel_size": 1e-06,
+        "size": 64,
+        "wavelength": 8.52e-07
+      }
+    }
+  },
+  "schema_version": 1,
+  "scope": "numerical_simulation_only"
+}

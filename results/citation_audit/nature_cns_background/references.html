@@ -1,0 +1,790 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nature Citation Browser</title>
+  <style>
+    :root {
+      --ink: #1f1f1f;
+      --muted: #5f6368;
+      --paper: #f8f9fa;
+      --panel: #ffffff;
+      --line: #dadce0;
+      --accent: #1a73e8;
+      --accent-2: #d93025;
+      --soft: #e8f0fe;
+      --soft-2: #f1f3f4;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.45;
+    }
+    header {
+      padding: 26px clamp(16px, 4vw, 40px) 16px;
+      border-bottom: 1px solid var(--line);
+      background: var(--panel);
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(28px, 3vw, 42px);
+      font-weight: 500;
+      letter-spacing: 0;
+    }
+    .subhead {
+      max-width: 980px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+    .toolbar {
+      display: grid;
+      grid-template-columns: 260px minmax(0, 1fr) auto;
+      gap: 14px;
+      align-items: start;
+      padding: 16px clamp(16px, 4vw, 40px);
+      background: var(--panel);
+      border-bottom: 1px solid var(--line);
+      position: sticky;
+      top: 0;
+      z-index: 8;
+    }
+    .toolbar a, .toolbar button, .toolbar input, .toolbar select {
+      appearance: none;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--ink);
+      border-radius: 20px;
+      padding: 10px 14px;
+      font: 500 14px Arial, Helvetica, sans-serif;
+      text-decoration: none;
+    }
+    .toolbar button, .toolbar a {
+      cursor: pointer;
+    }
+    .toolbar button.primary, .toolbar a.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: white;
+    }
+    .filters {
+      display: grid;
+      gap: 10px;
+    }
+    .filter-group {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .search-input {
+      width: 100%;
+    }
+    .summary-strip {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+    }
+    .pill {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 9px 12px;
+      background: var(--soft-2);
+      font-size: 13px;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 320px;
+      gap: 18px;
+      padding: 22px clamp(16px, 4vw, 40px) 48px;
+    }
+    main {
+      display: grid;
+      gap: 14px;
+      align-content: start;
+    }
+    aside {
+      position: sticky;
+      top: 124px;
+      align-self: start;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 2px 8px rgba(60, 64, 67, 0.12);
+    }
+    .segment-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 18px 20px;
+      box-shadow: 0 1px 4px rgba(60, 64, 67, 0.12);
+    }
+    .segment-head {
+      display: flex;
+      gap: 12px;
+      align-items: start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+    .segment-id {
+      background: var(--soft);
+      color: var(--accent);
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .query {
+      color: var(--muted);
+      font-size: 12px;
+      max-width: 780px;
+    }
+    .segment-text {
+      margin: 0 0 14px;
+      font-size: 18px;
+    }
+    .insert-row {
+      display: grid;
+      gap: 6px;
+      margin: 12px 0 16px;
+      padding: 12px;
+      background: var(--soft);
+      border-radius: 10px;
+    }
+    .insert-row span {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    code {
+      white-space: normal;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 14px;
+    }
+    .references-grid {
+      display: grid;
+      gap: 12px;
+    }
+    .reference {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 14px 16px;
+      background: #fff;
+    }
+    .ref-topline {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 8px;
+      font-size: 12px;
+    }
+    .marker {
+      color: var(--accent);
+      font-weight: 800;
+    }
+    .grade {
+      color: var(--accent-2);
+      font-weight: 800;
+    }
+    .ref-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .check-row {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    h3 {
+      margin: 0 0 8px;
+      font-size: 19px;
+      line-height: 1.35;
+      font-weight: 500;
+    }
+    .meta, .authors, .empty {
+      margin: 0 0 8px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .reference a {
+      color: var(--accent);
+      overflow-wrap: anywhere;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .abstract {
+      margin: 8px 0 0;
+      color: #3c4043;
+      font-size: 14px;
+    }
+    .hidden {
+      display: none !important;
+    }
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px;
+      background: rgba(20, 33, 31, 0.42);
+      backdrop-filter: blur(3px);
+      z-index: 20;
+    }
+    .modal-overlay.is-hidden {
+      display: none;
+    }
+    .modal-panel {
+      border: 1px solid var(--ink);
+      border-radius: 8px;
+      width: min(680px, calc(100vw - 28px));
+      box-shadow: 0 16px 40px rgba(60, 64, 67, 0.28);
+      background: var(--panel);
+      color: var(--ink);
+    }
+    .modal-inner {
+      padding: 24px;
+    }
+    .modal-inner h2 {
+      margin: 0 0 10px;
+      font-size: 28px;
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin: 18px 0;
+    }
+    .stat {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 14px;
+      background: var(--soft-2);
+    }
+    .stat b {
+      display: block;
+      font-size: 30px;
+      line-height: 1;
+    }
+    .modal-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .modal-actions a, .modal-actions button {
+      border: 1px solid var(--accent);
+      background: var(--accent);
+      color: #fffdf8;
+      border-radius: 20px;
+      padding: 10px 12px;
+      font: 700 14px Arial, Helvetica, sans-serif;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .modal-actions button {
+      background: var(--panel);
+      color: var(--accent);
+    }
+    .selection-title {
+      margin: 0 0 10px;
+      font-size: 16px;
+      font-weight: 700;
+    }
+    .selection-meta {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .selection-list {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 14px;
+      max-height: 48vh;
+      overflow: auto;
+    }
+    .selection-item {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 10px;
+      background: var(--soft-2);
+    }
+    .selection-item h4 {
+      margin: 0 0 6px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .selection-item p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .empty-state {
+      color: var(--muted);
+      font-size: 14px;
+      padding: 12px;
+      border: 1px dashed var(--line);
+      border-radius: 10px;
+      background: var(--soft-2);
+    }
+    @media (max-width: 680px) {
+      .stats { grid-template-columns: 1fr; }
+      .segment-head { align-items: flex-start; }
+    }
+    @media (max-width: 1040px) {
+      .toolbar {
+        grid-template-columns: 1fr;
+      }
+      .summary-strip {
+        justify-content: flex-start;
+      }
+      .layout {
+        grid-template-columns: 1fr;
+      }
+      aside {
+        position: static;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Nature Citation Browser</h1>
+    <p class="subhead">Scholar-style browsing for strict Nature/CNS-family candidates. Filter by year, compare related hits, choose the references you actually want, then download them as ENW, RIS, or Zotero RDF.</p>
+  </header>
+  <nav class="toolbar">
+    <div class="filters">
+      <input id="queryFilter" class="search-input" type="text" placeholder="Filter by title, journal, DOI, author, or segment text">
+      <div class="filter-group">
+        <label for="yearFrom">From year</label>
+        <input id="yearFrom" type="number" min="1900" max="2100" placeholder="2019">
+        <label for="yearTo">To year</label>
+        <input id="yearTo" type="number" min="1900" max="2100" placeholder="2026">
+        <button id="applyFilters" type="button">Apply filters</button>
+        <button id="clearFilters" type="button">Clear</button>
+      </div>
+      <div class="filter-group">
+        <label class="check-row"><input id="selectedOnly" type="checkbox"> Show selected only</label>
+      </div>
+    </div>
+    <div class="summary-strip">
+      <span class="pill"><strong id="visibleCount">0</strong> visible</span>
+      <span class="pill"><strong id="selectedCount">0</strong> selected</span>
+      <span class="pill"><strong>3</strong> segments</span>
+    </div>
+    <div class="summary-strip">
+      <button id="openSummary" type="button">Guide</button>
+      <label for="downloadFormat">Format</label>
+      <select id="downloadFormat">
+        <option value="enw">ENW</option>
+        <option value="ris">RIS</option>
+        <option value="zotero-rdf">Zotero RDF</option>
+      </select>
+      <a class="primary" id="downloadSelected" href="references.enw" download="references.enw">Download selected / all</a>
+    </div>
+  </nav>
+  <div class="layout">
+    <main id="results">
+      
+            <section class="segment-card" id="S001">
+              <div class="segment-head">
+                <span class="segment-id">S001 · Sentence 1</span>
+                <span class="query">Query: Diffractive deep neural networks can perform image classification through trained passive optical propagation</span>
+              </div>
+              <p class="segment-text">Diffractive deep neural networks can perform image classification through trained passive optical propagation.</p>
+              <div class="insert-row">
+                <span>Suggested insert</span>
+                <code>(Chang et al., 2018) (Hoshi et al., 2025)</code>
+              </div>
+              <div class="references-grid">
+                
+                    <article
+                      class="reference"
+                      data-key="10.1038/s41598-018-30619-y"
+                      data-title="Hybrid optical-electronic convolutional neural networks with optimized diffractive optics for image classification"
+                      data-journal="Scientific Reports"
+                      data-doi="10.1038/s41598-018-30619-y"
+                      data-year="2018"
+                      data-authors="Chang, Julie; Sitzmann, Vincent; Dun, Xiong; Heidrich, Wolfgang; Wetzstein, Gordon"
+                      data-segment="Diffractive deep neural networks can perform image classification through trained passive optical propagation."
+                      data-record="{&quot;title&quot;: &quot;Hybrid optical-electronic convolutional neural networks with optimized diffractive optics for image classification&quot;, &quot;journal&quot;: &quot;Scientific Reports&quot;, &quot;family&quot;: &quot;Nature Portfolio&quot;, &quot;year&quot;: &quot;2018&quot;, &quot;doi&quot;: &quot;10.1038/s41598-018-30619-y&quot;, &quot;url&quot;: &quot;https://doi.org/10.1038/s41598-018-30619-y&quot;, &quot;doi_url&quot;: &quot;https://doi.org/10.1038/s41598-018-30619-y&quot;, &quot;volume&quot;: &quot;8&quot;, &quot;issue&quot;: &quot;1&quot;, &quot;start_page&quot;: &quot;12324&quot;, &quot;end_page&quot;: &quot;&quot;, &quot;issn&quot;: &quot;2045-2322&quot;, &quot;authors&quot;: [&quot;Chang, Julie&quot;, &quot;Sitzmann, Vincent&quot;, &quot;Dun, Xiong&quot;, &quot;Heidrich, Wolfgang&quot;, &quot;Wetzstein, Gordon&quot;], &quot;abstract&quot;: &quot;Abstract Convolutional neural networks (CNNs) excel in a wide variety of computer vision applications, but their high performance also comes at a high computational cost. Despite efforts to increase efficiency both algorithmically and with specialized hardware, it remains difficult to deploy CNNs in embedded systems due to tight power budgets. Here we explore a complementary strategy that incorporates a layer of optical computing prior to electronic computing, improving performance on image classification tasks while adding minimal electronic computational cost or processing time. We propose a design for an optical convolutional layer based on an optimized diffractive optical element and test our design in two simulations: a learned optical correlator and an optoelectronic two-layer CNN. We demonstrate in simulation and with an optical prototype that the classification accuracies of our optical systems rival those of the analogous electronic implementations, while providing substantial savings on computational cost.&quot;, &quot;type&quot;: &quot;journal-article&quot;, &quot;score&quot;: 36.265213, &quot;source_query&quot;: &quot;Diffractive deep neural networks can perform image classification through trained passive optical propagation&quot;, &quot;citation_marker&quot;: &quot;(Chang et al., 2018)&quot;, &quot;support_grade&quot;: &quot;metadata-only candidate&quot;, &quot;screening_note&quot;: &quot;Inspect abstract/publisher page before citing this paper as support.&quot;, &quot;enw_record&quot;: &quot;%0 Journal Article\n%T Hybrid optical-electronic convolutional neural networks with optimized diffractive optics for image classification\n%A Chang, Julie\n%A Sitzmann, Vincent\n%A Dun, Xiong\n%A Heidrich, Wolfgang\n%A Wetzstein, Gordon\n%J Scientific Reports\n%V 8\n%N 1\n%P 12324\n%D 2018\n%@ 2045-2322\n%R 10.1038/s41598-018-30619-y\n%U https://doi.org/10.1038/s41598-018-30619-y&quot;, &quot;ris_record&quot;: &quot;TY  - JOUR\nTI  - Hybrid optical-electronic convolutional neural networks with optimized diffractive optics for image classification\nAU  - Chang, Julie\nAU  - Sitzmann, Vincent\nAU  - Dun, Xiong\nAU  - Heidrich, Wolfgang\nAU  - Wetzstein, Gordon\nT2  - Scientific Reports\nJO  - Scientific Reports\nPY  - 2018\nY1  - 2018/08/17\nVL  - 8\nIS  - 1\nSP  - 12324\nDO  - 10.1038/s41598-018-30619-y\nUR  - https://doi.org/10.1038/s41598-018-30619-y\nSN  - 2045-2322\nN1  - Metadata-only candidate. Inspect abstract or publisher page before citing as support.\nER  -&quot;, &quot;journal_resource&quot;: &quot;urn:issn:2045-2322:vol:8:issue:1&quot;, &quot;zotero_rdf_article&quot;: &quot;    &lt;bib:Article rdf:about=\&quot;https://doi.org/10.1038/s41598-018-30619-y\&quot;&gt;\n        &lt;z:itemType&gt;journalArticle&lt;/z:itemType&gt;\n        &lt;dcterms:isPartOf rdf:resource=\&quot;urn:issn:2045-2322:vol:8:issue:1\&quot;/&gt;\n        &lt;bib:authors&gt;\n            &lt;rdf:Seq&gt;\n                &lt;rdf:li&gt;\n                    &lt;foaf:Person&gt;\n                        &lt;foaf:surname&gt;Chang&lt;/foaf:surname&gt;\n                        &lt;foaf:givenName&gt;Julie&lt;/foaf:givenName&gt;\n                    &lt;/foaf:Person&gt;\n                &lt;/rdf:li&gt;\n                &lt;rdf:li&gt;\n                    &lt;foaf:Person&gt;\n                        &lt;foaf:surname&gt;Sitzmann&lt;/foaf:surname&gt;\n                        &lt;foaf:givenName&gt;Vincent&lt;/foaf:givenName&gt;\n                    &lt;/foaf:Person&gt;\n                &lt;/rdf:li&gt;\n                &lt;rdf:li&gt;\n                    &lt;foaf:Person&gt;\n                        &lt;foaf:surname&gt;Dun&lt;/foaf:surname&gt;\n                        &lt;foaf:givenName&gt;Xiong&lt;/foaf:givenName&gt;\n                    &lt;/foaf:Person&gt;\n                &lt;/rdf:li&gt;\n                &lt;rdf:li&gt;\n                    &lt;foaf:Person&gt;\n                        &lt;foaf:surname&gt;Heidrich&lt;/foaf:surname&gt;\n                        &lt;foaf:givenName&gt;Wolfgang&lt;/foaf:givenName&gt;\n                    &lt;/foaf:Person&gt;\n                &lt;/rdf:li&gt;\n                &lt;rdf:li&gt;\n                    &lt;foaf:Person&gt;\n                        &lt;foaf:surname&gt;Wetzstein&lt;/foaf:surname&gt;\n                        &lt;foaf:givenName&gt;Gordon&lt;/foaf:givenName&gt;\n                    &lt;/foaf:Person&gt;\n                &lt;/rdf:li&gt;\n            &lt;/rdf:Seq&gt;\n        &lt;/bib:authors&gt;\n        &lt;dc:title&gt;Hybrid optical-electronic convolutional neural networks with optimized diffractive optics for image classification&lt;/dc:title&gt;\n        &lt;dc:date&gt;2018-08-17&lt;/dc:date&gt;\n        &lt;z:libraryCatalog&gt;Crossref&lt;/z:libraryCatalog&gt;\n        &lt;dc:identifier&gt;\n            &lt;dcterms:URI&gt;\n                &lt;rdf:value&gt;https://doi.org/10.1038/s41598-018-30619-y&lt;/rdf:value&gt;\n            &lt;/dcterms:URI&gt;\n        &lt;/dc:identifier&gt;\n        &lt;dc:identifier&gt;DOI 10.1038/s41598-018-30619-y&lt;/dc:identifier&gt;\n        &lt;bib:pages&gt;12324&lt;/bib:pages&gt;\n        &lt;z:citationKey&gt;changHybridOpticalElectronic2018&lt;/z:citationKey&gt;\n    &lt;/bib:Article&gt;&quot;, &quot;zotero_rdf_journal&quot;: &quot;    &lt;bib:Journal rdf:about=\&quot;urn:issn:2045-2322:vol:8:issue:1\&quot;&gt;\n        &lt;prism:volume&gt;8&lt;/prism:volume&gt;\n        &lt;dc:title&gt;Scientific Reports&lt;/dc:title&gt;\n        &lt;prism:number&gt;1&lt;/prism:number&gt;\n        &lt;dc:identifier&gt;ISSN 2045-2322&lt;/dc:identifier&gt;\n    &lt;/bib:Journal&gt;&quot;}"
+                    >
+                      <div class="ref-controls">
+                        <label class="check-row"><input type="checkbox"> Select</label>
+                        <span class="marker">(Chang et al., 2018)</span>
+                      </div>
+                      <div class="ref-topline">
+                        <span class="grade">metadata-only</span>
+                        <span>1 / 2</span>
+                      </div>
+                      <h3>Hybrid optical-electronic convolutional neural networks with optimized diffractive optics for image classification</h3>
+                      <p class="meta">Scientific Reports · Nature Portfolio · 2018</p>
+                      <p class="authors">Chang, Julie; Sitzmann, Vincent; Dun, Xiong; Heidrich, Wolfgang; Wetzstein, Gordon</p>
+                      <p class="abstract">Abstract Convolutional neural networks (CNNs) excel in a wide variety of computer vision applications, but their high performance also comes at a high computational cost. Despite efforts to increase efficiency both algorithmically and with specialized hardware, it remains difficult to deploy CNNs in embedded systems due to tight power budgets. Here we explore a complementary st...</p>
+                      <a href="https://doi.org/10.1038/s41598-018-30619-y" target="_blank" rel="noreferrer">https://doi.org/10.1038/s41598-018-30619-y</a>
+                    </article>
+                    
+                    <article
+                      class="reference"
+                      data-key="10.1038/s41598-024-82791-z"
+                      data-title="Wavefront-aberration-tolerant diffractive deep neural networks using volume holographic optical elements"
+                      data-journal="Scientific Reports"
+                      data-doi="10.1038/s41598-024-82791-z"
+                      data-year="2025"
+                      data-authors="Hoshi, Ikuo; Wakunami, Koki; Ichihashi, Yasuyuki; Oi, Ryutaro"
+                      data-segment="Diffractive deep neural networks can perform image classification through trained passive optical propagation."
+                      data-record="{&quot;title&quot;: &quot;Wavefront-aberration-tolerant diffractive deep neural networks using volume holographic optical elements&quot;, &quot;journal&quot;: &quot;Scientific Reports&quot;, &quot;family&quot;: &quot;Nature Portfolio&quot;, &quot;year&quot;: &quot;2025&quot;, &quot;doi&quot;: &quot;10.1038/s41598-024-82791-z&quot;, &quot;url&quot;: &quot;https://doi.org/10.1038/s41598-024-82791-z&quot;, &quot;doi_url&quot;: &quot;https://doi.org/10.1038/s41598-024-82791-z&quot;, &quot;volume&quot;: &quot;15&quot;, &quot;issue&quot;: &quot;1&quot;, &quot;start_page&quot;: &quot;1104&quot;, &quot;end_page&quot;: &quot;&quot;, &quot;issn&quot;: &quot;2045-2322&quot;, &quot;authors&quot;: [&quot;Hoshi, Ikuo&quot;, &quot;Wakunami, Koki&quot;, &quot;Ichihashi, Yasuyuki&quot;, &quot;Oi, Ryutaro&quot;], &quot;abstract&quot;: &quot;Abstract As the demand for computational performance in artificial intelligence (AI) continues to increase, diffractive deep neural networks (D 2 NNs), which can perform AI computing at the speed of light by repeated optical modulation with diffractive optical elements (DOEs), are attracting attention. DOEs are varied in terms of fabrication methods and materials, and among them, volume holographic optical elements (vHOEs) have unique features such as high selectivity and multiplex recordability for wavelength and angle. However, when those are used for D 2 NNs, they suffer from unknown wavefront aberrations compounded by multiple fabrication errors. Here, we propose a training method to adapt the model to be unknown wavefront aberrations and demonstrate a D 2 NN using vHOEs. As a result, the proposed method improved the classification accuracy by approximately 58 percentage points in the optical experiment, with the model trained to classify handwritten digits. The achievement of this study can be extended to the D 2 NN that enables the independent modulation of multiple wavelengths owing to their wavelength selectivity and wavelength division multiplex recordability. Therefore, it might be promising for various applications that require multiple wavelengths in parallel optical computing, bioimaging, and optical communication.&quot;, &quot;type&quot;: &quot;journal-article&quot;, &quot;score&quot;: 31.762177, &quot;source_query&quot;: &quot;Diffractive deep neural networks can perform image classification through trained passive optical propagation&quot;, &quot;citation_marker&quot;: &quot;(Hoshi et al., 2025)&quot;, &quot;support_grade&quot;: &quot;metadata-only candidate&quot;, &quot;screening_note&quot;: &quot;Inspect abstract/publisher page before citing this paper as support.&quot;, &quot;enw_record&quot;: &quot;%0 Journal Article\n%T Wavefront-aberration-tolerant diffractive deep neural networks using volume holographic optical elements\n%A Hoshi, Ikuo\n%A Wakunami, Koki\n%A Ichihashi, Yasuyuki\n%A Oi, Ryutaro\n%J Scientific Reports\n%V 15\n%N 1\n%P 1104\n%D 2025\n%@ 2045-2322\n%R 10.1038/s41598-024-82791-z\n%U https://doi.org/10.1038/s41598-024-82791-z&quot;, &quot;ris_record&quot;: &quot;TY  - JOUR\nTI  - Wavefront-aberration-tolerant diffractive deep neural networks using volume holographic optical elements\nAU  - Hoshi, Ikuo\nAU  - Wakunami, Koki\nAU  - Ichihashi, Yasuyuki\nAU  - Oi, Ryutaro\nT2  - Scientific Reports\nJO  - Scientific Reports\nPY  - 2025\nY1  - 2025/01/07\nVL  - 15\nIS  - 1\nSP  - 1104\nDO  - 10.1038/s41598-024-82791-z\nUR  - https://doi.org/10.1038/s41598-024-82791-z\nSN  - 2045-2322\nN1  - Metadata-only candidate. Inspect abstract or publisher page before citing as support.\nER  -&quot;, &quot;journal_resource&quot;: &quot;urn:issn:2045-2322:vol:15:issue:1&quot;, &quot;zotero_rdf_article&quot;: &quot;    &lt;bib:Article rdf:about=\&quot;https://doi.org/10.1038/s41598-024-82791-z\&quot;&gt;\n        &lt;z:itemType&gt;journalArticle&lt;/z:itemType&gt;\n        &lt;dcterms:isPartOf rdf:resource=\&quot;urn:issn:2045-2322:vol:15:issue:1\&quot;/&gt;\n        &lt;bib:authors&gt;\n            &lt;rdf:Seq&gt;\n                &lt;rdf:li&gt;\n                    &lt;foaf:Person&gt;\n                        &lt;foaf:surname&gt;Hoshi&lt;/foaf:surname&gt;\n                        &lt;foaf:givenName&gt;Ikuo&lt;/foaf:givenName&gt;\n                    &lt;/foaf:Person&gt;\n                &lt;/rdf:li&gt;\n                &lt;rdf:li&gt;\n                    &lt;foaf:Person&gt;\n                        &lt;foaf:surname&gt;Wakunami&lt;/foaf:surname&gt;\n                        &lt;foaf:givenName&gt;Koki&lt;/foaf:givenName&gt;\n                    &lt;/foaf:Person&gt;\n                &lt;/rdf:li&gt;\n                &lt;rdf:li&gt;\n                    &lt;foaf:Person&gt;\n                        &lt;foaf:surname&gt;Ichihashi&lt;/foaf:surname&gt;\n                        &lt;foaf:givenName&gt;Yasuyuki&lt;/foaf:givenName&gt;\n                    &lt;/foaf:Person&gt;\n                &lt;/rdf:li&gt;\n                &lt;rdf:li&gt;\n                    &lt;foaf:Person&gt;\n                        &lt;foaf:surname&gt;Oi&lt;/foaf:surname&gt;\n                        &lt;foaf:givenName&gt;Ryutaro&lt;/foaf:givenName&gt;\n                    &lt;/foaf:Person&gt;\n                &lt;/rdf:li&gt;\n            &lt;/rdf:Seq&gt;\n        &lt;/bib:authors&gt;\n        &lt;dc:title&gt;Wavefront-aberration-tolerant diffractive deep neural networks using volume holographic optical elements&lt;/dc:title&gt;\n        &lt;dc:date&gt;2025-01-07&lt;/dc:date&gt;\n        &lt;z:libraryCatalog&gt;Crossref&lt;/z:libraryCatalog&gt;\n        &lt;dc:identifier&gt;\n            &lt;dcterms:URI&gt;\n                &lt;rdf:value&gt;https://doi.org/10.1038/s41598-024-82791-z&lt;/rdf:value&gt;\n            &lt;/dcterms:URI&gt;\n        &lt;/dc:identifier&gt;\n        &lt;dc:identifier&gt;DOI 10.1038/s41598-024-82791-z&lt;/dc:identifier&gt;\n        &lt;bib:pages&gt;1104&lt;/bib:pages&gt;\n        &lt;z:citationKey&gt;hoshiWavefrontAberrationTolerant2025&lt;/z:citationKey&gt;\n    &lt;/bib:Article&gt;&quot;, &quot;zotero_rdf_journal&quot;: &quot;    &lt;bib:Journal rdf:about=\&quot;urn:issn:2045-2322:vol:15:issue:1\&quot;&gt;\n        &lt;prism:volume&gt;15&lt;/prism:volume&gt;\n        &lt;dc:title&gt;Scientific Reports&lt;/dc:title&gt;\n        &lt;prism:number&gt;1&lt;/prism:number&gt;\n        &lt;dc:identifier&gt;ISSN 2045-2322&lt;/dc:identifier&gt;\n    &lt;/bib:Journal&gt;&quot;}"
+                    >
+                      <div class="ref-controls">
+                        <label class="check-row"><input type="checkbox"> Select</label>
+                        <span class="marker">(Hoshi et al., 2025)</span>
+                      </div>
+                      <div class="ref-topline">
+                        <span class="grade">metadata-only</span>
+                        <span>2 / 2</span>
+                      </div>
+                      <h3>Wavefront-aberration-tolerant diffractive deep neural networks using volume holographic optical elements</h3>
+                      <p class="meta">Scientific Reports · Nature Portfolio · 2025</p>
+                      <p class="authors">Hoshi, Ikuo; Wakunami, Koki; Ichihashi, Yasuyuki; Oi, Ryutaro</p>
+                      <p class="abstract">Abstract As the demand for computational performance in artificial intelligence (AI) continues to increase, diffractive deep neural networks (D 2 NNs), which can perform AI computing at the speed of light by repeated optical modulation with diffractive optical elements (DOEs), are attracting attention. DOEs are varied in terms of fabrication methods and materials, and among the...</p>
+                      <a href="https://doi.org/10.1038/s41598-024-82791-z" target="_blank" rel="noreferrer">https://doi.org/10.1038/s41598-024-82791-z</a>
+                    </article>
+                    
+              </div>
+            </section>
+            
+            <section class="segment-card" id="S002">
+              <div class="segment-head">
+                <span class="segment-id">S002 · Sentence 2</span>
+                <span class="query">Query: Jointly optimized optical front ends and electronic classifiers can trade optical feature compression against classification accuracy</span>
+              </div>
+              <p class="segment-text">Jointly optimized optical front ends and electronic classifiers can trade optical feature compression against classification accuracy.</p>
+              <div class="insert-row">
+                <span>Suggested insert</span>
+                <code>(Chang et al., 2018)</code>
+              </div>
+              <div class="references-grid">
+                
+                    <article
+                      class="reference"
+                      data-key="10.1038/s41598-018-30619-y"
+                      data-title="Hybrid optical-electronic convolutional neural networks with optimized diffractive optics for image classification"
+                      data-journal="Scientific Reports"
+                      data-doi="10.1038/s41598-018-30619-y"
+                      data-year="2018"
+                      data-authors="Chang, Julie; Sitzmann, Vincent; Dun, Xiong; Heidrich, Wolfgang; Wetzstein, Gordon"
+                      data-segment="Jointly optimized optical front ends and electronic classifiers can trade optical feature compression against classification accuracy."
+                      data-record="{&quot;title&quot;: &quot;Hybrid optical-electronic convolutional neural networks with optimized diffractive optics for image classification&quot;, &quot;journal&quot;: &quot;Scientific Reports&quot;, &quot;family&quot;: &quot;Nature Portfolio&quot;, &quot;year&quot;: &quot;2018&quot;, &quot;doi&quot;: &quot;10.1038/s41598-018-30619-y&quot;, &quot;url&quot;: &quot;https://doi.org/10.1038/s41598-018-30619-y&quot;, &quot;doi_url&quot;: &quot;https://doi.org/10.1038/s41598-018-30619-y&quot;, &quot;volume&quot;: &quot;8&quot;, &quot;issue&quot;: &quot;1&quot;, &quot;start_page&quot;: &quot;12324&quot;, &quot;end_page&quot;: &quot;&quot;, &quot;issn&quot;: &quot;2045-2322&quot;, &quot;authors&quot;: [&quot;Chang, Julie&quot;, &quot;Sitzmann, Vincent&quot;, &quot;Dun, Xiong&quot;, &quot;Heidrich, Wolfgang&quot;, &quot;Wetzstein, Gordon&quot;], &quot;abstract&quot;: &quot;Abstract Convolutional neural networks (CNNs) excel in a wide variety of computer vision applications, but their high performance also comes at a high computational cost. Despite efforts to increase efficiency both algorithmically and with specialized hardware, it remains difficult to deploy CNNs in embedded systems due to tight power budgets. Here we explore a complementary strategy that incorporates a layer of optical computing prior to electronic computing, improving performance on image classification tasks while adding minimal electronic computational cost or processing time. We propose a design for an optical convolutional layer based on an optimized diffractive optical element and test our design in two simulations: a learned optical correlator and an optoelectronic two-layer CNN. We demonstrate in simulation and with an optical prototype that the classification accuracies of our optical systems rival those of the analogous electronic implementations, while providing substantial savings on computational cost.&quot;, &quot;type&quot;: &quot;journal-article&quot;, &quot;score&quot;: 28.377224, &quot;source_query&quot;: &quot;Jointly optimized optical front ends and electronic classifiers can trade optical feature compression against classification accuracy&quot;, &quot;citation_marker&quot;: &quot;(Chang et al., 2018)&quot;, &quot;support_grade&quot;: &quot;metadata-only candidate&quot;, &quot;screening_note&quot;: &quot;Inspect abstract/publisher page before citing this paper as support.&quot;, &quot;enw_record&quot;: &quot;%0 Journal Article\n%T Hybrid optical-electronic convolutional neural networks with optimized diffractive optics for image classification\n%A Chang, Julie\n%A Sitzmann, Vincent\n%A Dun, Xiong\n%A Heidrich, Wolfgang\n%A Wetzstein, Gordon\n%J Scientific Reports\n%V 8\n%N 1\n%P 12324\n%D 2018\n%@ 2045-2322\n%R 10.1038/s41598-018-30619-y\n%U https://doi.org/10.1038/s41598-018-30619-y&quot;, &quot;ris_record&quot;: &quot;TY  - JOUR\nTI  - Hybrid optical-electronic convolutional neural networks with optimized diffractive optics for image classification\nAU  - Chang, Julie\nAU  - Sitzmann, Vincent\nAU  - Dun, Xiong\nAU  - Heidrich, Wolfgang\nAU  - Wetzstein, Gordon\nT2  - Scientific Reports\nJO  - Scientific Reports\nPY  - 2018\nY1  - 2018/08/17\nVL  - 8\nIS  - 1\nSP  - 12324\nDO  - 10.1038/s41598-018-30619-y\nUR  - https://doi.org/10.1038/s41598-018-30619-y\nSN  - 2045-2322\nN1  - Metadata-only candidate. Inspect abstract or publisher page before citing as support.\nER  -&quot;, &quot;journal_resource&quot;: &quot;urn:issn:2045-2322:vol:8:issue:1&quot;, &quot;zotero_rdf_article&quot;: &quot;    &lt;bib:Article rdf:about=\&quot;https://doi.org/10.1038/s41598-018-30619-y\&quot;&gt;\n        &lt;z:itemType&gt;journalArticle&lt;/z:itemType&gt;\n        &lt;dcterms:isPartOf rdf:resource=\&quot;urn:issn:2045-2322:vol:8:issue:1\&quot;/&gt;\n        &lt;bib:authors&gt;\n            &lt;rdf:Seq&gt;\n                &lt;rdf:li&gt;\n                    &lt;foaf:Person&gt;\n                        &lt;foaf:surname&gt;Chang&lt;/foaf:surname&gt;\n                        &lt;foaf:givenName&gt;Julie&lt;/foaf:givenName&gt;\n                    &lt;/foaf:Person&gt;\n                &lt;/rdf:li&gt;\n                &lt;rdf:li&gt;\n                    &lt;foaf:Person&gt;\n                        &lt;foaf:surname&gt;Sitzmann&lt;/foaf:surname&gt;\n                        &lt;foaf:givenName&gt;Vincent&lt;/foaf:givenName&gt;\n                    &lt;/foaf:Person&gt;\n                &lt;/rdf:li&gt;\n                &lt;rdf:li&gt;\n                    &lt;foaf:Person&gt;\n                        &lt;foaf:surname&gt;Dun&lt;/foaf:surname&gt;\n                        &lt;foaf:givenName&gt;Xiong&lt;/foaf:givenName&gt;\n                    &lt;/foaf:Person&gt;\n                &lt;/rdf:li&gt;\n                &lt;rdf:li&gt;\n                    &lt;foaf:Person&gt;\n                        &lt;foaf:surname&gt;Heidrich&lt;/foaf:surname&gt;\n                        &lt;foaf:givenName&gt;Wolfgang&lt;/foaf:givenName&gt;\n                    &lt;/foaf:Person&gt;\n                &lt;/rdf:li&gt;\n                &lt;rdf:li&gt;\n                    &lt;foaf:Person&gt;\n                        &lt;foaf:surname&gt;Wetzstein&lt;/foaf:surname&gt;\n                        &lt;foaf:givenName&gt;Gordon&lt;/foaf:givenName&gt;\n                    &lt;/foaf:Person&gt;\n                &lt;/rdf:li&gt;\n            &lt;/rdf:Seq&gt;\n        &lt;/bib:authors&gt;\n        &lt;dc:title&gt;Hybrid optical-electronic convolutional neural networks with optimized diffractive optics for image classification&lt;/dc:title&gt;\n        &lt;dc:date&gt;2018-08-17&lt;/dc:date&gt;\n        &lt;z:libraryCatalog&gt;Crossref&lt;/z:libraryCatalog&gt;\n        &lt;dc:identifier&gt;\n            &lt;dcterms:URI&gt;\n                &lt;rdf:value&gt;https://doi.org/10.1038/s41598-018-30619-y&lt;/rdf:value&gt;\n            &lt;/dcterms:URI&gt;\n        &lt;/dc:identifier&gt;\n        &lt;dc:identifier&gt;DOI 10.1038/s41598-018-30619-y&lt;/dc:identifier&gt;\n        &lt;bib:pages&gt;12324&lt;/bib:pages&gt;\n        &lt;z:citationKey&gt;changHybridOpticalElectronic2018&lt;/z:citationKey&gt;\n    &lt;/bib:Article&gt;&quot;, &quot;zotero_rdf_journal&quot;: &quot;    &lt;bib:Journal rdf:about=\&quot;urn:issn:2045-2322:vol:8:issue:1\&quot;&gt;\n        &lt;prism:volume&gt;8&lt;/prism:volume&gt;\n        &lt;dc:title&gt;Scientific Reports&lt;/dc:title&gt;\n        &lt;prism:number&gt;1&lt;/prism:number&gt;\n        &lt;dc:identifier&gt;ISSN 2045-2322&lt;/dc:identifier&gt;\n    &lt;/bib:Journal&gt;&quot;}"
+                    >
+                      <div class="ref-controls">
+                        <label class="check-row"><input type="checkbox"> Select</label>
+                        <span class="marker">(Chang et al., 2018)</span>
+                      </div>
+                      <div class="ref-topline">
+                        <span class="grade">metadata-only</span>
+                        <span>1 / 1</span>
+                      </div>
+                      <h3>Hybrid optical-electronic convolutional neural networks with optimized diffractive optics for image classification</h3>
+                      <p class="meta">Scientific Reports · Nature Portfolio · 2018</p>
+                      <p class="authors">Chang, Julie; Sitzmann, Vincent; Dun, Xiong; Heidrich, Wolfgang; Wetzstein, Gordon</p>
+                      <p class="abstract">Abstract Convolutional neural networks (CNNs) excel in a wide variety of computer vision applications, but their high performance also comes at a high computational cost. Despite efforts to increase efficiency both algorithmically and with specialized hardware, it remains difficult to deploy CNNs in embedded systems due to tight power budgets. Here we explore a complementary st...</p>
+                      <a href="https://doi.org/10.1038/s41598-018-30619-y" target="_blank" rel="noreferrer">https://doi.org/10.1038/s41598-018-30619-y</a>
+                    </article>
+                    
+              </div>
+            </section>
+            
+            <section class="segment-card" id="S003">
+              <div class="segment-head">
+                <span class="segment-id">S003 · Sentence 3</span>
+                <span class="query">Query: Photonic neural inference has been demonstrated in edge-oriented systems with experimentally measured low-energy operation</span>
+              </div>
+              <p class="segment-text">Photonic neural inference has been demonstrated in edge-oriented systems with experimentally measured low-energy operation.</p>
+              <div class="insert-row">
+                <span>Suggested insert</span>
+                <code>(Witze et al., 2021)</code>
+              </div>
+              <div class="references-grid">
+                
+                    <article
+                      class="reference"
+                      data-key="10.1038/d41586-021-00696-7"
+                      data-title="Mars’s core has been measured — and it’s surprisingly large"
+                      data-journal="Nature"
+                      data-doi="10.1038/d41586-021-00696-7"
+                      data-year="2021"
+                      data-authors="Witze, Alexandra"
+                      data-segment="Photonic neural inference has been demonstrated in edge-oriented systems with experimentally measured low-energy operation."
+                      data-record="{&quot;title&quot;: &quot;Mars’s core has been measured — and it’s surprisingly large&quot;, &quot;journal&quot;: &quot;Nature&quot;, &quot;family&quot;: &quot;Nature Portfolio&quot;, &quot;year&quot;: &quot;2021&quot;, &quot;doi&quot;: &quot;10.1038/d41586-021-00696-7&quot;, &quot;url&quot;: &quot;https://doi.org/10.1038/d41586-021-00696-7&quot;, &quot;doi_url&quot;: &quot;https://doi.org/10.1038/d41586-021-00696-7&quot;, &quot;volume&quot;: &quot;591&quot;, &quot;issue&quot;: &quot;7851&quot;, &quot;start_page&quot;: &quot;514&quot;, &quot;end_page&quot;: &quot;515&quot;, &quot;issn&quot;: &quot;0028-0836&quot;, &quot;authors&quot;: [&quot;Witze, Alexandra&quot;], &quot;abstract&quot;: &quot;&quot;, &quot;type&quot;: &quot;journal-article&quot;, &quot;score&quot;: 26.285732, &quot;source_query&quot;: &quot;Photonic neural inference has been demonstrated in edge-oriented systems with experimentally measured low-energy operation&quot;, &quot;citation_marker&quot;: &quot;(Witze et al., 2021)&quot;, &quot;support_grade&quot;: &quot;metadata-only candidate&quot;, &quot;screening_note&quot;: &quot;Inspect abstract/publisher page before citing this paper as support.&quot;, &quot;enw_record&quot;: &quot;%0 Journal Article\n%T Mars’s core has been measured — and it’s surprisingly large\n%A Witze, Alexandra\n%J Nature\n%V 591\n%N 7851\n%P 514-515\n%D 2021\n%@ 0028-0836\n%R 10.1038/d41586-021-00696-7\n%U https://doi.org/10.1038/d41586-021-00696-7&quot;, &quot;ris_record&quot;: &quot;TY  - JOUR\nTI  - Mars’s core has been measured — and it’s surprisingly large\nAU  - Witze, Alexandra\nT2  - Nature\nJO  - Nature\nPY  - 2021\nY1  - 2021/03/25\nVL  - 591\nIS  - 7851\nSP  - 514\nEP  - 515\nDO  - 10.1038/d41586-021-00696-7\nUR  - https://doi.org/10.1038/d41586-021-00696-7\nSN  - 0028-0836\nN1  - Metadata-only candidate. Inspect abstract or publisher page before citing as support.\nER  -&quot;, &quot;journal_resource&quot;: &quot;urn:issn:0028-0836:vol:591:issue:7851&quot;, &quot;zotero_rdf_article&quot;: &quot;    &lt;bib:Article rdf:about=\&quot;https://doi.org/10.1038/d41586-021-00696-7\&quot;&gt;\n        &lt;z:itemType&gt;journalArticle&lt;/z:itemType&gt;\n        &lt;dcterms:isPartOf rdf:resource=\&quot;urn:issn:0028-0836:vol:591:issue:7851\&quot;/&gt;\n        &lt;bib:authors&gt;\n            &lt;rdf:Seq&gt;\n                &lt;rdf:li&gt;\n                    &lt;foaf:Person&gt;\n                        &lt;foaf:surname&gt;Witze&lt;/foaf:surname&gt;\n                        &lt;foaf:givenName&gt;Alexandra&lt;/foaf:givenName&gt;\n                    &lt;/foaf:Person&gt;\n                &lt;/rdf:li&gt;\n            &lt;/rdf:Seq&gt;\n        &lt;/bib:authors&gt;\n        &lt;dc:title&gt;Mars’s core has been measured — and it’s surprisingly large&lt;/dc:title&gt;\n        &lt;dc:date&gt;2021-03-25&lt;/dc:date&gt;\n        &lt;z:libraryCatalog&gt;Crossref&lt;/z:libraryCatalog&gt;\n        &lt;dc:identifier&gt;\n            &lt;dcterms:URI&gt;\n                &lt;rdf:value&gt;https://doi.org/10.1038/d41586-021-00696-7&lt;/rdf:value&gt;\n            &lt;/dcterms:URI&gt;\n        &lt;/dc:identifier&gt;\n        &lt;dc:identifier&gt;DOI 10.1038/d41586-021-00696-7&lt;/dc:identifier&gt;\n        &lt;bib:pages&gt;514-515&lt;/bib:pages&gt;\n        &lt;z:citationKey&gt;witzeMarsSCore2021&lt;/z:citationKey&gt;\n    &lt;/bib:Article&gt;&quot;, &quot;zotero_rdf_journal&quot;: &quot;    &lt;bib:Journal rdf:about=\&quot;urn:issn:0028-0836:vol:591:issue:7851\&quot;&gt;\n        &lt;prism:volume&gt;591&lt;/prism:volume&gt;\n        &lt;dc:title&gt;Nature&lt;/dc:title&gt;\n        &lt;prism:number&gt;7851&lt;/prism:number&gt;\n        &lt;dc:identifier&gt;ISSN 0028-0836&lt;/dc:identifier&gt;\n    &lt;/bib:Journal&gt;&quot;}"
+                    >
+                      <div class="ref-controls">
+                        <label class="check-row"><input type="checkbox"> Select</label>
+                        <span class="marker">(Witze et al., 2021)</span>
+                      </div>
+                      <div class="ref-topline">
+                        <span class="grade">metadata-only</span>
+                        <span>1 / 1</span>
+                      </div>
+                      <h3>Mars’s core has been measured — and it’s surprisingly large</h3>
+                      <p class="meta">Nature · Nature Portfolio · 2021</p>
+                      <p class="authors">Witze, Alexandra</p>
+                      <p class="abstract">No abstract snippet available from Crossref metadata.</p>
+                      <a href="https://doi.org/10.1038/d41586-021-00696-7" target="_blank" rel="noreferrer">https://doi.org/10.1038/d41586-021-00696-7</a>
+                    </article>
+                    
+              </div>
+            </section>
+            
+    </main>
+    <aside>
+      <h2 class="selection-title">Selected references</h2>
+      <p class="selection-meta">Tick the references you want. The download button exports the selection in the chosen format. If nothing is selected, it exports all references.</p>
+      <div id="selectionList" class="selection-list"></div>
+      <div id="selectionEmpty" class="empty-state">No references selected yet.</div>
+    </aside>
+  </div>
+  <div class="modal-overlay" id="summaryModal" aria-hidden="false">
+    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="summaryTitle">
+      <div class="modal-inner">
+        <h2 id="summaryTitle">Ready to review citations</h2>
+        <p>This page behaves more like a compact Scholar browser: filter by year, browse related results, select the citations you trust, and download them as ENW, RIS, or Zotero RDF.</p>
+        <div class="stats">
+          <div class="stat"><b>3</b><span>segments</span></div>
+          <div class="stat"><b>3</b><span>unique references</span></div>
+        </div>
+        <p class="meta">Important: these are still metadata-level candidates. Selection is your decision, not an automatic validity guarantee.</p>
+        <div class="modal-actions">
+          <a href="references.enw" download>Download original ENW file</a>
+          <button id="closeSummary" type="button" onclick="document.getElementById('summaryModal').classList.add('is-hidden'); document.getElementById('summaryModal').setAttribute('aria-hidden', 'true');">Start browsing</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script id="citationData" type="application/json">{"segmentCount": 3, "referenceCount": 3, "defaultExportFormat": "enw", "defaultExportName": "references.enw", "references": [{"title": "Hybrid optical-electronic convolutional neural networks with optimized diffractive optics for image classification", "journal": "Scientific Reports", "family": "Nature Portfolio", "year": "2018", "doi": "10.1038/s41598-018-30619-y", "url": "https://doi.org/10.1038/s41598-018-30619-y", "doi_url": "https://doi.org/10.1038/s41598-018-30619-y", "volume": "8", "issue": "1", "start_page": "12324", "end_page": "", "issn": "2045-2322", "authors": ["Chang, Julie", "Sitzmann, Vincent", "Dun, Xiong", "Heidrich, Wolfgang", "Wetzstein, Gordon"], "abstract": "Abstract Convolutional neural networks (CNNs) excel in a wide variety of computer vision applications, but their high performance also comes at a high computational cost. Despite efforts to increase efficiency both algorithmically and with specialized hardware, it remains difficult to deploy CNNs in embedded systems due to tight power budgets. Here we explore a complementary strategy that incorporates a layer of optical computing prior to electronic computing, improving performance on image classification tasks while adding minimal electronic computational cost or processing time. We propose a design for an optical convolutional layer based on an optimized diffractive optical element and test our design in two simulations: a learned optical correlator and an optoelectronic two-layer CNN. We demonstrate in simulation and with an optical prototype that the classification accuracies of our optical systems rival those of the analogous electronic implementations, while providing substantial savings on computational cost.", "type": "journal-article", "score": 36.265213, "source_query": "Diffractive deep neural networks can perform image classification through trained passive optical propagation", "citation_marker": "(Chang et al., 2018)", "support_grade": "metadata-only candidate", "screening_note": "Inspect abstract/publisher page before citing this paper as support.", "enw_record": "%0 Journal Article\n%T Hybrid optical-electronic convolutional neural networks with optimized diffractive optics for image classification\n%A Chang, Julie\n%A Sitzmann, Vincent\n%A Dun, Xiong\n%A Heidrich, Wolfgang\n%A Wetzstein, Gordon\n%J Scientific Reports\n%V 8\n%N 1\n%P 12324\n%D 2018\n%@ 2045-2322\n%R 10.1038/s41598-018-30619-y\n%U https://doi.org/10.1038/s41598-018-30619-y", "ris_record": "TY  - JOUR\nTI  - Hybrid optical-electronic convolutional neural networks with optimized diffractive optics for image classification\nAU  - Chang, Julie\nAU  - Sitzmann, Vincent\nAU  - Dun, Xiong\nAU  - Heidrich, Wolfgang\nAU  - Wetzstein, Gordon\nT2  - Scientific Reports\nJO  - Scientific Reports\nPY  - 2018\nY1  - 2018/08/17\nVL  - 8\nIS  - 1\nSP  - 12324\nDO  - 10.1038/s41598-018-30619-y\nUR  - https://doi.org/10.1038/s41598-018-30619-y\nSN  - 2045-2322\nN1  - Metadata-only candidate. Inspect abstract or publisher page before citing as support.\nER  -", "journal_resource": "urn:issn:2045-2322:vol:8:issue:1", "zotero_rdf_article": "    <bib:Article rdf:about=\"https://doi.org/10.1038/s41598-018-30619-y\">\n        <z:itemType>journalArticle</z:itemType>\n        <dcterms:isPartOf rdf:resource=\"urn:issn:2045-2322:vol:8:issue:1\"/>\n        <bib:authors>\n            <rdf:Seq>\n                <rdf:li>\n                    <foaf:Person>\n                        <foaf:surname>Chang</foaf:surname>\n                        <foaf:givenName>Julie</foaf:givenName>\n                    </foaf:Person>\n                </rdf:li>\n                <rdf:li>\n                    <foaf:Person>\n                        <foaf:surname>Sitzmann</foaf:surname>\n                        <foaf:givenName>Vincent</foaf:givenName>\n                    </foaf:Person>\n                </rdf:li>\n                <rdf:li>\n                    <foaf:Person>\n                        <foaf:surname>Dun</foaf:surname>\n                        <foaf:givenName>Xiong</foaf:givenName>\n                    </foaf:Person>\n                </rdf:li>\n                <rdf:li>\n                    <foaf:Person>\n                        <foaf:surname>Heidrich</foaf:surname>\n                        <foaf:givenName>Wolfgang</foaf:givenName>\n                    </foaf:Person>\n                </rdf:li>\n                <rdf:li>\n                    <foaf:Person>\n                        <foaf:surname>Wetzstein</foaf:surname>\n                        <foaf:givenName>Gordon</foaf:givenName>\n                    </foaf:Person>\n                </rdf:li>\n            </rdf:Seq>\n        </bib:authors>\n        <dc:title>Hybrid optical-electronic convolutional neural networks with optimized diffractive optics for image classification</dc:title>\n        <dc:date>2018-08-17</dc:date>\n        <z:libraryCatalog>Crossref</z:libraryCatalog>\n        <dc:identifier>\n            <dcterms:URI>\n                <rdf:value>https://doi.org/10.1038/s41598-018-30619-y</rdf:value>\n            </dcterms:URI>\n        </dc:identifier>\n        <dc:identifier>DOI 10.1038/s41598-018-30619-y</dc:identifier>\n        <bib:pages>12324</bib:pages>\n        <z:citationKey>changHybridOpticalElectronic2018</z:citationKey>\n    </bib:Article>", "zotero_rdf_journal": "    <bib:Journal rdf:about=\"urn:issn:2045-2322:vol:8:issue:1\">\n        <prism:volume>8</prism:volume>\n        <dc:title>Scientific Reports</dc:title>\n        <prism:number>1</prism:number>\n        <dc:identifier>ISSN 2045-2322</dc:identifier>\n    </bib:Journal>"}, {"title": "Wavefront-aberration-tolerant diffractive deep neural networks using volume holographic optical elements", "journal": "Scientific Reports", "family": "Nature Portfolio", "year": "2025", "doi": "10.1038/s41598-024-82791-z", "url": "https://doi.org/10.1038/s41598-024-82791-z", "doi_url": "https://doi.org/10.1038/s41598-024-82791-z", "volume": "15", "issue": "1", "start_page": "1104", "end_page": "", "issn": "2045-2322", "authors": ["Hoshi, Ikuo", "Wakunami, Koki", "Ichihashi, Yasuyuki", "Oi, Ryutaro"], "abstract": "Abstract As the demand for computational performance in artificial intelligence (AI) continues to increase, diffractive deep neural networks (D 2 NNs), which can perform AI computing at the speed of light by repeated optical modulation with diffractive optical elements (DOEs), are attracting attention. DOEs are varied in terms of fabrication methods and materials, and among them, volume holographic optical elements (vHOEs) have unique features such as high selectivity and multiplex recordability for wavelength and angle. However, when those are used for D 2 NNs, they suffer from unknown wavefront aberrations compounded by multiple fabrication errors. Here, we propose a training method to adapt the model to be unknown wavefront aberrations and demonstrate a D 2 NN using vHOEs. As a result, the proposed method improved the classification accuracy by approximately 58 percentage points in the optical experiment, with the model trained to classify handwritten digits. The achievement of this study can be extended to the D 2 NN that enables the independent modulation of multiple wavelengths owing to their wavelength selectivity and wavelength division multiplex recordability. Therefore, it might be promising for various applications that require multiple wavelengths in parallel optical computing, bioimaging, and optical communication.", "type": "journal-article", "score": 31.762177, "source_query": "Diffractive deep neural networks can perform image classification through trained passive optical propagation", "citation_marker": "(Hoshi et al., 2025)", "support_grade": "metadata-only candidate", "screening_note": "Inspect abstract/publisher page before citing this paper as support.", "enw_record": "%0 Journal Article\n%T Wavefront-aberration-tolerant diffractive deep neural networks using volume holographic optical elements\n%A Hoshi, Ikuo\n%A Wakunami, Koki\n%A Ichihashi, Yasuyuki\n%A Oi, Ryutaro\n%J Scientific Reports\n%V 15\n%N 1\n%P 1104\n%D 2025\n%@ 2045-2322\n%R 10.1038/s41598-024-82791-z\n%U https://doi.org/10.1038/s41598-024-82791-z", "ris_record": "TY  - JOUR\nTI  - Wavefront-aberration-tolerant diffractive deep neural networks using volume holographic optical elements\nAU  - Hoshi, Ikuo\nAU  - Wakunami, Koki\nAU  - Ichihashi, Yasuyuki\nAU  - Oi, Ryutaro\nT2  - Scientific Reports\nJO  - Scientific Reports\nPY  - 2025\nY1  - 2025/01/07\nVL  - 15\nIS  - 1\nSP  - 1104\nDO  - 10.1038/s41598-024-82791-z\nUR  - https://doi.org/10.1038/s41598-024-82791-z\nSN  - 2045-2322\nN1  - Metadata-only candidate. Inspect abstract or publisher page before citing as support.\nER  -", "journal_resource": "urn:issn:2045-2322:vol:15:issue:1", "zotero_rdf_article": "    <bib:Article rdf:about=\"https://doi.org/10.1038/s41598-024-82791-z\">\n        <z:itemType>journalArticle</z:itemType>\n        <dcterms:isPartOf rdf:resource=\"urn:issn:2045-2322:vol:15:issue:1\"/>\n        <bib:authors>\n            <rdf:Seq>\n                <rdf:li>\n                    <foaf:Person>\n                        <foaf:surname>Hoshi</foaf:surname>\n                        <foaf:givenName>Ikuo</foaf:givenName>\n                    </foaf:Person>\n                </rdf:li>\n                <rdf:li>\n                    <foaf:Person>\n                        <foaf:surname>Wakunami</foaf:surname>\n                        <foaf:givenName>Koki</foaf:givenName>\n                    </foaf:Person>\n                </rdf:li>\n                <rdf:li>\n                    <foaf:Person>\n                        <foaf:surname>Ichihashi</foaf:surname>\n                        <foaf:givenName>Yasuyuki</foaf:givenName>\n                    </foaf:Person>\n                </rdf:li>\n                <rdf:li>\n                    <foaf:Person>\n                        <foaf:surname>Oi</foaf:surname>\n                        <foaf:givenName>Ryutaro</foaf:givenName>\n                    </foaf:Person>\n                </rdf:li>\n            </rdf:Seq>\n        </bib:authors>\n        <dc:title>Wavefront-aberration-tolerant diffractive deep neural networks using volume holographic optical elements</dc:title>\n        <dc:date>2025-01-07</dc:date>\n        <z:libraryCatalog>Crossref</z:libraryCatalog>\n        <dc:identifier>\n            <dcterms:URI>\n                <rdf:value>https://doi.org/10.1038/s41598-024-82791-z</rdf:value>\n            </dcterms:URI>\n        </dc:identifier>\n        <dc:identifier>DOI 10.1038/s41598-024-82791-z</dc:identifier>\n        <bib:pages>1104</bib:pages>\n        <z:citationKey>hoshiWavefrontAberrationTolerant2025</z:citationKey>\n    </bib:Article>", "zotero_rdf_journal": "    <bib:Journal rdf:about=\"urn:issn:2045-2322:vol:15:issue:1\">\n        <prism:volume>15</prism:volume>\n        <dc:title>Scientific Reports</dc:title>\n        <prism:number>1</prism:number>\n        <dc:identifier>ISSN 2045-2322</dc:identifier>\n    </bib:Journal>"}, {"title": "Mars’s core has been measured — and it’s surprisingly large", "journal": "Nature", "family": "Nature Portfolio", "year": "2021", "doi": "10.1038/d41586-021-00696-7", "url": "https://doi.org/10.1038/d41586-021-00696-7", "doi_url": "https://doi.org/10.1038/d41586-021-00696-7", "volume": "591", "issue": "7851", "start_page": "514", "end_page": "515", "issn": "0028-0836", "authors": ["Witze, Alexandra"], "abstract": "", "type": "journal-article", "score": 26.285732, "source_query": "Photonic neural inference has been demonstrated in edge-oriented systems with experimentally measured low-energy operation", "citation_marker": "(Witze et al., 2021)", "support_grade": "metadata-only candidate", "screening_note": "Inspect abstract/publisher page before citing this paper as support.", "enw_record": "%0 Journal Article\n%T Mars’s core has been measured — and it’s surprisingly large\n%A Witze, Alexandra\n%J Nature\n%V 591\n%N 7851\n%P 514-515\n%D 2021\n%@ 0028-0836\n%R 10.1038/d41586-021-00696-7\n%U https://doi.org/10.1038/d41586-021-00696-7", "ris_record": "TY  - JOUR\nTI  - Mars’s core has been measured — and it’s surprisingly large\nAU  - Witze, Alexandra\nT2  - Nature\nJO  - Nature\nPY  - 2021\nY1  - 2021/03/25\nVL  - 591\nIS  - 7851\nSP  - 514\nEP  - 515\nDO  - 10.1038/d41586-021-00696-7\nUR  - https://doi.org/10.1038/d41586-021-00696-7\nSN  - 0028-0836\nN1  - Metadata-only candidate. Inspect abstract or publisher page before citing as support.\nER  -", "journal_resource": "urn:issn:0028-0836:vol:591:issue:7851", "zotero_rdf_article": "    <bib:Article rdf:about=\"https://doi.org/10.1038/d41586-021-00696-7\">\n        <z:itemType>journalArticle</z:itemType>\n        <dcterms:isPartOf rdf:resource=\"urn:issn:0028-0836:vol:591:issue:7851\"/>\n        <bib:authors>\n            <rdf:Seq>\n                <rdf:li>\n                    <foaf:Person>\n                        <foaf:surname>Witze</foaf:surname>\n                        <foaf:givenName>Alexandra</foaf:givenName>\n                    </foaf:Person>\n                </rdf:li>\n            </rdf:Seq>\n        </bib:authors>\n        <dc:title>Mars’s core has been measured — and it’s surprisingly large</dc:title>\n        <dc:date>2021-03-25</dc:date>\n        <z:libraryCatalog>Crossref</z:libraryCatalog>\n        <dc:identifier>\n            <dcterms:URI>\n                <rdf:value>https://doi.org/10.1038/d41586-021-00696-7</rdf:value>\n            </dcterms:URI>\n        </dc:identifier>\n        <dc:identifier>DOI 10.1038/d41586-021-00696-7</dc:identifier>\n        <bib:pages>514-515</bib:pages>\n        <z:citationKey>witzeMarsSCore2021</z:citationKey>\n    </bib:Article>", "zotero_rdf_journal": "    <bib:Journal rdf:about=\"urn:issn:0028-0836:vol:591:issue:7851\">\n        <prism:volume>591</prism:volume>\n        <dc:title>Nature</dc:title>\n        <prism:number>7851</prism:number>\n        <dc:identifier>ISSN 0028-0836</dc:identifier>\n    </bib:Journal>"}], "segments": [{"id": "S001", "order": 1, "text": "Diffractive deep neural networks can perform image classification through trained passive optical propagation.", "query": "Diffractive deep neural networks can perform image classification through trained passive optical propagation", "suggestedInsertText": "(Chang et al., 2018) (Hoshi et al., 2025)", "references": [{"title": "Hybrid optical-electronic convolutional neural networks with optimized diffractive optics for image classification", "journal": "Scientific Reports", "family": "Nature Portfolio", "year": "2018", "doi": "10.1038/s41598-018-30619-y", "url": "https://doi.org/10.1038/s41598-018-30619-y", "doi_url": "https://doi.org/10.1038/s41598-018-30619-y", "volume": "8", "issue": "1", "start_page": "12324", "end_page": "", "issn": "2045-2322", "authors": ["Chang, Julie", "Sitzmann, Vincent", "Dun, Xiong", "Heidrich, Wolfgang", "Wetzstein, Gordon"], "abstract": "Abstract Convolutional neural networks (CNNs) excel in a wide variety of computer vision applications, but their high performance also comes at a high computational cost. Despite efforts to increase efficiency both algorithmically and with specialized hardware, it remains difficult to deploy CNNs in embedded systems due to tight power budgets. Here we explore a complementary strategy that incorporates a layer of optical computing prior to electronic computing, improving performance on image classification tasks while adding minimal electronic computational cost or processing time. We propose a design for an optical convolutional layer based on an optimized diffractive optical element and test our design in two simulations: a learned optical correlator and an optoelectronic two-layer CNN. We demonstrate in simulation and with an optical prototype that the classification accuracies of our optical systems rival those of the analogous electronic implementations, while providing substantial savings on computational cost.", "type": "journal-article", "score": 36.265213, "source_query": "Diffractive deep neural networks can perform image classification through trained passive optical propagation", "citation_marker": "(Chang et al., 2018)", "support_grade": "metadata-only candidate", "screening_note": "Inspect abstract/publisher page before citing this paper as support.", "enw_record": "%0 Journal Article\n%T Hybrid optical-electronic convolutional neural networks with optimized diffractive optics for image classification\n%A Chang, Julie\n%A Sitzmann, Vincent\n%A Dun, Xiong\n%A Heidrich, Wolfgang\n%A Wetzstein, Gordon\n%J Scientific Reports\n%V 8\n%N 1\n%P 12324\n%D 2018\n%@ 2045-2322\n%R 10.1038/s41598-018-30619-y\n%U https://doi.org/10.1038/s41598-018-30619-y", "ris_record": "TY  - JOUR\nTI  - Hybrid optical-electronic convolutional neural networks with optimized diffractive optics for image classification\nAU  - Chang, Julie\nAU  - Sitzmann, Vincent\nAU  - Dun, Xiong\nAU  - Heidrich, Wolfgang\nAU  - Wetzstein, Gordon\nT2  - Scientific Reports\nJO  - Scientific Reports\nPY  - 2018\nY1  - 2018/08/17\nVL  - 8\nIS  - 1\nSP  - 12324\nDO  - 10.1038/s41598-018-30619-y\nUR  - https://doi.org/10.1038/s41598-018-30619-y\nSN  - 2045-2322\nN1  - Metadata-only candidate. Inspect abstract or publisher page before citing as support.\nER  -", "journal_resource": "urn:issn:2045-2322:vol:8:issue:1", "zotero_rdf_article": "    <bib:Article rdf:about=\"https://doi.org/10.1038/s41598-018-30619-y\">\n        <z:itemType>journalArticle</z:itemType>\n        <dcterms:isPartOf rdf:resource=\"urn:issn:2045-2322:vol:8:issue:1\"/>\n        <bib:authors>\n            <rdf:Seq>\n                <rdf:li>\n                    <foaf:Person>\n                        <foaf:surname>Chang</foaf:surname>\n                        <foaf:givenName>Julie</foaf:givenName>\n                    </foaf:Person>\n                </rdf:li>\n                <rdf:li>\n                    <foaf:Person>\n                        <foaf:surname>Sitzmann</foaf:surname>\n                        <foaf:givenName>Vincent</foaf:givenName>\n                    </foaf:Person>\n                </rdf:li>\n                <rdf:li>\n                    <foaf:Person>\n                        <foaf:surname>Dun</foaf:surname>\n                        <foaf:givenName>Xiong</foaf:givenName>\n                    </foaf:Person>\n                </rdf:li>\n                <rdf:li>\n                    <foaf:Person>\n                        <foaf:surname>Heidrich</foaf:surname>\n                        <foaf:givenName>Wolfgang</foaf:givenName>\n                    </foaf:Person>\n                </rdf:li>\n                <rdf:li>\n                    <foaf:Person>\n                        <foaf:surname>Wetzstein</foaf:surname>\n                        <foaf:givenName>Gordon</foaf:givenName>\n                    </foaf:Person>\n                </rdf:li>\n            </rdf:Seq>\n        </bib:authors>\n        <dc:title>Hybrid optical-electronic convolutional neural networks with optimized diffractive optics for image classification</dc:title>\n        <dc:date>2018-08-17</dc:date>\n        <z:libraryCatalog>Crossref</z:libraryCatalog>\n        <dc:identifier>\n            <dcterms:URI>\n                <rdf:value>https://doi.org/10.1038/s41598-018-30619-y</rdf:value>\n            </dcterms:URI>\n        </dc:identifier>\n        <dc:identifier>DOI 10.1038/s41598-018-30619-y</dc:identifier>\n        <bib:pages>12324</bib:pages>\n        <z:citationKey>changHybridOpticalElectronic2018</z:citationKey>\n    </bib:Article>", "zotero_rdf_journal": "    <bib:Journal rdf:about=\"urn:issn:2045-2322:vol:8:issue:1\">\n        <prism:volume>8</prism:volume>\n        <dc:title>Scientific Reports</dc:title>\n        <prism:number>1</prism:number>\n        <dc:identifier>ISSN 2045-2322</dc:identifier>\n    </bib:Journal>"}, {"title": "Wavefront-aberration-tolerant diffractive deep neural networks using volume holographic optical elements", "journal": "Scientific Reports", "family": "Nature Portfolio", "year": "2025", "doi": "10.1038/s41598-024-82791-z", "url": "https://doi.org/10.1038/s41598-024-82791-z", "doi_url": "https://doi.org/10.1038/s41598-024-82791-z", "volume": "15", "issue": "1", "start_page": "1104", "end_page": "", "issn": "2045-2322", "authors": ["Hoshi, Ikuo", "Wakunami, Koki", "Ichihashi, Yasuyuki", "Oi, Ryutaro"], "abstract": "Abstract As the demand for computational performance in artificial intelligence (AI) continues to increase, diffractive deep neural networks (D 2 NNs), which can perform AI computing at the speed of light by repeated optical modulation with diffractive optical elements (DOEs), are attracting attention. DOEs are varied in terms of fabrication methods and materials, and among them, volume holographic optical elements (vHOEs) have unique features such as high selectivity and multiplex recordability for wavelength and angle. However, when those are used for D 2 NNs, they suffer from unknown wavefront aberrations compounded by multiple fabrication errors. Here, we propose a training method to adapt the model to be unknown wavefront aberrations and demonstrate a D 2 NN using vHOEs. As a result, the proposed method improved the classification accuracy by approximately 58 percentage points in the optical experiment, with the model trained to classify handwritten digits. The achievement of this study can be extended to the D 2 NN that enables the independent modulation of multiple wavelengths owing to their wavelength selectivity and wavelength division multiplex recordability. Therefore, it might be promising for various applications that require multiple wavelengths in parallel optical computing, bioimaging, and optical communication.", "type": "journal-article", "score": 31.762177, "source_query": "Diffractive deep neural networks can perform image classification through trained passive optical propagation", "citation_marker": "(Hoshi et al., 2025)", "support_grade": "metadata-only candidate", "screening_note": "Inspect abstract/publisher page before citing this paper as support.", "enw_record": "%0 Journal Article\n%T Wavefront-aberration-tolerant diffractive deep neural networks using volume holographic optical elements\n%A Hoshi, Ikuo\n%A Wakunami, Koki\n%A Ichihashi, Yasuyuki\n%A Oi, Ryutaro\n%J Scientific Reports\n%V 15\n%N 1\n%P 1104\n%D 2025\n%@ 2045-2322\n%R 10.1038/s41598-024-82791-z\n%U https://doi.org/10.1038/s41598-024-82791-z", "ris_record": "TY  - JOUR\nTI  - Wavefront-aberration-tolerant diffractive deep neural networks using volume holographic optical elements\nAU  - Hoshi, Ikuo\nAU  - Wakunami, Koki\nAU  - Ichihashi, Yasuyuki\nAU  - Oi, Ryutaro\nT2  - Scientific Reports\nJO  - Scientific Reports\nPY  - 2025\nY1  - 2025/01/07\nVL  - 15\nIS  - 1\nSP  - 1104\nDO  - 10.1038/s41598-024-82791-z\nUR  - https://doi.org/10.1038/s41598-024-82791-z\nSN  - 2045-2322\nN1  - Metadata-only candidate. Inspect abstract or publisher page before citing as support.\nER  -", "journal_resource": "urn:issn:2045-2322:vol:15:issue:1", "zotero_rdf_article": "    <bib:Article rdf:about=\"https://doi.org/10.1038/s41598-024-82791-z\">\n        <z:itemType>journalArticle</z:itemType>\n        <dcterms:isPartOf rdf:resource=\"urn:issn:2045-2322:vol:15:issue:1\"/>\n        <bib:authors>\n            <rdf:Seq>\n                <rdf:li>\n                    <foaf:Person>\n                        <foaf:surname>Hoshi</foaf:surname>\n                        <foaf:givenName>Ikuo</foaf:givenName>\n                    </foaf:Person>\n                </rdf:li>\n                <rdf:li>\n                    <foaf:Person>\n                        <foaf:surname>Wakunami</foaf:surname>\n                        <foaf:givenName>Koki</foaf:givenName>\n                    </foaf:Person>\n                </rdf:li>\n                <rdf:li>\n                    <foaf:Person>\n                        <foaf:surname>Ichihashi</foaf:surname>\n                        <foaf:givenName>Yasuyuki</foaf:givenName>\n                    </foaf:Person>\n                </rdf:li>\n                <rdf:li>\n                    <foaf:Person>\n                        <foaf:surname>Oi</foaf:surname>\n                        <foaf:givenName>Ryutaro</foaf:givenName>\n                    </foaf:Person>\n                </rdf:li>\n            </rdf:Seq>\n        </bib:authors>\n        <dc:title>Wavefront-aberration-tolerant diffractive deep neural networks using volume holographic optical elements</dc:title>\n        <dc:date>2025-01-07</dc:date>\n        <z:libraryCatalog>Crossref</z:libraryCatalog>\n        <dc:identifier>\n            <dcterms:URI>\n                <rdf:value>https://doi.org/10.1038/s41598-024-82791-z</rdf:value>\n            </dcterms:URI>\n        </dc:identifier>\n        <dc:identifier>DOI 10.1038/s41598-024-82791-z</dc:identifier>\n        <bib:pages>1104</bib:pages>\n        <z:citationKey>hoshiWavefrontAberrationTolerant2025</z:citationKey>\n    </bib:Article>", "zotero_rdf_journal": "    <bib:Journal rdf:about=\"urn:issn:2045-2322:vol:15:issue:1\">\n        <prism:volume>15</prism:volume>\n        <dc:title>Scientific Reports</dc:title>\n        <prism:number>1</prism:number>\n        <dc:identifier>ISSN 2045-2322</dc:identifier>\n    </bib:Journal>"}]}, {"id": "S002", "order": 2, "text": "Jointly optimized optical front ends and electronic classifiers can trade optical feature compression against classification accuracy.", "query": "Jointly optimized optical front ends and electronic classifiers can trade optical feature compression against classification accuracy", "suggestedInsertText": "(Chang et al., 2018)", "references": [{"title": "Hybrid optical-electronic convolutional neural networks with optimized diffractive optics for image classification", "journal": "Scientific Reports", "family": "Nature Portfolio", "year": "2018", "doi": "10.1038/s41598-018-30619-y", "url": "https://doi.org/10.1038/s41598-018-30619-y", "doi_url": "https://doi.org/10.1038/s41598-018-30619-y", "volume": "8", "issue": "1", "start_page": "12324", "end_page": "", "issn": "2045-2322", "authors": ["Chang, Julie", "Sitzmann, Vincent", "Dun, Xiong", "Heidrich, Wolfgang", "Wetzstein, Gordon"], "abstract": "Abstract Convolutional neural networks (CNNs) excel in a wide variety of computer vision applications, but their high performance also comes at a high computational cost. Despite efforts to increase efficiency both algorithmically and with specialized hardware, it remains difficult to deploy CNNs in embedded systems due to tight power budgets. Here we explore a complementary strategy that incorporates a layer of optical computing prior to electronic computing, improving performance on image classification tasks while adding minimal electronic computational cost or processing time. We propose a design for an optical convolutional layer based on an optimized diffractive optical element and test our design in two simulations: a learned optical correlator and an optoelectronic two-layer CNN. We demonstrate in simulation and with an optical prototype that the classification accuracies of our optical systems rival those of the analogous electronic implementations, while providing substantial savings on computational cost.", "type": "journal-article", "score": 28.377224, "source_query": "Jointly optimized optical front ends and electronic classifiers can trade optical feature compression against classification accuracy", "citation_marker": "(Chang et al., 2018)", "support_grade": "metadata-only candidate", "screening_note": "Inspect abstract/publisher page before citing this paper as support.", "enw_record": "%0 Journal Article\n%T Hybrid optical-electronic convolutional neural networks with optimized diffractive optics for image classification\n%A Chang, Julie\n%A Sitzmann, Vincent\n%A Dun, Xiong\n%A Heidrich, Wolfgang\n%A Wetzstein, Gordon\n%J Scientific Reports\n%V 8\n%N 1\n%P 12324\n%D 2018\n%@ 2045-2322\n%R 10.1038/s41598-018-30619-y\n%U https://doi.org/10.1038/s41598-018-30619-y", "ris_record": "TY  - JOUR\nTI  - Hybrid optical-electronic convolutional neural networks with optimized diffractive optics for image classification\nAU  - Chang, Julie\nAU  - Sitzmann, Vincent\nAU  - Dun, Xiong\nAU  - Heidrich, Wolfgang\nAU  - Wetzstein, Gordon\nT2  - Scientific Reports\nJO  - Scientific Reports\nPY  - 2018\nY1  - 2018/08/17\nVL  - 8\nIS  - 1\nSP  - 12324\nDO  - 10.1038/s41598-018-30619-y\nUR  - https://doi.org/10.1038/s41598-018-30619-y\nSN  - 2045-2322\nN1  - Metadata-only candidate. Inspect abstract or publisher page before citing as support.\nER  -", "journal_resource": "urn:issn:2045-2322:vol:8:issue:1", "zotero_rdf_article": "    <bib:Article rdf:about=\"https://doi.org/10.1038/s41598-018-30619-y\">\n        <z:itemType>journalArticle</z:itemType>\n        <dcterms:isPartOf rdf:resource=\"urn:issn:2045-2322:vol:8:issue:1\"/>\n        <bib:authors>\n            <rdf:Seq>\n                <rdf:li>\n                    <foaf:Person>\n                        <foaf:surname>Chang</foaf:surname>\n                        <foaf:givenName>Julie</foaf:givenName>\n                    </foaf:Person>\n                </rdf:li>\n                <rdf:li>\n                    <foaf:Person>\n                        <foaf:surname>Sitzmann</foaf:surname>\n                        <foaf:givenName>Vincent</foaf:givenName>\n                    </foaf:Person>\n                </rdf:li>\n                <rdf:li>\n                    <foaf:Person>\n                        <foaf:surname>Dun</foaf:surname>\n                        <foaf:givenName>Xiong</foaf:givenName>\n                    </foaf:Person>\n                </rdf:li>\n                <rdf:li>\n                    <foaf:Person>\n                        <foaf:surname>Heidrich</foaf:surname>\n                        <foaf:givenName>Wolfgang</foaf:givenName>\n                    </foaf:Person>\n                </rdf:li>\n                <rdf:li>\n                    <foaf:Person>\n                        <foaf:surname>Wetzstein</foaf:surname>\n                        <foaf:givenName>Gordon</foaf:givenName>\n                    </foaf:Person>\n                </rdf:li>\n            </rdf:Seq>\n        </bib:authors>\n        <dc:title>Hybrid optical-electronic convolutional neural networks with optimized diffractive optics for image classification</dc:title>\n        <dc:date>2018-08-17</dc:date>\n        <z:libraryCatalog>Crossref</z:libraryCatalog>\n        <dc:identifier>\n            <dcterms:URI>\n                <rdf:value>https://doi.org/10.1038/s41598-018-30619-y</rdf:value>\n            </dcterms:URI>\n        </dc:identifier>\n        <dc:identifier>DOI 10.1038/s41598-018-30619-y</dc:identifier>\n        <bib:pages>12324</bib:pages>\n        <z:citationKey>changHybridOpticalElectronic2018</z:citationKey>\n    </bib:Article>", "zotero_rdf_journal": "    <bib:Journal rdf:about=\"urn:issn:2045-2322:vol:8:issue:1\">\n        <prism:volume>8</prism:volume>\n        <dc:title>Scientific Reports</dc:title>\n        <prism:number>1</prism:number>\n        <dc:identifier>ISSN 2045-2322</dc:identifier>\n    </bib:Journal>"}]}, {"id": "S003", "order": 3, "text": "Photonic neural inference has been demonstrated in edge-oriented systems with experimentally measured low-energy operation.", "query": "Photonic neural inference has been demonstrated in edge-oriented systems with experimentally measured low-energy operation", "suggestedInsertText": "(Witze et al., 2021)", "references": [{"title": "Mars’s core has been measured — and it’s surprisingly large", "journal": "Nature", "family": "Nature Portfolio", "year": "2021", "doi": "10.1038/d41586-021-00696-7", "url": "https://doi.org/10.1038/d41586-021-00696-7", "doi_url": "https://doi.org/10.1038/d41586-021-00696-7", "volume": "591", "issue": "7851", "start_page": "514", "end_page": "515", "issn": "0028-0836", "authors": ["Witze, Alexandra"], "abstract": "", "type": "journal-article", "score": 26.285732, "source_query": "Photonic neural inference has been demonstrated in edge-oriented systems with experimentally measured low-energy operation", "citation_marker": "(Witze et al., 2021)", "support_grade": "metadata-only candidate", "screening_note": "Inspect abstract/publisher page before citing this paper as support.", "enw_record": "%0 Journal Article\n%T Mars’s core has been measured — and it’s surprisingly large\n%A Witze, Alexandra\n%J Nature\n%V 591\n%N 7851\n%P 514-515\n%D 2021\n%@ 0028-0836\n%R 10.1038/d41586-021-00696-7\n%U https://doi.org/10.1038/d41586-021-00696-7", "ris_record": "TY  - JOUR\nTI  - Mars’s core has been measured — and it’s surprisingly large\nAU  - Witze, Alexandra\nT2  - Nature\nJO  - Nature\nPY  - 2021\nY1  - 2021/03/25\nVL  - 591\nIS  - 7851\nSP  - 514\nEP  - 515\nDO  - 10.1038/d41586-021-00696-7\nUR  - https://doi.org/10.1038/d41586-021-00696-7\nSN  - 0028-0836\nN1  - Metadata-only candidate. Inspect abstract or publisher page before citing as support.\nER  -", "journal_resource": "urn:issn:0028-0836:vol:591:issue:7851", "zotero_rdf_article": "    <bib:Article rdf:about=\"https://doi.org/10.1038/d41586-021-00696-7\">\n        <z:itemType>journalArticle</z:itemType>\n        <dcterms:isPartOf rdf:resource=\"urn:issn:0028-0836:vol:591:issue:7851\"/>\n        <bib:authors>\n            <rdf:Seq>\n                <rdf:li>\n                    <foaf:Person>\n                        <foaf:surname>Witze</foaf:surname>\n                        <foaf:givenName>Alexandra</foaf:givenName>\n                    </foaf:Person>\n                </rdf:li>\n            </rdf:Seq>\n        </bib:authors>\n        <dc:title>Mars’s core has been measured — and it’s surprisingly large</dc:title>\n        <dc:date>2021-03-25</dc:date>\n        <z:libraryCatalog>Crossref</z:libraryCatalog>\n        <dc:identifier>\n            <dcterms:URI>\n                <rdf:value>https://doi.org/10.1038/d41586-021-00696-7</rdf:value>\n            </dcterms:URI>\n        </dc:identifier>\n        <dc:identifier>DOI 10.1038/d41586-021-00696-7</dc:identifier>\n        <bib:pages>514-515</bib:pages>\n        <z:citationKey>witzeMarsSCore2021</z:citationKey>\n    </bib:Article>", "zotero_rdf_journal": "    <bib:Journal rdf:about=\"urn:issn:0028-0836:vol:591:issue:7851\">\n        <prism:volume>591</prism:volume>\n        <dc:title>Nature</dc:title>\n        <prism:number>7851</prism:number>\n        <dc:identifier>ISSN 0028-0836</dc:identifier>\n    </bib:Journal>"}]}]}</script>
+  <script>
+    const data = JSON.parse(document.getElementById('citationData').textContent);
+    const modal = document.getElementById('summaryModal');
+    const closeSummary = document.getElementById('closeSummary');
+    const openSummary = document.getElementById('openSummary');
+    const yearFromInput = document.getElementById('yearFrom');
+    const yearToInput = document.getElementById('yearTo');
+    const queryFilterInput = document.getElementById('queryFilter');
+    const selectedOnlyInput = document.getElementById('selectedOnly');
+    const applyFiltersButton = document.getElementById('applyFilters');
+    const clearFiltersButton = document.getElementById('clearFilters');
+    const visibleCount = document.getElementById('visibleCount');
+    const selectedCount = document.getElementById('selectedCount');
+    const selectionList = document.getElementById('selectionList');
+    const selectionEmpty = document.getElementById('selectionEmpty');
+    const downloadSelected = document.getElementById('downloadSelected');
+    const downloadFormat = document.getElementById('downloadFormat');
+    const selectedMap = new Map();
+    let currentDownloadUrl = null;
+
+    downloadFormat.value = data.defaultExportFormat || 'enw';
+
+    function showModal() {
+      if (modal) {
+        modal.classList.remove('is-hidden');
+        modal.setAttribute('aria-hidden', 'false');
+      }
+    }
+    function hideModal() {
+      if (modal) {
+        modal.classList.add('is-hidden');
+        modal.setAttribute('aria-hidden', 'true');
+      }
+    }
+    window.addEventListener('DOMContentLoaded', showModal);
+    openSummary.addEventListener('click', showModal);
+    closeSummary.addEventListener('click', hideModal);
+    modal.addEventListener('click', (event) => {
+      if (event.target === modal) {
+        hideModal();
+      }
+    });
+
+    function revokeDownloadUrl() {
+      if (currentDownloadUrl) {
+        URL.revokeObjectURL(currentDownloadUrl);
+        currentDownloadUrl = null;
+      }
+    }
+
+    function selectedItems() {
+      return Array.from(selectedMap.values());
+    }
+
+    function exportItems() {
+      const items = selectedItems();
+      return items.length ? items : (data.references || []);
+    }
+
+    function buildEnw(items) {
+      return items.map((item) => item.enw_record).join('\n\n');
+    }
+
+    function buildRis(items) {
+      return items.map((item) => item.ris_record).join('\n\n');
+    }
+
+    function buildZoteroRdf(items) {
+      const journals = new Map();
+      const articles = [];
+      for (const item of items) {
+        if (item.zotero_rdf_article) {
+          articles.push(item.zotero_rdf_article);
+        }
+        if (item.journal_resource && item.zotero_rdf_journal && !journals.has(item.journal_resource)) {
+          journals.set(item.journal_resource, item.zotero_rdf_journal);
+        }
+      }
+      const header = [
+        '<rdf:RDF',
+        ' xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"',
+        ' xmlns:z="http://www.zotero.org/namespaces/export#"',
+        ' xmlns:dcterms="http://purl.org/dc/terms/"',
+        ' xmlns:bib="http://purl.org/net/biblio#"',
+        ' xmlns:foaf="http://xmlns.com/foaf/0.1/"',
+        ' xmlns:dc="http://purl.org/dc/elements/1.1/"',
+        ' xmlns:prism="http://prismstandard.org/namespaces/1.2/basic/"',
+        '>',
+      ].join('');
+      return [header, ...articles, ...journals.values(), '</rdf:RDF>'].join('\n');
+    }
+
+    function exportFileName(format, hasSelection) {
+      const base = hasSelection ? 'selected-references' : 'all-references';
+      if (format === 'ris') return `${base}.ris`;
+      if (format === 'zotero-rdf') return `${base}.rdf`;
+      return `${base}.enw`;
+    }
+
+    function updateDownloadLink() {
+      const items = exportItems();
+      const format = downloadFormat.value || 'enw';
+      const hasSelection = selectedItems().length > 0;
+      let content = '';
+      if (format === 'ris') {
+        content = buildRis(items);
+      } else if (format === 'zotero-rdf') {
+        content = buildZoteroRdf(items);
+      } else {
+        content = buildEnw(items);
+      }
+      revokeDownloadUrl();
+      currentDownloadUrl = URL.createObjectURL(new Blob([content], { type: 'text/plain;charset=utf-8' }));
+      downloadSelected.href = currentDownloadUrl;
+      downloadSelected.download = exportFileName(format, hasSelection);
+    }
+
+    function updateSelectedPanel() {
+      selectionList.innerHTML = '';
+      const items = selectedItems();
+      selectedCount.textContent = String(items.length);
+      if (!items.length) {
+        selectionEmpty.classList.remove('hidden');
+      } else {
+        selectionEmpty.classList.add('hidden');
+      }
+      for (const item of items) {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'selection-item';
+        wrapper.innerHTML = `<h4>${item.title}</h4><p>${item.journal} · ${item.year || 'n.d.'}</p>`;
+        selectionList.appendChild(wrapper);
+      }
+      updateDownloadLink();
+    }
+
+    function yearPass(year) {
+      const fromYear = Number(yearFromInput.value || 0);
+      const toYear = Number(yearToInput.value || 0);
+      const y = Number(year || 0);
+      if (fromYear && (!y || y < fromYear)) return false;
+      if (toYear && (!y || y > toYear)) return false;
+      return true;
+    }
+
+    function queryPass(text) {
+      const needle = queryFilterInput.value.trim().toLowerCase();
+      if (!needle) return true;
+      return text.toLowerCase().includes(needle);
+    }
+
+    function applyFilters() {
+      let totalVisible = 0;
+      document.querySelectorAll('.segment-card').forEach((card) => {
+        let visibleRefs = 0;
+        card.querySelectorAll('.reference').forEach((ref) => {
+          const title = ref.dataset.title || '';
+          const journal = ref.dataset.journal || '';
+          const doi = ref.dataset.doi || '';
+          const authors = ref.dataset.authors || '';
+          const segmentText = ref.dataset.segment || '';
+          const year = ref.dataset.year || '';
+          const key = ref.dataset.key || '';
+          const searchText = `${title} ${journal} ${doi} ${authors} ${segmentText}`;
+          const matches = yearPass(year) && queryPass(searchText) && (!selectedOnlyInput.checked || selectedMap.has(key));
+          ref.classList.toggle('hidden', !matches);
+          if (matches) visibleRefs += 1;
+        });
+        const noRefsMessage = card.querySelector('.empty');
+        if (noRefsMessage) {
+          const matches = !selectedOnlyInput.checked && queryPass(card.dataset.segment || '');
+          noRefsMessage.classList.toggle('hidden', !matches);
+          card.classList.toggle('hidden', !matches);
+          if (matches) totalVisible += 1;
+          return;
+        }
+        card.classList.toggle('hidden', visibleRefs === 0);
+        totalVisible += visibleRefs;
+      });
+      visibleCount.textContent = String(totalVisible);
+    }
+
+    document.querySelectorAll('.reference').forEach((ref) => {
+      const checkbox = ref.querySelector('input[type="checkbox"]');
+      checkbox.addEventListener('change', () => {
+        const key = ref.dataset.key;
+        const record = JSON.parse(ref.dataset.record);
+        if (checkbox.checked) {
+          selectedMap.set(key, record);
+        } else {
+          selectedMap.delete(key);
+        }
+        updateSelectedPanel();
+        applyFilters();
+      });
+    });
+
+    applyFiltersButton.addEventListener('click', applyFilters);
+    downloadFormat.addEventListener('change', updateDownloadLink);
+    clearFiltersButton.addEventListener('click', () => {
+      yearFromInput.value = '';
+      yearToInput.value = '';
+      queryFilterInput.value = '';
+      selectedOnlyInput.checked = false;
+      applyFilters();
+    });
+    queryFilterInput.addEventListener('input', applyFilters);
+    selectedOnlyInput.addEventListener('change', applyFilters);
+    yearFromInput.addEventListener('change', applyFilters);
+    yearToInput.addEventListener('change', applyFilters);
+    updateSelectedPanel();
+    applyFilters();
+  </script>
+</body>
+</html>

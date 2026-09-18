@@ -1,0 +1,306 @@
+{
+  "artifacts": {
+    "clean_metrics": {
+      "path": "clean_metrics.json",
+      "row_count": 1,
+      "sha256": "a805f095cfbafa8060361144fd7278eb009f133228ae328449641a4b646e36f5",
+      "size_bytes": 2226
+    },
+    "cpu_software_timing": {
+      "path": "cpu_software_timing.json",
+      "sha256": "54693d75bceacd0e7af9042ea7d72997bc9bd148ac6490416553bded152874a5",
+      "size_bytes": 894
+    },
+    "predictions": {
+      "path": "predictions.jsonl",
+      "row_count": 10000,
+      "sha256": "d7e9ab19619c61dfae4bf73ea2a63e683275830956cc445e6580eed37ebcd867",
+      "size_bytes": 7234994
+    }
+  },
+  "checkpoint": {
+    "path": "D:\\\u9879\u76ee\\\u57fa\u4e8eD2NN\\artifacts\\formal_mnist_v1\\best_mnist.formal_mnist_v1_electronic_seed42.pth",
+    "sha256": "0c70c974d1c734f059e7c5261a465685d4319b5739eb8a18e5ce6d914deb3b1e"
+  },
+  "cli_configuration": {
+    "batch_size": 128,
+    "checkpoint": "..\\artifacts\\formal_mnist_v1\\best_mnist.formal_mnist_v1_electronic_seed42.pth",
+    "cpu_threads": 1,
+    "data_dir": "D:\\\u9879\u76ee\\\u57fa\u4e8eD2NN\\simulator\\data",
+    "include_scores": false,
+    "measurement_repeats": 5,
+    "method_id": "electronic",
+    "output_dir": "..\\results\\formal_mnist_v1\\clean\\electronic_seed42",
+    "protocol": "..\\FORMAL_EXPERIMENT_PROTOCOL.json",
+    "sample_limit": null,
+    "warmup_repeats": 1
+  },
+  "created_at_utc": "2026-08-01T09:17:37.974893+00:00",
+  "environment": {
+    "captured_at_utc": "2026-08-01T09:17:38.027755+00:00",
+    "packages": {
+      "Pillow": "12.3.0",
+      "matplotlib": "3.11.1",
+      "numpy": "2.4.6",
+      "torch": "2.10.0",
+      "torchvision": "0.25.0"
+    },
+    "platform": {
+      "cpu_count": 12,
+      "machine": "AMD64",
+      "processor": "Intel64 Family 6 Model 186 Stepping 2, GenuineIntel",
+      "release": "10",
+      "system": "Windows"
+    },
+    "python": {
+      "executable": "C:\\Users\\zayn_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+      "version": "3.11.7 (tags/v3.11.7:fa7a6f2, Dec  4 2023, 19:24:49) [MSC v.1937 64 bit (AMD64)]"
+    },
+    "repository": {
+      "commit": "f1ae6e3e5076fcd2f60111ef4d42a2798d30ac8f",
+      "diagnostics": {
+        "commit": {
+          "available": true,
+          "value": "f1ae6e3e5076fcd2f60111ef4d42a2798d30ac8f"
+        },
+        "status": {
+          "available": true,
+          "value": "M README.md\n M artifacts.py\n M d2nn.py\n M export_phase_plate.py\n M pyproject.toml\n M tasks.py\n M train.py\n M train_core.py\n M uv.lock\n?? clean_evaluation.py\n?? clean_evaluation_manifest.py\n?? diagnose_optical_scale.py\n?? evaluate_clean.py\n?? evaluate_robustness.py\n?? model_variants.py\n?? perturbations.py\n?? robustness_cohort.py\n?? robustness_evaluation.py\n?? robustness_io.py\n?? robustness_plan.py\n?? robustness_records.py\n?? robustness_run_manifest.py\n?? robustness_summary_input.py\n?? robustness_target.py\n?? summarize_robustness.py\n?? tests/test_clean_evaluation_cli.py\n?? tests/test_model_variants.py\n?? tests/test_optical_scale_diagnostic.py\n?? tests/test_optics_presets_and_export.py\n?? tests/test_perturbations.py\n?? tests/test_robustness_cli.py\n?? tests/test_robustness_evaluation.py\n?? tests/test_robustness_plan_and_target.py\n?? tests/test_robustness_summary.py\n?? tests/test_training_cli_integration.py\n?? tests/test_training_manifest.py\n?? training_provenance.py\n?? training_runtime.py"
+        }
+      },
+      "dirty": true
+    },
+    "source_files_sha256": {
+      "artifacts.py": "0c4c498b2e809340eaf45c64ce87ecbb9d30b581e798542e1063d0bff442a792",
+      "d2nn.py": "d85ed13925015fb6423c829b2687c7754878cdde89a359f6e1f0aa1466b45e22",
+      "model_variants.py": "9d1af9d906095f4ff41235bece1dad0674c9e8b225c5bf86f04270c9ada36aec",
+      "perturbations.py": "0cde40ac16456c6224947d34eb8f4cef1f50660dba88389254731d7124df803e",
+      "tasks.py": "b21e4d57bd91b80e567bd8d9d39ea11cc15f93a376fa934d1b8c35ae5eac77a4",
+      "train.py": "caa364eb265ebc7dd393ed1229f3b6967b2fd7875928037e4ea9c0ee0fda4da9",
+      "train_core.py": "0ae025984630fd1cdf03984c64a3a9b73b6f08d6a2640cb14c69bf9444229217",
+      "training_provenance.py": "9a23224fe36886ca52ed5471b6fa7491492be2309d39364e6af1d62785543259",
+      "training_runtime.py": "d17b64751d395ad5b9625c50bca23647a87f5b4bb268b3e5dccdcf593ec3321f"
+    },
+    "torch_runtime": {
+      "cuda_available": false,
+      "cuda_device_name": null,
+      "cuda_version": null,
+      "cudnn_benchmark": false,
+      "cudnn_deterministic": false,
+      "deterministic_algorithms": true,
+      "device": "cpu",
+      "num_interop_threads": 8,
+      "num_threads": 1
+    }
+  },
+  "evaluation_id": "clean-evaluation-97dbaf8b1420488dfef6",
+  "evaluation_source_files_sha256": {
+    "artifacts.py": "0c4c498b2e809340eaf45c64ce87ecbb9d30b581e798542e1063d0bff442a792",
+    "clean_evaluation.py": "768fe319e00e40c5d04e2fe83e3348c374f3c59be66f7f28ebbd54ef69433081",
+    "clean_evaluation_manifest.py": "f85c72a471f8a7b725686e94388a26785d78a4e0cb95c5c557fe1b657a037077",
+    "d2nn.py": "d85ed13925015fb6423c829b2687c7754878cdde89a359f6e1f0aa1466b45e22",
+    "evaluate_clean.py": "0230286c56ec1b0f7664c4c3b2aa0095e51f69576bb0b567a66bb17e36512fdd",
+    "model_variants.py": "9d1af9d906095f4ff41235bece1dad0674c9e8b225c5bf86f04270c9ada36aec",
+    "perturbations.py": "0cde40ac16456c6224947d34eb8f4cef1f50660dba88389254731d7124df803e",
+    "robustness_evaluation.py": "f412e607e27a4408304d441b3f5b162c079ee0474308ddf418eb936aa0c6d659",
+    "robustness_io.py": "f2fd1342dff3ecd8d821708069351bbf5c3e5a90dd02e389a32d1e0762c258a0",
+    "robustness_plan.py": "ef287eea45b6432f6d1b51edbb170f9ca8a9b07856e2e23fff22435eb1ed489b",
+    "robustness_records.py": "8a2b9c9cc7da903cd49b7b7bb78ca34d9eebe640ff77ce327eee0d8fb6db6ed0",
+    "robustness_target.py": "b54f2f81079f9d214079c80574b4b9e38013abfc870c62f32dfbc3596688ef45",
+    "tasks.py": "b21e4d57bd91b80e567bd8d9d39ea11cc15f93a376fa934d1b8c35ae5eac77a4",
+    "training_provenance.py": "9a23224fe36886ca52ed5471b6fa7491492be2309d39364e6af1d62785543259"
+  },
+  "evidence_status": "protocol_bound_full_test_single_seed_requires_cross_training_seed_summary",
+  "formal_protocol": {
+    "path": "D:\\\u9879\u76ee\\\u57fa\u4e8eD2NN\\FORMAL_EXPERIMENT_PROTOCOL.json",
+    "protocol_id": "formal-mnist-v1-20260729",
+    "sha256": "0c1d48d864fc02bbea64ae53c59d92f921cadf2edaee2cb6b73462a0bf386fe1"
+  },
+  "manifest_payload_sha256": "35de331b56707ec48b06923a407360c3dc2e7f0c7495f32ff8f59637342733a9",
+  "method_id": "electronic",
+  "metrics": {
+    "accuracy": 0.9478,
+    "confusion_matrix": [
+      [
+        962,
+        0,
+        1,
+        2,
+        2,
+        4,
+        5,
+        2,
+        2,
+        0
+      ],
+      [
+        0,
+        1118,
+        4,
+        1,
+        0,
+        2,
+        3,
+        1,
+        6,
+        0
+      ],
+      [
+        9,
+        7,
+        976,
+        13,
+        6,
+        1,
+        6,
+        11,
+        3,
+        0
+      ],
+      [
+        6,
+        0,
+        7,
+        947,
+        0,
+        25,
+        1,
+        9,
+        13,
+        2
+      ],
+      [
+        1,
+        0,
+        7,
+        0,
+        935,
+        0,
+        2,
+        6,
+        5,
+        26
+      ],
+      [
+        6,
+        1,
+        4,
+        25,
+        4,
+        824,
+        11,
+        2,
+        12,
+        3
+      ],
+      [
+        9,
+        3,
+        2,
+        0,
+        9,
+        18,
+        910,
+        0,
+        7,
+        0
+      ],
+      [
+        1,
+        9,
+        12,
+        13,
+        1,
+        1,
+        0,
+        985,
+        1,
+        5
+      ],
+      [
+        6,
+        2,
+        12,
+        25,
+        8,
+        7,
+        6,
+        9,
+        894,
+        5
+      ],
+      [
+        6,
+        8,
+        0,
+        21,
+        15,
+        3,
+        2,
+        22,
+        5,
+        927
+      ]
+    ],
+    "macro_f1": 0.9471767932846639,
+    "macro_f1_convention": "all_score_classes_zero_division_0",
+    "mean_contrast": 0.8601010085105896,
+    "mean_cross_entropy": 0.1802271634206176,
+    "n_correct": 9478,
+    "n_samples": 10000
+  },
+  "model": {
+    "class_name": "ElectronicMLPClassifier",
+    "detector_feature_count": null,
+    "feature_schema_id": "flattened_input:1x28x28",
+    "score_semantics": "softmax_probability",
+    "total_parameters": 14320,
+    "trainable_parameters": 14320,
+    "training_seed": 42,
+    "variant": "electronic"
+  },
+  "runtime": {
+    "batch_size": 128,
+    "cpu_threads": 1,
+    "deterministic_algorithms": true,
+    "device": "cpu",
+    "include_scores": false,
+    "num_workers": 0
+  },
+  "sample_scope": {
+    "full_test_samples": 10000,
+    "sample_count": 10000,
+    "selection": "full_test"
+  },
+  "schema_version": "clean-evaluation/v1",
+  "scope": "numerical_simulation_only",
+  "statistics": {
+    "independent_unit": "training_seed",
+    "reporting_requirement": "aggregate_clean_metrics_across_planned_training_seeds",
+    "timing_repeats_role": "runtime_precision_only_not_independent_replicates"
+  },
+  "timing": {
+    "claim_boundary": "not_physical_optical_hardware_latency_energy_or_efficiency",
+    "device": "cpu",
+    "elapsed_seconds": [
+      0.8075409999582916,
+      0.6355978000210598,
+      0.9140568999573588,
+      0.7166339999530464,
+      0.7028709999285638
+    ],
+    "iqr_seconds": 0.10467000002972782,
+    "measurement_repeats": 5,
+    "measurement_scope": "full_selected_test_loader_forward_with_metrics_including_data_iteration_and_shape_validation_excluding_metric_aggregation_and_artifact_io",
+    "median_seconds": 0.7166339999530464,
+    "median_seconds_per_sample": 7.166339999530464e-05,
+    "q1_seconds": 0.7028709999285638,
+    "q3_seconds": 0.8075409999582916,
+    "sample_count_per_repeat": 10000,
+    "schema_version": "cpu-software-simulation-timing/v1",
+    "scope": "cpu_software_simulation_overhead",
+    "torch_num_interop_threads": 8,
+    "torch_num_threads": 1,
+    "warmup_repeats": 1
+  }
+}

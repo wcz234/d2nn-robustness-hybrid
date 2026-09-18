@@ -1,0 +1,40 @@
+%SystemDrive%/
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+.idea/
+.vscode/
+.codex/
+.codex_tmp/
+.claude/
+.worktrees/
+
+# AI agent configuration files (local only)
+AGENTS.md
+CLAUDE.md
+docs/superpowers/
+
+# Local development scripts and notes
+fix_path.ps1
+python_paths.txt
+
+# Large binary artifacts (distributed via GitHub Releases)
+data/
+checkpoints/
+exports/
+checkpoints_smoke*/
+exports_smoke*/
+
+# Generated figures are gitignored by default; selected representative figures
+# are committed explicitly and tracked via git add -f
+figures/
+figures_smoke*/
+
+*.log
+pytest.log
+pytest_*.txt
+test_*.txt
+test_out_cmd.txt
+test_output.txt

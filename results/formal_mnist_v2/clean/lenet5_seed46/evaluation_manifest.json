@@ -1,0 +1,314 @@
+{
+  "artifacts": {
+    "clean_metrics": {
+      "path": "clean_metrics.json",
+      "row_count": 1,
+      "sha256": "a9fbd0efe61767d27abca4924291c35f7b3e49c866c4f5f9140994f6069cfbb9",
+      "size_bytes": 2208
+    },
+    "cpu_software_timing": {
+      "path": "cpu_software_timing.json",
+      "sha256": "019a45bdd6d243f29f2979d8dc3bf20cc1051152f541b791d8adddda354ea1a4",
+      "size_bytes": 892
+    },
+    "predictions": {
+      "path": "predictions.jsonl",
+      "row_count": 10000,
+      "sha256": "daaf129af5a392fb2a239ccb3f24b8e3b0f4eea4e30b4be7b2aa57f8f30ec7fa",
+      "size_bytes": 7131295
+    }
+  },
+  "checkpoint": {
+    "path": "D:\\\u9879\u76ee\\\u57fa\u4e8eD2NN\\artifacts\\formal_mnist_v2\\best_mnist.formal_mnist_v2_lenet5_seed46.pth",
+    "sha256": "798be89d2e4924e17f2087b90b9eae31f53b12585fd898bfd14d782df6e785d8"
+  },
+  "cli_configuration": {
+    "batch_size": 128,
+    "checkpoint": "D:\\\u9879\u76ee\\\u57fa\u4e8eD2NN\\artifacts\\formal_mnist_v2\\best_mnist.formal_mnist_v2_lenet5_seed46.pth",
+    "cpu_threads": 8,
+    "data_dir": "D:\\\u9879\u76ee\\\u57fa\u4e8eD2NN\\simulator\\data",
+    "include_scores": false,
+    "measurement_repeats": 5,
+    "method_id": "lenet5",
+    "metrics_device": "cpu",
+    "output_dir": "D:\\\u9879\u76ee\\\u57fa\u4e8eD2NN\\results\\formal_mnist_v2\\clean\\lenet5_seed46",
+    "protocol": "D:\\\u9879\u76ee\\\u57fa\u4e8eD2NN\\tmp\\FORMAL_EXPERIMENT_PROTOCOL_V2_localcpu.json",
+    "sample_limit": null,
+    "warmup_repeats": 1
+  },
+  "created_at_utc": "2026-09-17T06:41:44.772017+00:00",
+  "device_assignment": {
+    "metrics_device": "cpu",
+    "metrics_device_parity": "not_applicable",
+    "rationale": "clean metrics and per-sample predictions may run on an accelerator; CPU software timing is always measured on CPU because that overhead is the measured quantity, not an implementation detail",
+    "timing_claim_boundary": "cpu_software_simulation_overhead_only",
+    "timing_device": "cpu"
+  },
+  "environment": {
+    "captured_at_utc": "2026-09-17T06:41:44.807363+00:00",
+    "packages": {
+      "Pillow": "12.3.0",
+      "matplotlib": "3.11.1",
+      "numpy": "2.4.6",
+      "torch": "2.10.0",
+      "torchvision": "0.25.0"
+    },
+    "platform": {
+      "cpu_count": 12,
+      "machine": "AMD64",
+      "processor": "Intel64 Family 6 Model 186 Stepping 2, GenuineIntel",
+      "release": "10",
+      "system": "Windows"
+    },
+    "python": {
+      "executable": "D:\\\u9879\u76ee\\\u57fa\u4e8eD2NN\\.venv\\Scripts\\python.exe",
+      "version": "3.11.7 (tags/v3.11.7:fa7a6f2, Dec  4 2023, 19:24:49) [MSC v.1937 64 bit (AMD64)]"
+    },
+    "repository": {
+      "commit": "f58e75f9eb3cacb0d96f89d681fa5d63f3a2142e",
+      "diagnostics": {
+        "commit": {
+          "available": true,
+          "value": "f58e75f9eb3cacb0d96f89d681fa5d63f3a2142e"
+        },
+        "status": {
+          "available": true,
+          "value": ""
+        }
+      },
+      "dirty": false
+    },
+    "source_files_sha256": {
+      "artifacts.py": "0c4c498b2e809340eaf45c64ce87ecbb9d30b581e798542e1063d0bff442a792",
+      "d2nn.py": "d85ed13925015fb6423c829b2687c7754878cdde89a359f6e1f0aa1466b45e22",
+      "model_variants.py": "49c0fbd3c71c1a2a6e07ca5e07eaaa5025586dfcbafc1e7819448903be463077",
+      "perturbations.py": "58c64882bff1e2276c247d9a4a20b6d7102b38ebaa47e3692dde53493f6d2a21",
+      "tasks.py": "b21e4d57bd91b80e567bd8d9d39ea11cc15f93a376fa934d1b8c35ae5eac77a4",
+      "train.py": "f1b98b97a4d5c4b0be6f6eb0c7fda806014f95dc34b3bae061c5f7ab57eed5ad",
+      "train_core.py": "0ae025984630fd1cdf03984c64a3a9b73b6f08d6a2640cb14c69bf9444229217",
+      "training_provenance.py": "9a23224fe36886ca52ed5471b6fa7491492be2309d39364e6af1d62785543259",
+      "training_runtime.py": "3b45ac057ac238da0e5a6524d4b0a464afaf3ba555aa4f4a1493d1e5af8e9101"
+    },
+    "torch_runtime": {
+      "cuda_available": false,
+      "cuda_device_name": null,
+      "cuda_version": null,
+      "cudnn_benchmark": false,
+      "cudnn_deterministic": false,
+      "deterministic_algorithms": true,
+      "device": "cpu",
+      "num_interop_threads": 8,
+      "num_threads": 8
+    }
+  },
+  "evaluation_id": "clean-evaluation-d459d073df592399ec0e",
+  "evaluation_source_files_sha256": {
+    "artifacts.py": "0c4c498b2e809340eaf45c64ce87ecbb9d30b581e798542e1063d0bff442a792",
+    "clean_evaluation.py": "c3e2480210ac7be33c7e1648a0d789f6e8bc1d5775bd7b1563ac953f937042b6",
+    "clean_evaluation_manifest.py": "13ec41f2ff4ebe59462706f03dd7d26ed03880139ef0ef23934470093b93ccaf",
+    "d2nn.py": "d85ed13925015fb6423c829b2687c7754878cdde89a359f6e1f0aa1466b45e22",
+    "evaluate_clean.py": "17bcb60ba8490d3afa6e2755cb00f3c57be47f935e2356b6909bc53a18e4290e",
+    "model_variants.py": "49c0fbd3c71c1a2a6e07ca5e07eaaa5025586dfcbafc1e7819448903be463077",
+    "perturbations.py": "58c64882bff1e2276c247d9a4a20b6d7102b38ebaa47e3692dde53493f6d2a21",
+    "robustness_evaluation.py": "f412e607e27a4408304d441b3f5b162c079ee0474308ddf418eb936aa0c6d659",
+    "robustness_io.py": "f2fd1342dff3ecd8d821708069351bbf5c3e5a90dd02e389a32d1e0762c258a0",
+    "robustness_plan.py": "ef287eea45b6432f6d1b51edbb170f9ca8a9b07856e2e23fff22435eb1ed489b",
+    "robustness_records.py": "8a2b9c9cc7da903cd49b7b7bb78ca34d9eebe640ff77ce327eee0d8fb6db6ed0",
+    "robustness_target.py": "54731210640af2568fb567823fbecfb906af6d3ec96aca497ba5f538001770d9",
+    "tasks.py": "b21e4d57bd91b80e567bd8d9d39ea11cc15f93a376fa934d1b8c35ae5eac77a4",
+    "training_provenance.py": "9a23224fe36886ca52ed5471b6fa7491492be2309d39364e6af1d62785543259"
+  },
+  "evidence_status": "protocol_bound_full_test_single_seed_requires_cross_training_seed_summary",
+  "formal_protocol": {
+    "path": "D:\\\u9879\u76ee\\\u57fa\u4e8eD2NN\\tmp\\FORMAL_EXPERIMENT_PROTOCOL_V2_localcpu.json",
+    "protocol_id": "formal-mnist-v2-20260917-localcpu-metrics",
+    "sha256": "9801f501578236ee20bbbdddda4fd4063460ad6b5697da4f439195bc1f5b5d6b"
+  },
+  "manifest_payload_sha256": "fa9c152b782277361b97e1ff0bea2e5c21c0e471145a371bee230056a3e48e77",
+  "method_id": "lenet5",
+  "metrics": {
+    "accuracy": 0.9839,
+    "confusion_matrix": [
+      [
+        973,
+        0,
+        0,
+        0,
+        0,
+        0,
+        5,
+        1,
+        1,
+        0
+      ],
+      [
+        1,
+        1126,
+        0,
+        0,
+        0,
+        0,
+        3,
+        3,
+        2,
+        0
+      ],
+      [
+        3,
+        0,
+        1018,
+        0,
+        2,
+        0,
+        0,
+        9,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        6,
+        980,
+        0,
+        14,
+        0,
+        5,
+        3,
+        1
+      ],
+      [
+        0,
+        0,
+        0,
+        1,
+        974,
+        0,
+        3,
+        1,
+        0,
+        3
+      ],
+      [
+        3,
+        0,
+        0,
+        3,
+        0,
+        876,
+        4,
+        2,
+        1,
+        3
+      ],
+      [
+        4,
+        2,
+        0,
+        1,
+        1,
+        1,
+        948,
+        0,
+        1,
+        0
+      ],
+      [
+        0,
+        2,
+        5,
+        1,
+        1,
+        0,
+        0,
+        1015,
+        1,
+        3
+      ],
+      [
+        1,
+        0,
+        3,
+        1,
+        1,
+        8,
+        1,
+        3,
+        943,
+        13
+      ],
+      [
+        3,
+        0,
+        0,
+        0,
+        12,
+        3,
+        0,
+        5,
+        0,
+        986
+      ]
+    ],
+    "macro_f1": 0.9837105612702821,
+    "macro_f1_convention": "all_score_classes_zero_division_0",
+    "mean_contrast": 0.957253862285614,
+    "mean_cross_entropy": 0.05667100362237543,
+    "n_correct": 9839,
+    "n_samples": 10000
+  },
+  "model": {
+    "class_name": "LeNet5Classifier",
+    "detector_feature_count": 120,
+    "feature_schema_id": "cnn_penultimate_features:120",
+    "score_semantics": "softmax_probability",
+    "total_parameters": 34622,
+    "trainable_parameters": 34622,
+    "training_seed": 46,
+    "variant": "lenet5"
+  },
+  "runtime": {
+    "batch_size": 128,
+    "cpu_threads": 8,
+    "deterministic_algorithms": true,
+    "device": "cpu",
+    "include_scores": false,
+    "num_workers": 0
+  },
+  "sample_scope": {
+    "full_test_samples": 10000,
+    "sample_count": 10000,
+    "selection": "full_test"
+  },
+  "schema_version": "clean-evaluation/v1",
+  "scope": "numerical_simulation_only",
+  "statistics": {
+    "independent_unit": "training_seed",
+    "reporting_requirement": "aggregate_clean_metrics_across_planned_training_seeds",
+    "timing_repeats_role": "runtime_precision_only_not_independent_replicates"
+  },
+  "timing": {
+    "claim_boundary": "not_physical_optical_hardware_latency_energy_or_efficiency",
+    "device": "cpu",
+    "elapsed_seconds": [
+      1.8197826000396162,
+      2.9596692000050098,
+      3.0046866000047885,
+      3.5209170000161976,
+      3.588496499985922
+    ],
+    "iqr_seconds": 0.5612478000111878,
+    "measurement_repeats": 5,
+    "measurement_scope": "full_selected_test_loader_forward_with_metrics_including_data_iteration_and_shape_validation_excluding_metric_aggregation_and_artifact_io",
+    "median_seconds": 3.0046866000047885,
+    "median_seconds_per_sample": 0.0003004686600004788,
+    "q1_seconds": 2.9596692000050098,
+    "q3_seconds": 3.5209170000161976,
+    "sample_count_per_repeat": 10000,
+    "schema_version": "cpu-software-simulation-timing/v1",
+    "scope": "cpu_software_simulation_overhead",
+    "torch_num_interop_threads": 8,
+    "torch_num_threads": 8,
+    "warmup_repeats": 1
+  }
+}

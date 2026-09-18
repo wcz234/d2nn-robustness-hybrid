@@ -1,0 +1,24 @@
+{
+  "claim_boundary": "not_physical_optical_hardware_latency_energy_or_efficiency",
+  "device": "cpu",
+  "elapsed_seconds": [
+    91.0459434427321,
+    91.33234348520637,
+    90.91389878094196,
+    90.35537587851286,
+    90.31733886897564
+  ],
+  "iqr_seconds": 0.6905675642192364,
+  "measurement_repeats": 5,
+  "measurement_scope": "full_selected_test_loader_forward_with_metrics_including_data_iteration_and_shape_validation_excluding_metric_aggregation_and_artifact_io",
+  "median_seconds": 90.91389878094196,
+  "median_seconds_per_sample": 0.009091389878094196,
+  "q1_seconds": 90.35537587851286,
+  "q3_seconds": 91.0459434427321,
+  "sample_count_per_repeat": 10000,
+  "schema_version": "cpu-software-simulation-timing/v1",
+  "scope": "cpu_software_simulation_overhead",
+  "torch_num_interop_threads": 18,
+  "torch_num_threads": 1,
+  "warmup_repeats": 1
+}

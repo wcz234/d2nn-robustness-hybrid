@@ -1,0 +1,339 @@
+{
+  "protocol_schema_version": "formal-simulation-protocol/v1",
+  "protocol_id": "formal-fashion-mnist-v3-20260917",
+  "scope": "numerical_simulation_only",
+  "frozen_at_utc": "2026-09-17T12:41:38.759821+00:00",
+  "status": "frozen_before_v3_training",
+  "research_boundary": {
+    "physical_optical_experiment": false,
+    "real_edge_device_measurement": false,
+    "power_or_energy_claims": false,
+    "detector_noise_hardware_calibrated": false
+  },
+  "decision_basis": {
+    "training_budget_basis": "fixed CPU compute budget and equal epoch count, not test-set model selection",
+    "full_test_one_draw_outer_seconds": 20.953,
+    "timing_pilot_manifest_sha256": "4212cd6f9a2229066b4ce9edbc930b55ff19089da0dc58988337ded90f0d7b48",
+    "timing_scope": "budget estimate including process startup, loading, evaluation, and artifact writing; not a paper latency metric",
+    "pilot_accuracy_use": "forbidden_for_hyperparameter_or_method_selection"
+  },
+  "dataset": {
+    "key": "fashion-mnist",
+    "provider": "torchvision",
+    "train_side_samples": 60000,
+    "test_samples": 10000,
+    "validation_samples": 5000,
+    "split_policy": "training-seed-specific deterministic 55000/5000 split recorded with index SHA-256",
+    "test_policy": "complete test set used only after training under frozen conditions",
+    "normalized_key": "fashion_mnist",
+    "display_name": "Fashion-MNIST",
+    "note": "Same provider, split policy and sample counts as the MNIST cohorts; only the image content differs, which makes this a second-dataset replication of the frozen protocol rather than a new experimental design."
+  },
+  "training": {
+    "paired_training_seeds": [
+      42,
+      43,
+      44
+    ],
+    "epochs": 3,
+    "batch_size": 128,
+    "learning_rate": 0.01,
+    "num_workers": 0,
+    "deterministic_algorithms": true,
+    "optics_preset": "d2nn2018_thz",
+    "size": 64,
+    "layers": 3,
+    "propagation_backend": "fft",
+    "validation_selection": "clean validation accuracy, then contrast, then later epoch",
+    "experiment_stage": "formal_fashion_mnist_v3",
+    "output_dir": "artifacts/formal_fashion_mnist_v3"
+  },
+  "methods": [
+    {
+      "method_id": "baseline_d2nn",
+      "model_variant": "d2nn",
+      "training_perturbations": {
+        "lateral_shift_max_px": 0.0,
+        "gap_spacing_error_max_m": 0.0,
+        "phase_noise_std_rad": 0.0,
+        "phase_quantization_levels": null,
+        "detector_noise_std_relative": 0.0
+      },
+      "robustness_plan_applicability": "all_frozen_optical_conditions"
+    },
+    {
+      "method_id": "robust_d2nn",
+      "model_variant": "d2nn",
+      "training_perturbations": {
+        "lateral_shift_max_px": 0.5,
+        "gap_spacing_error_max_m": 0.0001,
+        "phase_noise_std_rad": 0.05,
+        "phase_quantization_levels": null,
+        "detector_noise_std_relative": 0.01
+      },
+      "robustness_plan_applicability": "all_frozen_optical_conditions"
+    },
+    {
+      "method_id": "hybrid",
+      "model_variant": "hybrid",
+      "hybrid_pool_size": 8,
+      "hybrid_hidden_dim": 32,
+      "training_perturbations": {
+        "lateral_shift_max_px": 0.0,
+        "gap_spacing_error_max_m": 0.0,
+        "phase_noise_std_rad": 0.0,
+        "phase_quantization_levels": null,
+        "detector_noise_std_relative": 0.0
+      },
+      "robustness_plan_applicability": "all_frozen_optical_conditions"
+    }
+  ],
+  "evaluation": {
+    "sample_scope": "full_test",
+    "batch_size": 128,
+    "num_workers": 0,
+    "device": "cuda",
+    "master_optical_seed": 62001,
+    "master_detector_seed": 62002,
+    "stochastic_draw_count": 3,
+    "deterministic_draw_count": 1,
+    "primary_metrics": [
+      "accuracy",
+      "macro_f1"
+    ],
+    "secondary_metrics": [
+      "mean_cross_entropy",
+      "mean_contrast"
+    ],
+    "macro_f1_convention": "all_score_classes_zero_division_0",
+    "detector_noise_semantics": "synthetic_relative_additive_simulation_noise",
+    "optical_draw_pairing": "same condition/draw IDs across d2nn and hybrid methods",
+    "detector_noise_pairing": "feature-schema-specific tables; tensors are not claimed identical across model variants",
+    "timing_device": "cpu",
+    "device_parity_evidence": {
+      "probe": "device_parity_probe.py",
+      "conditions_probed": [
+        "clean_continuous",
+        "lateral_shift_0p50px",
+        "phase_quantization_4",
+        "mixed_stress"
+      ],
+      "checkpoints_probed": [
+        "baseline_d2nn_seed42",
+        "hybrid_seed42",
+        "hybrid_qat_seed42"
+      ],
+      "worst_accuracy_delta": 0.0,
+      "speedup": {
+        "baseline_d2nn": 3.22,
+        "hybrid": 4.45,
+        "hybrid_qat": 5.28,
+        "overall": 4.11
+      },
+      "conclusion": "cuda_metrics_bit_identical_to_cpu_on_this_cohort"
+    },
+    "timing_device_rationale": "CPU software-simulation overhead is the measured quantity, not an implementation detail"
+  },
+  "conditions": [
+    {
+      "condition_id": "clean_continuous",
+      "draw_count": 1,
+      "perturbation_config": {
+        "lateral_shift_max_px": 0.0,
+        "gap_spacing_error_max_m": 0.0,
+        "phase_noise_std_rad": 0.0,
+        "phase_quantization_levels": null,
+        "detector_noise_std_relative": 0.0
+      }
+    },
+    {
+      "condition_id": "lateral_shift_0p25px",
+      "draw_count": 3,
+      "perturbation_config": {
+        "lateral_shift_max_px": 0.25,
+        "gap_spacing_error_max_m": 0.0,
+        "phase_noise_std_rad": 0.0,
+        "phase_quantization_levels": null,
+        "detector_noise_std_relative": 0.0
+      }
+    },
+    {
+      "condition_id": "lateral_shift_0p50px",
+      "draw_count": 3,
+      "perturbation_config": {
+        "lateral_shift_max_px": 0.5,
+        "gap_spacing_error_max_m": 0.0,
+        "phase_noise_std_rad": 0.0,
+        "phase_quantization_levels": null,
+        "detector_noise_std_relative": 0.0
+      }
+    },
+    {
+      "condition_id": "gap_error_0p1mm",
+      "draw_count": 3,
+      "perturbation_config": {
+        "lateral_shift_max_px": 0.0,
+        "gap_spacing_error_max_m": 0.0001,
+        "phase_noise_std_rad": 0.0,
+        "phase_quantization_levels": null,
+        "detector_noise_std_relative": 0.0
+      }
+    },
+    {
+      "condition_id": "gap_error_0p3mm",
+      "draw_count": 3,
+      "perturbation_config": {
+        "lateral_shift_max_px": 0.0,
+        "gap_spacing_error_max_m": 0.0003,
+        "phase_noise_std_rad": 0.0,
+        "phase_quantization_levels": null,
+        "detector_noise_std_relative": 0.0
+      }
+    },
+    {
+      "condition_id": "phase_noise_0p02rad",
+      "draw_count": 3,
+      "perturbation_config": {
+        "lateral_shift_max_px": 0.0,
+        "gap_spacing_error_max_m": 0.0,
+        "phase_noise_std_rad": 0.02,
+        "phase_quantization_levels": null,
+        "detector_noise_std_relative": 0.0
+      }
+    },
+    {
+      "condition_id": "phase_noise_0p05rad",
+      "draw_count": 3,
+      "perturbation_config": {
+        "lateral_shift_max_px": 0.0,
+        "gap_spacing_error_max_m": 0.0,
+        "phase_noise_std_rad": 0.05,
+        "phase_quantization_levels": null,
+        "detector_noise_std_relative": 0.0
+      }
+    },
+    {
+      "condition_id": "detector_noise_0p01",
+      "draw_count": 3,
+      "perturbation_config": {
+        "lateral_shift_max_px": 0.0,
+        "gap_spacing_error_max_m": 0.0,
+        "phase_noise_std_rad": 0.0,
+        "phase_quantization_levels": null,
+        "detector_noise_std_relative": 0.01
+      }
+    },
+    {
+      "condition_id": "detector_noise_0p03",
+      "draw_count": 3,
+      "perturbation_config": {
+        "lateral_shift_max_px": 0.0,
+        "gap_spacing_error_max_m": 0.0,
+        "phase_noise_std_rad": 0.0,
+        "phase_quantization_levels": null,
+        "detector_noise_std_relative": 0.03
+      }
+    },
+    {
+      "condition_id": "phase_quantization_16",
+      "draw_count": 1,
+      "perturbation_config": {
+        "lateral_shift_max_px": 0.0,
+        "gap_spacing_error_max_m": 0.0,
+        "phase_noise_std_rad": 0.0,
+        "phase_quantization_levels": 16,
+        "detector_noise_std_relative": 0.0
+      }
+    },
+    {
+      "condition_id": "phase_quantization_8",
+      "draw_count": 1,
+      "perturbation_config": {
+        "lateral_shift_max_px": 0.0,
+        "gap_spacing_error_max_m": 0.0,
+        "phase_noise_std_rad": 0.0,
+        "phase_quantization_levels": 8,
+        "detector_noise_std_relative": 0.0
+      }
+    },
+    {
+      "condition_id": "phase_quantization_4",
+      "draw_count": 1,
+      "perturbation_config": {
+        "lateral_shift_max_px": 0.0,
+        "gap_spacing_error_max_m": 0.0,
+        "phase_noise_std_rad": 0.0,
+        "phase_quantization_levels": 4,
+        "detector_noise_std_relative": 0.0
+      }
+    },
+    {
+      "condition_id": "mixed_nominal",
+      "draw_count": 3,
+      "perturbation_config": {
+        "lateral_shift_max_px": 0.25,
+        "gap_spacing_error_max_m": 0.0001,
+        "phase_noise_std_rad": 0.02,
+        "phase_quantization_levels": null,
+        "detector_noise_std_relative": 0.01
+      }
+    },
+    {
+      "condition_id": "mixed_stress",
+      "draw_count": 3,
+      "perturbation_config": {
+        "lateral_shift_max_px": 0.5,
+        "gap_spacing_error_max_m": 0.0003,
+        "phase_noise_std_rad": 0.05,
+        "phase_quantization_levels": null,
+        "detector_noise_std_relative": 0.03
+      }
+    }
+  ],
+  "statistics": {
+    "independent_unit": "training_seed",
+    "n_training_seeds": 3,
+    "within_seed_draw_handling": "mean across frozen deployment draws before cross-seed summaries",
+    "method_comparison": "paired by training seed, condition, and optical draw ID",
+    "reported_uncertainty": "mean, SD, all seed values, and two-sided 95% Student t interval across training seeds",
+    "small_sample_boundary": "three-seed t intervals are imprecise and interpreted as limited-repeat simulation evidence",
+    "hypothesis_tests": "not_performed",
+    "multiple_comparison_claims": "no significance-based selection"
+  },
+  "engineering_scale_notes": {
+    "pixel_pitch_m": 0.0004,
+    "lateral_shift_0p25px_m": 0.0001,
+    "lateral_shift_0p50px_m": 0.0002,
+    "nominal_gap_m": 0.03,
+    "gap_error_0p1mm_fraction": 0.0033333333333333335,
+    "gap_error_0p3mm_fraction": 0.01,
+    "interpretation": "engineering sensitivity grid only; not calibrated to a fabricated system"
+  },
+  "required_artifacts": [
+    "checkpoint_and_adjacent_training_manifest",
+    "frozen_condition_plan",
+    "evaluation_manifest",
+    "per_sample_predictions_jsonl",
+    "draw_metrics_jsonl_with_confusion_matrix",
+    "cross_seed_summary_and_paired_comparisons",
+    "source_and_artifact_sha256"
+  ],
+  "supersedes": {
+    "protocol_id": "formal-mnist-v2-20260917",
+    "path": "FORMAL_EXPERIMENT_PROTOCOL_V2.json",
+    "sha256": "9da8b0e0a95c022c82d66b533737ff2ddb7c2832d4c0e2c2f6d05869f10472b6",
+    "relationship": "v3 reuses the v2 training budget, evaluation runtime settings, 14 conditions and statistics, and changes the dataset identity to Fashion-MNIST."
+  },
+  "v2_change_log": [
+    "Add method_id 'hybrid_qat': quantization-aware hybrid (four-level phase quantization during training, clean validation/test).",
+    "Add method_id 'lenet5': LeNet-5-style pure-electronic CNN reference baseline.",
+    "No change to dataset, training budget, conditions, or statistics.",
+    "v1 results stay valid for the v1 cohort; the new methods are evaluated under v2."
+  ],
+  "v3_change_log": [
+    "Dataset identity changed to Fashion-MNIST; split policy and sample counts unchanged.",
+    "Methods limited to the three optical-compatible methods used by the robustness plan.",
+    "Training seeds 42/43/44, matching the v1 cohort size for a like-for-like replication.",
+    "MNIST v1 and v2 results are unaffected and remain the primary cohort."
+  ]
+}

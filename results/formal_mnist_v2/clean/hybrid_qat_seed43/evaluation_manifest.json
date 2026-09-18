@@ -1,0 +1,314 @@
+{
+  "artifacts": {
+    "clean_metrics": {
+      "path": "clean_metrics.json",
+      "row_count": 1,
+      "sha256": "129f40beb81f9648e09baed78abc46bb0fedb54104b41ef903c802ee9af57387",
+      "size_bytes": 2086
+    },
+    "cpu_software_timing": {
+      "path": "cpu_software_timing.json",
+      "sha256": "cbc3c57eab3706508da15b265adea4fb188ae2762585d952a1faedd600120b0f",
+      "size_bytes": 862
+    },
+    "predictions": {
+      "path": "predictions.jsonl",
+      "row_count": 10000,
+      "sha256": "3e2ade2ce81af0a902a1c788455c7c788b74c0ee7b372786a37a7c666c6a3e74",
+      "size_bytes": 7176398
+    }
+  },
+  "checkpoint": {
+    "path": "/root/d2nn/artifacts/formal_mnist_v2/best_mnist.formal_mnist_v2_hybrid_qat_seed43.pth",
+    "sha256": "f8e8fabe7095e2b0d406c8bee1fde4ea76c6fd2d19a084463c5c16672da8a5f9"
+  },
+  "cli_configuration": {
+    "batch_size": 128,
+    "checkpoint": "/root/d2nn/artifacts/formal_mnist_v2/best_mnist.formal_mnist_v2_hybrid_qat_seed43.pth",
+    "cpu_threads": 1,
+    "data_dir": "/root/d2nn/simulator/data",
+    "include_scores": false,
+    "measurement_repeats": 5,
+    "method_id": "hybrid_qat",
+    "metrics_device": "cuda",
+    "output_dir": "/root/d2nn/results/formal_mnist_v2/clean/hybrid_qat_seed43",
+    "protocol": "/root/d2nn/simulator/FORMAL_EXPERIMENT_PROTOCOL_V2.json",
+    "sample_limit": null,
+    "warmup_repeats": 1
+  },
+  "created_at_utc": "2026-09-17T04:40:02.333589+00:00",
+  "device_assignment": {
+    "metrics_device": "cuda",
+    "metrics_device_parity": "cpu_and_cuda_clean_metrics_verified_bit_identical_on_this_cohort",
+    "rationale": "clean metrics and per-sample predictions may run on an accelerator; CPU software timing is always measured on CPU because that overhead is the measured quantity, not an implementation detail",
+    "timing_claim_boundary": "cpu_software_simulation_overhead_only",
+    "timing_device": "cpu"
+  },
+  "environment": {
+    "captured_at_utc": "2026-09-17T04:40:02.335758+00:00",
+    "packages": {
+      "Pillow": "11.0.0",
+      "matplotlib": "3.11.2",
+      "numpy": "2.2.4",
+      "torch": "2.5.1+cu124",
+      "torchvision": "0.20.1+cu124"
+    },
+    "platform": {
+      "cpu_count": 36,
+      "machine": "x86_64",
+      "processor": "x86_64",
+      "release": "5.15.0-143-generic",
+      "system": "Linux"
+    },
+    "python": {
+      "executable": "/usr/local/bin/python3",
+      "version": "3.11.11 (main, Dec  4 2024, 08:55:07) [GCC 11.4.0]"
+    },
+    "repository": {
+      "commit": null,
+      "diagnostics": {
+        "commit": {
+          "available": false,
+          "returncode": 128
+        },
+        "status": {
+          "available": false,
+          "returncode": 128
+        }
+      },
+      "dirty": null
+    },
+    "source_files_sha256": {
+      "artifacts.py": "0c4c498b2e809340eaf45c64ce87ecbb9d30b581e798542e1063d0bff442a792",
+      "d2nn.py": "d85ed13925015fb6423c829b2687c7754878cdde89a359f6e1f0aa1466b45e22",
+      "model_variants.py": "49c0fbd3c71c1a2a6e07ca5e07eaaa5025586dfcbafc1e7819448903be463077",
+      "perturbations.py": "58c64882bff1e2276c247d9a4a20b6d7102b38ebaa47e3692dde53493f6d2a21",
+      "tasks.py": "b21e4d57bd91b80e567bd8d9d39ea11cc15f93a376fa934d1b8c35ae5eac77a4",
+      "train.py": "f1b98b97a4d5c4b0be6f6eb0c7fda806014f95dc34b3bae061c5f7ab57eed5ad",
+      "train_core.py": "0ae025984630fd1cdf03984c64a3a9b73b6f08d6a2640cb14c69bf9444229217",
+      "training_provenance.py": "9a23224fe36886ca52ed5471b6fa7491492be2309d39364e6af1d62785543259",
+      "training_runtime.py": "3b45ac057ac238da0e5a6524d4b0a464afaf3ba555aa4f4a1493d1e5af8e9101"
+    },
+    "torch_runtime": {
+      "cuda_available": true,
+      "cuda_device_name": null,
+      "cuda_version": "12.4",
+      "cudnn_benchmark": false,
+      "cudnn_deterministic": false,
+      "deterministic_algorithms": false,
+      "device": "cpu",
+      "num_interop_threads": 18,
+      "num_threads": 1
+    }
+  },
+  "evaluation_id": "clean-evaluation-d2750f352271beaf5dc3",
+  "evaluation_source_files_sha256": {
+    "artifacts.py": "0c4c498b2e809340eaf45c64ce87ecbb9d30b581e798542e1063d0bff442a792",
+    "clean_evaluation.py": "c3e2480210ac7be33c7e1648a0d789f6e8bc1d5775bd7b1563ac953f937042b6",
+    "clean_evaluation_manifest.py": "13ec41f2ff4ebe59462706f03dd7d26ed03880139ef0ef23934470093b93ccaf",
+    "d2nn.py": "d85ed13925015fb6423c829b2687c7754878cdde89a359f6e1f0aa1466b45e22",
+    "evaluate_clean.py": "17bcb60ba8490d3afa6e2755cb00f3c57be47f935e2356b6909bc53a18e4290e",
+    "model_variants.py": "49c0fbd3c71c1a2a6e07ca5e07eaaa5025586dfcbafc1e7819448903be463077",
+    "perturbations.py": "58c64882bff1e2276c247d9a4a20b6d7102b38ebaa47e3692dde53493f6d2a21",
+    "robustness_evaluation.py": "f412e607e27a4408304d441b3f5b162c079ee0474308ddf418eb936aa0c6d659",
+    "robustness_io.py": "f2fd1342dff3ecd8d821708069351bbf5c3e5a90dd02e389a32d1e0762c258a0",
+    "robustness_plan.py": "ef287eea45b6432f6d1b51edbb170f9ca8a9b07856e2e23fff22435eb1ed489b",
+    "robustness_records.py": "8a2b9c9cc7da903cd49b7b7bb78ca34d9eebe640ff77ce327eee0d8fb6db6ed0",
+    "robustness_target.py": "54731210640af2568fb567823fbecfb906af6d3ec96aca497ba5f538001770d9",
+    "tasks.py": "b21e4d57bd91b80e567bd8d9d39ea11cc15f93a376fa934d1b8c35ae5eac77a4",
+    "training_provenance.py": "9a23224fe36886ca52ed5471b6fa7491492be2309d39364e6af1d62785543259"
+  },
+  "evidence_status": "protocol_bound_full_test_single_seed_requires_cross_training_seed_summary",
+  "formal_protocol": {
+    "path": "/root/d2nn/simulator/FORMAL_EXPERIMENT_PROTOCOL_V2.json",
+    "protocol_id": "formal-mnist-v2-20260917",
+    "sha256": "9da8b0e0a95c022c82d66b533737ff2ddb7c2832d4c0e2c2f6d05869f10472b6"
+  },
+  "manifest_payload_sha256": "ad862ec0012f1024f6077120ef3a8fe302e6a08fb585ced6c27f8b8d49828e0f",
+  "method_id": "hybrid_qat",
+  "metrics": {
+    "accuracy": 0.6834,
+    "confusion_matrix": [
+      [
+        690,
+        1,
+        232,
+        1,
+        1,
+        2,
+        43,
+        10,
+        0,
+        0
+      ],
+      [
+        0,
+        1122,
+        6,
+        0,
+        0,
+        0,
+        4,
+        3,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        1020,
+        0,
+        2,
+        0,
+        5,
+        4,
+        0,
+        0
+      ],
+      [
+        0,
+        20,
+        271,
+        677,
+        16,
+        0,
+        2,
+        19,
+        0,
+        5
+      ],
+      [
+        4,
+        0,
+        51,
+        0,
+        890,
+        0,
+        19,
+        18,
+        0,
+        0
+      ],
+      [
+        3,
+        12,
+        20,
+        55,
+        34,
+        513,
+        246,
+        9,
+        0,
+        0
+      ],
+      [
+        9,
+        4,
+        50,
+        0,
+        0,
+        1,
+        892,
+        2,
+        0,
+        0
+      ],
+      [
+        0,
+        5,
+        38,
+        1,
+        8,
+        0,
+        2,
+        974,
+        0,
+        0
+      ],
+      [
+        0,
+        23,
+        176,
+        5,
+        393,
+        3,
+        318,
+        41,
+        13,
+        2
+      ],
+      [
+        1,
+        4,
+        41,
+        7,
+        782,
+        0,
+        8,
+        123,
+        0,
+        43
+      ]
+    ],
+    "macro_f1": 0.624302782313044,
+    "macro_f1_convention": "all_score_classes_zero_division_0",
+    "mean_contrast": 0.34833990650177005,
+    "mean_cross_entropy": 1.3894073085784913,
+    "n_correct": 6834,
+    "n_samples": 10000
+  },
+  "model": {
+    "class_name": "HybridD2NNClassifier",
+    "detector_feature_count": 64,
+    "feature_schema_id": "pooled_intensity:8x8",
+    "score_semantics": "softmax_probability",
+    "total_parameters": 14698,
+    "trainable_parameters": 14698,
+    "training_seed": 43,
+    "variant": "hybrid"
+  },
+  "runtime": {
+    "batch_size": 128,
+    "cpu_threads": 1,
+    "deterministic_algorithms": false,
+    "device": "cuda",
+    "include_scores": false,
+    "num_workers": 0
+  },
+  "sample_scope": {
+    "full_test_samples": 10000,
+    "sample_count": 10000,
+    "selection": "full_test"
+  },
+  "schema_version": "clean-evaluation/v1",
+  "scope": "numerical_simulation_only",
+  "statistics": {
+    "independent_unit": "training_seed",
+    "reporting_requirement": "aggregate_clean_metrics_across_planned_training_seeds",
+    "timing_repeats_role": "runtime_precision_only_not_independent_replicates"
+  },
+  "timing": {
+    "claim_boundary": "not_physical_optical_hardware_latency_energy_or_efficiency",
+    "device": "cpu",
+    "elapsed_seconds": [
+      95.98765861615539,
+      96.30328180268407,
+      96.07455533742905,
+      96.08560375496745,
+      94.57440864294767
+    ],
+    "iqr_seconds": 0.09794513881206512,
+    "measurement_repeats": 5,
+    "measurement_scope": "full_selected_test_loader_forward_with_metrics_including_data_iteration_and_shape_validation_excluding_metric_aggregation_and_artifact_io",
+    "median_seconds": 96.07455533742905,
+    "median_seconds_per_sample": 0.009607455533742905,
+    "q1_seconds": 95.98765861615539,
+    "q3_seconds": 96.08560375496745,
+    "sample_count_per_repeat": 10000,
+    "schema_version": "cpu-software-simulation-timing/v1",
+    "scope": "cpu_software_simulation_overhead",
+    "torch_num_interop_threads": 18,
+    "torch_num_threads": 1,
+    "warmup_repeats": 1
+  }
+}

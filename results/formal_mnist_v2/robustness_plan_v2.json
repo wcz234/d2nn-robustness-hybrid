@@ -1,0 +1,466 @@
+{
+  "cohort": {
+    "compatible_model_variants": [
+      "d2nn",
+      "hybrid"
+    ],
+    "dataset_key": "mnist",
+    "full_test_samples": 10000,
+    "input_shape": [
+      1,
+      28,
+      28
+    ],
+    "model_version": "rs_v1",
+    "optical_config": {
+      "input_distance": 0.03,
+      "layer_distance": 0.03,
+      "num_layers": 3,
+      "output_distance": 0.03,
+      "pixel_size": 0.0004,
+      "size": 64,
+      "wavelength": 0.00075
+    },
+    "optical_draw_dtype": "float32",
+    "task": "classification"
+  },
+  "conditions": [
+    {
+      "condition_id": "clean_continuous",
+      "draws": [
+        {
+          "detector_seed": 6897358542679013045,
+          "draw_id": 0,
+          "optical_seed": 3768568252920090307
+        }
+      ],
+      "perturbation_config": {
+        "detector_noise_std_relative": 0.0,
+        "gap_spacing_error_max_m": 0.0,
+        "lateral_shift_max_px": 0.0,
+        "phase_noise_std_rad": 0.0,
+        "phase_quantization_levels": null
+      },
+      "seed_protocol": {
+        "master_detector_seed": 62002,
+        "master_optical_seed": 62001,
+        "name": "sha256_derived_independent_streams/v1"
+      }
+    },
+    {
+      "condition_id": "lateral_shift_0p25px",
+      "draws": [
+        {
+          "detector_seed": 5496481214755190450,
+          "draw_id": 0,
+          "optical_seed": 897841811404240372
+        },
+        {
+          "detector_seed": 3124229398889548030,
+          "draw_id": 1,
+          "optical_seed": 2779229990927239987
+        },
+        {
+          "detector_seed": 1037527600132651431,
+          "draw_id": 2,
+          "optical_seed": 9101167544845274532
+        }
+      ],
+      "perturbation_config": {
+        "detector_noise_std_relative": 0.0,
+        "gap_spacing_error_max_m": 0.0,
+        "lateral_shift_max_px": 0.25,
+        "phase_noise_std_rad": 0.0,
+        "phase_quantization_levels": null
+      },
+      "seed_protocol": {
+        "master_detector_seed": 62002,
+        "master_optical_seed": 62001,
+        "name": "sha256_derived_independent_streams/v1"
+      }
+    },
+    {
+      "condition_id": "lateral_shift_0p50px",
+      "draws": [
+        {
+          "detector_seed": 2060067882732955301,
+          "draw_id": 0,
+          "optical_seed": 1522334842297880938
+        },
+        {
+          "detector_seed": 4198384064711191014,
+          "draw_id": 1,
+          "optical_seed": 799614056469963032
+        },
+        {
+          "detector_seed": 2587079123375755516,
+          "draw_id": 2,
+          "optical_seed": 8840927168302135359
+        }
+      ],
+      "perturbation_config": {
+        "detector_noise_std_relative": 0.0,
+        "gap_spacing_error_max_m": 0.0,
+        "lateral_shift_max_px": 0.5,
+        "phase_noise_std_rad": 0.0,
+        "phase_quantization_levels": null
+      },
+      "seed_protocol": {
+        "master_detector_seed": 62002,
+        "master_optical_seed": 62001,
+        "name": "sha256_derived_independent_streams/v1"
+      }
+    },
+    {
+      "condition_id": "gap_error_0p1mm",
+      "draws": [
+        {
+          "detector_seed": 4734427004324734396,
+          "draw_id": 0,
+          "optical_seed": 3150267842412153625
+        },
+        {
+          "detector_seed": 6206622486702124938,
+          "draw_id": 1,
+          "optical_seed": 8946086078081448132
+        },
+        {
+          "detector_seed": 1084676359080112165,
+          "draw_id": 2,
+          "optical_seed": 7723181067804317429
+        }
+      ],
+      "perturbation_config": {
+        "detector_noise_std_relative": 0.0,
+        "gap_spacing_error_max_m": 0.0001,
+        "lateral_shift_max_px": 0.0,
+        "phase_noise_std_rad": 0.0,
+        "phase_quantization_levels": null
+      },
+      "seed_protocol": {
+        "master_detector_seed": 62002,
+        "master_optical_seed": 62001,
+        "name": "sha256_derived_independent_streams/v1"
+      }
+    },
+    {
+      "condition_id": "gap_error_0p3mm",
+      "draws": [
+        {
+          "detector_seed": 6561434189153640801,
+          "draw_id": 0,
+          "optical_seed": 7344099300620872758
+        },
+        {
+          "detector_seed": 1384339275259043511,
+          "draw_id": 1,
+          "optical_seed": 8484477039334218818
+        },
+        {
+          "detector_seed": 2807405011973682579,
+          "draw_id": 2,
+          "optical_seed": 1212808476903043182
+        }
+      ],
+      "perturbation_config": {
+        "detector_noise_std_relative": 0.0,
+        "gap_spacing_error_max_m": 0.0003,
+        "lateral_shift_max_px": 0.0,
+        "phase_noise_std_rad": 0.0,
+        "phase_quantization_levels": null
+      },
+      "seed_protocol": {
+        "master_detector_seed": 62002,
+        "master_optical_seed": 62001,
+        "name": "sha256_derived_independent_streams/v1"
+      }
+    },
+    {
+      "condition_id": "phase_noise_0p02rad",
+      "draws": [
+        {
+          "detector_seed": 1710708768094706121,
+          "draw_id": 0,
+          "optical_seed": 798010018313130743
+        },
+        {
+          "detector_seed": 135525860458737200,
+          "draw_id": 1,
+          "optical_seed": 8716188541634429962
+        },
+        {
+          "detector_seed": 3925313390908767139,
+          "draw_id": 2,
+          "optical_seed": 1568887503607422121
+        }
+      ],
+      "perturbation_config": {
+        "detector_noise_std_relative": 0.0,
+        "gap_spacing_error_max_m": 0.0,
+        "lateral_shift_max_px": 0.0,
+        "phase_noise_std_rad": 0.02,
+        "phase_quantization_levels": null
+      },
+      "seed_protocol": {
+        "master_detector_seed": 62002,
+        "master_optical_seed": 62001,
+        "name": "sha256_derived_independent_streams/v1"
+      }
+    },
+    {
+      "condition_id": "phase_noise_0p05rad",
+      "draws": [
+        {
+          "detector_seed": 3402199567390142670,
+          "draw_id": 0,
+          "optical_seed": 1680202346431048385
+        },
+        {
+          "detector_seed": 1141887018612264474,
+          "draw_id": 1,
+          "optical_seed": 9063805442320769715
+        },
+        {
+          "detector_seed": 6173483804505327400,
+          "draw_id": 2,
+          "optical_seed": 3669995190071534962
+        }
+      ],
+      "perturbation_config": {
+        "detector_noise_std_relative": 0.0,
+        "gap_spacing_error_max_m": 0.0,
+        "lateral_shift_max_px": 0.0,
+        "phase_noise_std_rad": 0.05,
+        "phase_quantization_levels": null
+      },
+      "seed_protocol": {
+        "master_detector_seed": 62002,
+        "master_optical_seed": 62001,
+        "name": "sha256_derived_independent_streams/v1"
+      }
+    },
+    {
+      "condition_id": "detector_noise_0p01",
+      "draws": [
+        {
+          "detector_seed": 4527219957944478736,
+          "draw_id": 0,
+          "optical_seed": 4753544713857887638
+        },
+        {
+          "detector_seed": 1225386224400590216,
+          "draw_id": 1,
+          "optical_seed": 8146843454890833377
+        },
+        {
+          "detector_seed": 4176626538993688740,
+          "draw_id": 2,
+          "optical_seed": 505166459050916982
+        }
+      ],
+      "perturbation_config": {
+        "detector_noise_std_relative": 0.01,
+        "gap_spacing_error_max_m": 0.0,
+        "lateral_shift_max_px": 0.0,
+        "phase_noise_std_rad": 0.0,
+        "phase_quantization_levels": null
+      },
+      "seed_protocol": {
+        "master_detector_seed": 62002,
+        "master_optical_seed": 62001,
+        "name": "sha256_derived_independent_streams/v1"
+      }
+    },
+    {
+      "condition_id": "detector_noise_0p03",
+      "draws": [
+        {
+          "detector_seed": 327054737922927615,
+          "draw_id": 0,
+          "optical_seed": 7424798176019519771
+        },
+        {
+          "detector_seed": 7116382633933168952,
+          "draw_id": 1,
+          "optical_seed": 3901456337465196601
+        },
+        {
+          "detector_seed": 3104352150636416828,
+          "draw_id": 2,
+          "optical_seed": 869827042365826820
+        }
+      ],
+      "perturbation_config": {
+        "detector_noise_std_relative": 0.03,
+        "gap_spacing_error_max_m": 0.0,
+        "lateral_shift_max_px": 0.0,
+        "phase_noise_std_rad": 0.0,
+        "phase_quantization_levels": null
+      },
+      "seed_protocol": {
+        "master_detector_seed": 62002,
+        "master_optical_seed": 62001,
+        "name": "sha256_derived_independent_streams/v1"
+      }
+    },
+    {
+      "condition_id": "phase_quantization_16",
+      "draws": [
+        {
+          "detector_seed": 6915860509748907458,
+          "draw_id": 0,
+          "optical_seed": 1240749945185356279
+        }
+      ],
+      "perturbation_config": {
+        "detector_noise_std_relative": 0.0,
+        "gap_spacing_error_max_m": 0.0,
+        "lateral_shift_max_px": 0.0,
+        "phase_noise_std_rad": 0.0,
+        "phase_quantization_levels": 16
+      },
+      "seed_protocol": {
+        "master_detector_seed": 62002,
+        "master_optical_seed": 62001,
+        "name": "sha256_derived_independent_streams/v1"
+      }
+    },
+    {
+      "condition_id": "phase_quantization_8",
+      "draws": [
+        {
+          "detector_seed": 8845126313241743829,
+          "draw_id": 0,
+          "optical_seed": 3807229075083753498
+        }
+      ],
+      "perturbation_config": {
+        "detector_noise_std_relative": 0.0,
+        "gap_spacing_error_max_m": 0.0,
+        "lateral_shift_max_px": 0.0,
+        "phase_noise_std_rad": 0.0,
+        "phase_quantization_levels": 8
+      },
+      "seed_protocol": {
+        "master_detector_seed": 62002,
+        "master_optical_seed": 62001,
+        "name": "sha256_derived_independent_streams/v1"
+      }
+    },
+    {
+      "condition_id": "phase_quantization_4",
+      "draws": [
+        {
+          "detector_seed": 7456387043554558767,
+          "draw_id": 0,
+          "optical_seed": 7172040301341273897
+        }
+      ],
+      "perturbation_config": {
+        "detector_noise_std_relative": 0.0,
+        "gap_spacing_error_max_m": 0.0,
+        "lateral_shift_max_px": 0.0,
+        "phase_noise_std_rad": 0.0,
+        "phase_quantization_levels": 4
+      },
+      "seed_protocol": {
+        "master_detector_seed": 62002,
+        "master_optical_seed": 62001,
+        "name": "sha256_derived_independent_streams/v1"
+      }
+    },
+    {
+      "condition_id": "mixed_nominal",
+      "draws": [
+        {
+          "detector_seed": 4395209911638991998,
+          "draw_id": 0,
+          "optical_seed": 7394360335113153668
+        },
+        {
+          "detector_seed": 4567695299037674070,
+          "draw_id": 1,
+          "optical_seed": 898702607996364883
+        },
+        {
+          "detector_seed": 502700843442832510,
+          "draw_id": 2,
+          "optical_seed": 62959759527244706
+        }
+      ],
+      "perturbation_config": {
+        "detector_noise_std_relative": 0.01,
+        "gap_spacing_error_max_m": 0.0001,
+        "lateral_shift_max_px": 0.25,
+        "phase_noise_std_rad": 0.02,
+        "phase_quantization_levels": null
+      },
+      "seed_protocol": {
+        "master_detector_seed": 62002,
+        "master_optical_seed": 62001,
+        "name": "sha256_derived_independent_streams/v1"
+      }
+    },
+    {
+      "condition_id": "mixed_stress",
+      "draws": [
+        {
+          "detector_seed": 7771832007571280971,
+          "draw_id": 0,
+          "optical_seed": 3841471960486506256
+        },
+        {
+          "detector_seed": 1129899225454454787,
+          "draw_id": 1,
+          "optical_seed": 2635035273352872734
+        },
+        {
+          "detector_seed": 8952749911097236246,
+          "draw_id": 2,
+          "optical_seed": 1770901499567930371
+        }
+      ],
+      "perturbation_config": {
+        "detector_noise_std_relative": 0.03,
+        "gap_spacing_error_max_m": 0.0003,
+        "lateral_shift_max_px": 0.5,
+        "phase_noise_std_rad": 0.05,
+        "phase_quantization_levels": null
+      },
+      "seed_protocol": {
+        "master_detector_seed": 62002,
+        "master_optical_seed": 62001,
+        "name": "sha256_derived_independent_streams/v1"
+      }
+    }
+  ],
+  "created_at_utc": "2026-09-17T04:04:08.952233+00:00",
+  "formal_protocol": {
+    "protocol_id": "formal-mnist-v2-20260917",
+    "protocol_schema_version": "formal-simulation-protocol/v1",
+    "sha256": "b841c5121ae5b6b238ea25f7a4f1f98065bcb602529509c35c89ebc2afac1018"
+  },
+  "plan_id": "robustness-plan-62aae73d8284e7fd25a4",
+  "reference_checkpoint": {
+    "model_variant": "hybrid",
+    "sha256": "5eb75d562eabe4c9c54fe9c0e5397128c013795853a28e25a197382ad620d985",
+    "training_seed": 42
+  },
+  "sample_scope": {
+    "full_test_samples": 10000,
+    "sample_count": 10000,
+    "selection": "full_test"
+  },
+  "sampling_protocol": {
+    "detector_noise_scope": "per_sample_feature_table",
+    "detector_noise_semantics": "synthetic_relative_additive_simulation_noise",
+    "feature_schema_pairing": "optical_draws_are_paired; detector_tables_are_feature_schema_specific",
+    "optical_draw_scope": "one_fixed_draw_per_draw_id_across_selected_test_scope"
+  },
+  "schema_version": "robustness-plan/v1",
+  "scope": "numerical_simulation_only",
+  "statistics": {
+    "draw_role": "deployment_perturbation_variability_not_independent_training_replicates",
+    "independent_unit": "training_seed"
+  }
+}

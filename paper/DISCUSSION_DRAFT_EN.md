@@ -1,0 +1,26 @@
+# Discussion
+
+## Robustness gains follow the perturbation family rather than the method label
+
+The frozen evaluation shows that perturbation-aware training redistributes performance instead of uniformly improving it. The robust D2NN sacrificed 1.33 clean percentage points and remained below the baseline under gap, phase, and detector noise. It recovered accuracy under the stronger lateral shift, mixed stress, and coarse phase quantization. This pattern agrees with the established role of training-time perturbation sampling in alignment resilience \cite{Mengu2020MisalignmentResilient}, while narrowing the claim to the distributions and optical model evaluated here.
+
+The four-level quantization result requires the most caution. The robust D2NN improved its mean by 17.91 percentage points over the baseline, although the interval remained wide across three seeds. Quantization was not included in robust training, so distribution matching alone cannot explain this result. Stochastic optical perturbations could favor phase configurations that tolerate coarse discretization, but the present experiments did not measure phase-spectrum smoothness, normalized cutoff frequency, or loss-landscape sharpness. Phase-filtered networks, normalized-cutoff-frequency analysis, and sharpness-aware training provide concrete tests for this candidate explanation \cite{Wang2025PhaseFilteredD2NN,Wang2026NormalizedCutoffRobustness,Xu2026SharpnessAwarePNN}.
+
+## The electronic head broadens the useful optical representation
+
+The hybrid model led the mean accuracy in 13 of 14 optical-compatible conditions. Its 64 pooled-intensity values preserve more spatial information than the ten detector-region energies used by the pure D2NN. An electronic head can therefore learn class boundaries that the fixed detector partition cannot express. This interpretation is consistent with prior jointly optimized optical-electronic classifiers \cite{Mengu2020DiffractiveIntegration,Chang2018HybridOpticalElectronicCNN}, but our experiment does not isolate pooling resolution, head depth, or feature normalization. A component ablation must test whether the gain comes from representation width, nonlinear electronic processing, or their interaction.
+
+Extreme phase quantization also defines the hybrid boundary. At four phase levels, the robust D2NN had a higher mean than the hybrid model, but the paired interval could not resolve their order. The hybrid seed estimates varied enough to produce an unbounded t interval beyond 100% accuracy. The instability indicates sensitivity to the learned optical features and prevents a general claim that an electronic head compensates every optical distortion.
+
+## Model counts do not establish edge-device efficiency
+
+The hybrid model adds 2,410 trainable parameters to the D2NN and passes 64 values across the optical-electronic boundary. These counts make the computational partition explicit, but they do not determine bandwidth, memory traffic, conversion cost, or energy. Photonic edge systems can achieve hardware benefits through architectures such as remote weight streaming or reconfigurable optical processing \cite{Sludds2022NetcastEdge,Zhou2021ReconfigurableDPU}. Our simulator does not implement those devices, so their measured performance cannot validate our timing results.
+
+The CPU measurements reinforce this boundary. Optical-compatible models required about one minute for a complete software-simulated test-set forward, while the electronic model required less than one second. This difference measures numerical propagation cost in one software environment. It cannot estimate physical propagation time, sensor conversion, electronic-head latency, device throughput, power, or energy efficiency.
+
+## Evidence boundaries and next experiments
+
+Five constraints limit the conclusions. First, MNIST does not represent natural images or task diversity. Second, three training seeds provide limited precision, especially for extreme quantization. Third, the fully coherent scalar propagation model omits partial coherence, material dispersion, fabrication calibration, and detector-system details; coherence alone can change diffractive-network behavior \cite{Filipovich2024SpatialCoherence}. Fourth, the study compares matched in-repository variants rather than reimplementing phase-filtered, structural-hybrid, sharpness-aware, or quantization-aware methods \cite{Wang2025PLQAT,Wang2025PhaseFilteredD2NN,Zhu2026HybridRobustODNN,Xu2026SharpnessAwarePNN}. Fifth, no physical optical platform or edge device validates latency, power, or energy claims.
+
+The next evidence milestone should expand the seed cohort and repeat the frozen comparison on Fashion-MNIST and a grayscale natural-image benchmark. A second milestone should add quantization-aware training, normalized-cutoff-frequency analysis, and pooling/head ablations without changing the current result set. Physical validation would then require measured alignment, detector noise, conversion latency, and energy under a documented optical platform. Until those experiments exist, the paper's contribution remains a reproducible numerical benchmark of robustness and optical-electronic partitioning.
+

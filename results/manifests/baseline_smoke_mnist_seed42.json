@@ -1,0 +1,89 @@
+{
+  "activation_diagnostics": {},
+  "activation_hparams": {},
+  "activation_positions": [],
+  "activation_type": "none",
+  "batch_size": 256,
+  "best_epoch": 1,
+  "best_val_accuracy": 10.5,
+  "best_val_contrast": -7.008891408227802e-13,
+  "checkpoint": "D:\\\u9879\u76ee\\\u57fa\u4e8eD2NN\\artifacts\\baseline_smoke\\best_mnist.cpu_smoke_seed42.pth",
+  "dataset": "MNIST",
+  "epochs": 1,
+  "experiment_stage": "baseline_smoke",
+  "history": {
+    "train": {
+      "accuracy": [
+        10.225454545454545
+      ],
+      "ce": [
+        2.3025853800340133
+      ],
+      "contrast": [
+        -7.115083280442605e-13
+      ],
+      "loss": [
+        0.3302586904005571
+      ],
+      "mse": [
+        0.09999914906458421
+      ],
+      "reg": [
+        0.00010015655606001881
+      ]
+    },
+    "val": {
+      "accuracy": [
+        10.5
+      ],
+      "ce": [
+        2.3025853633880615
+      ],
+      "contrast": [
+        -7.008891408227802e-13
+      ],
+      "loss": [
+        0.3302576909065247
+      ],
+      "mse": [
+        0.0999991527557373
+      ],
+      "reg": [
+        2.269858789816226e-08
+      ]
+    }
+  },
+  "learning_rate": 0.01,
+  "loss_config": {
+    "alpha": 1.0,
+    "beta": 0.1,
+    "gamma": 0.01
+  },
+  "model_version": "rs_v1",
+  "optical_config": {
+    "input_distance": 0.491302,
+    "layer_distance": 0.03,
+    "num_layers": 1,
+    "output_distance": 0.575304,
+    "pixel_size": 1e-06,
+    "size": 32,
+    "wavelength": 8.52e-07
+  },
+  "optics_preset": "paper",
+  "paper_target_accuracy": 91.75,
+  "propagation_backend": "fft",
+  "propagation_chunk_size": null,
+  "run_name": "cpu_smoke_seed42",
+  "runtime_config": {
+    "allow_tf32": false,
+    "device": "cpu",
+    "num_workers": 0,
+    "pin_memory": false,
+    "prefetch_factor": null
+  },
+  "seed": 42,
+  "task": "classification",
+  "test_accuracy": 10.17,
+  "test_contrast": -7.167797654895891e-13,
+  "test_loss": 0.3302576642513275
+}

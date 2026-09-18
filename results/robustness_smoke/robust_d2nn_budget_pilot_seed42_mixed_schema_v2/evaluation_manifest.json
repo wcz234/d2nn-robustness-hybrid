@@ -1,0 +1,190 @@
+{
+  "artifacts": {
+    "draw_metrics": {
+      "path": "draw_metrics.jsonl",
+      "row_count": 2,
+      "sha256": "b03fb11aa3aeab0b9b36f2a58f4fefc66416691c1af6d32ed7ccec00608f28ca",
+      "size_bytes": 3971
+    },
+    "predictions": {
+      "path": "predictions.jsonl",
+      "row_count": 64,
+      "sha256": "8f960f75645bdb4833e3049d15d41a514c1d9d272f766997cf981370fe5674ea",
+      "size_bytes": 63034
+    }
+  },
+  "checkpoint": {
+    "path": "D:\\\u9879\u76ee\\\u57fa\u4e8eD2NN\\artifacts\\method_budget_pilots_20260728\\best_mnist.robust_d2nn_budget_pilot_64x3_seed42.pth",
+    "sha256": "14795891becb45f1be33c991a371dc18f1c006cb06718e5d11370d04f9b091d2"
+  },
+  "cli_configuration": {
+    "batch_size": 16,
+    "checkpoint": "..\\artifacts\\method_budget_pilots_20260728\\best_mnist.robust_d2nn_budget_pilot_64x3_seed42.pth",
+    "command": "run",
+    "data_dir": "data",
+    "device": "cpu",
+    "include_scores": true,
+    "method_id": "robust_d2nn_budget_pilot",
+    "num_workers": 0,
+    "output_dir": "..\\results\\robustness_smoke\\robust_d2nn_budget_pilot_seed42_mixed_schema_v2",
+    "plan": "..\\results\\robustness_smoke\\pilot_mnist_003_subset32_mixed_plan.json"
+  },
+  "cohort": {
+    "compatible_model_variants": [
+      "d2nn",
+      "hybrid"
+    ],
+    "dataset_key": "mnist",
+    "full_test_samples": 10000,
+    "input_shape": [
+      1,
+      28,
+      28
+    ],
+    "model_version": "rs_v1",
+    "optical_config": {
+      "input_distance": 0.03,
+      "layer_distance": 0.03,
+      "num_layers": 3,
+      "output_distance": 0.03,
+      "pixel_size": 0.0004,
+      "size": 64,
+      "wavelength": 0.00075
+    },
+    "optical_draw_dtype": "float32",
+    "task": "classification"
+  },
+  "condition_summaries": [
+    {
+      "accuracy_max": 0.96875,
+      "accuracy_mean": 0.96875,
+      "accuracy_min": 0.96875,
+      "accuracy_sd_across_draws": 0.0,
+      "condition_id": "engineering_smoke_mixed",
+      "contrast_mean": 0.5051547512412071,
+      "contrast_sd_across_draws": 0.0034915608344758668,
+      "draw_count": 2,
+      "statistical_unit_note": "draw variability for one trained model; not an independent training replicate"
+    }
+  ],
+  "created_at_utc": "2026-07-28T16:17:15.637800+00:00",
+  "environment": {
+    "captured_at_utc": "2026-07-28T16:17:15.657798+00:00",
+    "packages": {
+      "Pillow": "12.3.0",
+      "matplotlib": "3.11.1",
+      "numpy": "2.4.6",
+      "torch": "2.10.0",
+      "torchvision": "0.25.0"
+    },
+    "platform": {
+      "cpu_count": 12,
+      "machine": "AMD64",
+      "processor": "Intel64 Family 6 Model 186 Stepping 2, GenuineIntel",
+      "release": "10",
+      "system": "Windows"
+    },
+    "python": {
+      "executable": "C:\\Users\\zayn_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+      "version": "3.11.7 (tags/v3.11.7:fa7a6f2, Dec  4 2023, 19:24:49) [MSC v.1937 64 bit (AMD64)]"
+    },
+    "repository": {
+      "commit": "f1ae6e3e5076fcd2f60111ef4d42a2798d30ac8f",
+      "diagnostics": {
+        "commit": {
+          "available": true,
+          "value": "f1ae6e3e5076fcd2f60111ef4d42a2798d30ac8f"
+        },
+        "status": {
+          "available": true,
+          "value": "M README.md\n M artifacts.py\n M d2nn.py\n M export_phase_plate.py\n M pyproject.toml\n M tasks.py\n M train.py\n M train_core.py\n M uv.lock\n?? diagnose_optical_scale.py\n?? evaluate_robustness.py\n?? model_variants.py\n?? perturbations.py\n?? robustness_cohort.py\n?? robustness_evaluation.py\n?? robustness_io.py\n?? robustness_plan.py\n?? robustness_records.py\n?? robustness_run_manifest.py\n?? robustness_summary_input.py\n?? robustness_target.py\n?? summarize_robustness.py\n?? tests/test_model_variants.py\n?? tests/test_optical_scale_diagnostic.py\n?? tests/test_optics_presets_and_export.py\n?? tests/test_perturbations.py\n?? tests/test_robustness_cli.py\n?? tests/test_robustness_evaluation.py\n?? tests/test_robustness_plan_and_target.py\n?? tests/test_robustness_summary.py\n?? tests/test_training_cli_integration.py\n?? tests/test_training_manifest.py\n?? training_provenance.py\n?? training_runtime.py"
+        }
+      },
+      "dirty": true
+    },
+    "source_files_sha256": {
+      "artifacts.py": "0c4c498b2e809340eaf45c64ce87ecbb9d30b581e798542e1063d0bff442a792",
+      "d2nn.py": "d85ed13925015fb6423c829b2687c7754878cdde89a359f6e1f0aa1466b45e22",
+      "model_variants.py": "9d1af9d906095f4ff41235bece1dad0674c9e8b225c5bf86f04270c9ada36aec",
+      "perturbations.py": "0cde40ac16456c6224947d34eb8f4cef1f50660dba88389254731d7124df803e",
+      "tasks.py": "b21e4d57bd91b80e567bd8d9d39ea11cc15f93a376fa934d1b8c35ae5eac77a4",
+      "train.py": "caa364eb265ebc7dd393ed1229f3b6967b2fd7875928037e4ea9c0ee0fda4da9",
+      "train_core.py": "0ae025984630fd1cdf03984c64a3a9b73b6f08d6a2640cb14c69bf9444229217",
+      "training_provenance.py": "9a23224fe36886ca52ed5471b6fa7491492be2309d39364e6af1d62785543259",
+      "training_runtime.py": "d17b64751d395ad5b9625c50bca23647a87f5b4bb268b3e5dccdcf593ec3321f"
+    },
+    "torch_runtime": {
+      "cuda_available": false,
+      "cuda_device_name": null,
+      "cuda_version": null,
+      "cudnn_benchmark": false,
+      "cudnn_deterministic": false,
+      "deterministic_algorithms": true,
+      "device": "cpu",
+      "num_interop_threads": 8,
+      "num_threads": 8
+    }
+  },
+  "evaluation_id": "robustness-evaluation-2f10a6ea231ef6993127",
+  "evaluation_source_files_sha256": {
+    "artifacts.py": "0c4c498b2e809340eaf45c64ce87ecbb9d30b581e798542e1063d0bff442a792",
+    "d2nn.py": "d85ed13925015fb6423c829b2687c7754878cdde89a359f6e1f0aa1466b45e22",
+    "evaluate_robustness.py": "965f8f9a182f0b6eb4e34bfd0390c5e481fbb48abb0cb2b977ccf565806fa3bd",
+    "model_variants.py": "9d1af9d906095f4ff41235bece1dad0674c9e8b225c5bf86f04270c9ada36aec",
+    "perturbations.py": "0cde40ac16456c6224947d34eb8f4cef1f50660dba88389254731d7124df803e",
+    "robustness_cohort.py": "794f84bdf64609c412394209722e3522a402b0c2f66332a999866ed6248fd729",
+    "robustness_evaluation.py": "1eb0fda15f9bd3222185b10e392ac155a8a23dadd29b6bbe99625944110d4a07",
+    "robustness_io.py": "f2fd1342dff3ecd8d821708069351bbf5c3e5a90dd02e389a32d1e0762c258a0",
+    "robustness_plan.py": "dbeb762967744187d1473157929218b6968add9c62d3bccc716a56a68e7f7bf6",
+    "robustness_records.py": "13bb2584c590279a1bd9fc120c10f7bd1d0844a7f1771f53aceb1573345bbfa7",
+    "robustness_run_manifest.py": "568922f297cd1e281e81857ff49c1db4fa4d0f86a651e1d965e0dc12a58700cc",
+    "robustness_target.py": "dd87028af955bc5f8695524768c0f55f5c7a8df7d2fddd4f56efaba1b3b69838",
+    "tasks.py": "b21e4d57bd91b80e567bd8d9d39ea11cc15f93a376fa934d1b8c35ae5eac77a4",
+    "training_provenance.py": "9a23224fe36886ca52ed5471b6fa7491492be2309d39364e6af1d62785543259"
+  },
+  "evidence_status": "subset_smoke_only_not_a_main_result",
+  "manifest_payload_sha256": "fa127427ae8f8b0e35eebcd4ded03cdea45b8bd03f16b170620225fc16e243ce",
+  "method_id": "robust_d2nn_budget_pilot",
+  "model": {
+    "activation_hparams": {},
+    "activation_positions": [],
+    "activation_type": "none",
+    "class_name": "D2NN",
+    "detector_feature_count": 10,
+    "feature_schema_id": "class_detector_energy:10",
+    "propagation_backend": "fft",
+    "propagation_chunk_size": null,
+    "score_semantics": "raw_detector_energy",
+    "training_seed": 42,
+    "variant": "d2nn"
+  },
+  "plan": {
+    "path": "D:\\\u9879\u76ee\\\u57fa\u4e8eD2NN\\results\\robustness_smoke\\pilot_mnist_003_subset32_mixed_plan.json",
+    "plan_id": "robustness-plan-fd1b53a517e3ae0946bb",
+    "sha256": "f1c2c1badea1339571270e61726f330d2e5a5adabf1e87bd8456833eaf73fc39"
+  },
+  "runtime": {
+    "batch_size": 16,
+    "deterministic_algorithms": true,
+    "device": "cpu",
+    "include_scores": true,
+    "num_workers": 0
+  },
+  "sample_scope": {
+    "full_test_samples": 10000,
+    "sample_count": 32,
+    "selection": "test_prefix_subset"
+  },
+  "sampling_protocol": {
+    "detector_noise_scope": "per_sample_feature_table",
+    "detector_noise_semantics": "synthetic_relative_additive_simulation_noise",
+    "feature_schema_pairing": "optical_draws_are_paired; detector_tables_are_feature_schema_specific",
+    "optical_draw_scope": "one_fixed_draw_per_draw_id_across_selected_test_scope"
+  },
+  "schema_version": "robustness-evaluation/v2",
+  "scope": "numerical_simulation_only",
+  "statistics": {
+    "draw_role": "deployment_perturbation_variability_not_independent_training_replicates",
+    "independent_unit": "training_seed"
+  }
+}

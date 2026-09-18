@@ -1,0 +1,63 @@
+{
+  "artifacts": {
+    "method_summary": {
+      "path": "method_summary.jsonl",
+      "row_count": 1,
+      "sha256": "3867789f1569884a4bb93b378e53bb192b59cb74dbaa74ee4836fb299d28e689",
+      "size_bytes": 661
+    },
+    "paired_comparisons": {
+      "path": "paired_comparisons.jsonl",
+      "row_count": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "seed_metrics": {
+      "path": "seed_metrics.jsonl",
+      "row_count": 1,
+      "sha256": "dc5e2a74982e584c0033d7a30c4e60c29d8623354cec465cbd04b37ed95701a4",
+      "size_bytes": 330
+    }
+  },
+  "created_at_utc": "2026-07-28T15:18:26.085920+00:00",
+  "evidence": {
+    "dataset_evidence_status": "subset_smoke_only_not_a_main_result",
+    "inference_status": "descriptive_only_below_preregistered_three_seed_minimum",
+    "input_evidence_statuses": [
+      "subset_smoke_only_not_a_main_result"
+    ]
+  },
+  "input_evaluations": [
+    {
+      "evaluation_id": "robustness-evaluation-12088d5971e01df069a9",
+      "path": "D:\\\u9879\u76ee\\\u57fa\u4e8eD2NN\\results\\robustness_smoke\\pilot_mnist_003_subset32_mixed\\evaluation_manifest.json",
+      "sha256": "3e64e7b76b4938161e5e36ddfbe792773ae87d07ab00cdd4120ba52bd7c48bdc"
+    }
+  ],
+  "manifest_payload_sha256": "5de7897d3988417afe3a881ab209304b0eb7d5adfa40d53e20bac94259ef98be",
+  "plan": {
+    "path": "D:\\\u9879\u76ee\\\u57fa\u4e8eD2NN\\results\\robustness_smoke\\pilot_mnist_003_subset32_mixed_plan.json",
+    "plan_id": "robustness-plan-fd1b53a517e3ae0946bb",
+    "sha256": "f1c2c1badea1339571270e61726f330d2e5a5adabf1e87bd8456833eaf73fc39"
+  },
+  "schema_version": "robustness-summary/v1",
+  "scope": "numerical_simulation_only",
+  "software": {
+    "python": "3.11.7 (tags/v3.11.7:fa7a6f2, Dec  4 2023, 19:24:49) [MSC v.1937 64 bit (AMD64)]",
+    "scipy": "1.17.1"
+  },
+  "statistics": {
+    "draw_handling": "aggregate_within_training_seed_before_cross_seed_summary",
+    "hypothesis_tests": "not_performed",
+    "independent_unit": "training_seed",
+    "interval": "two_sided_95_percent_Student_t_CI_across_training_seeds",
+    "method_comparison": "paired_by_training_seed_condition_and_draw_id"
+  },
+  "summary_source_files_sha256": {
+    "robustness_io.py": "f2fd1342dff3ecd8d821708069351bbf5c3e5a90dd02e389a32d1e0762c258a0",
+    "robustness_plan.py": "dbeb762967744187d1473157929218b6968add9c62d3bccc716a56a68e7f7bf6",
+    "robustness_summary_input.py": "c42bfb7420519eb5d0f92cedede99159b740aa6596d9a78097d5afd120bb79a7",
+    "summarize_robustness.py": "a9100a344f2ffbfee4e2384eec773b591dd6a8bbeada73b20104521d7e52478c",
+    "training_provenance.py": "9a23224fe36886ca52ed5471b6fa7491492be2309d39364e6af1d62785543259"
+  }
+}

@@ -1,0 +1,291 @@
+{
+  "protocol_schema_version": "formal-simulation-protocol/v1",
+  "protocol_id": "formal-mnist-v1-20260729",
+  "scope": "numerical_simulation_only",
+  "frozen_at_utc": "2026-07-28T16:23:08.5624749Z",
+  "status": "frozen_before_formal_training",
+  "research_boundary": {
+    "physical_optical_experiment": false,
+    "real_edge_device_measurement": false,
+    "power_or_energy_claims": false,
+    "detector_noise_hardware_calibrated": false
+  },
+  "decision_basis": {
+    "training_budget_basis": "fixed CPU compute budget and equal epoch count, not test-set model selection",
+    "full_test_one_draw_outer_seconds": 20.953,
+    "timing_pilot_manifest_sha256": "4212cd6f9a2229066b4ce9edbc930b55ff19089da0dc58988337ded90f0d7b48",
+    "timing_scope": "budget estimate including process startup, loading, evaluation, and artifact writing; not a paper latency metric",
+    "pilot_accuracy_use": "forbidden_for_hyperparameter_or_method_selection"
+  },
+  "dataset": {
+    "key": "mnist",
+    "provider": "torchvision",
+    "train_side_samples": 60000,
+    "test_samples": 10000,
+    "validation_samples": 5000,
+    "split_policy": "training-seed-specific deterministic 55000/5000 split recorded with index SHA-256",
+    "test_policy": "complete test set used only after training under frozen conditions"
+  },
+  "training": {
+    "paired_training_seeds": [42, 43, 44],
+    "epochs": 3,
+    "batch_size": 128,
+    "learning_rate": 0.01,
+    "num_workers": 0,
+    "deterministic_algorithms": true,
+    "optics_preset": "d2nn2018_thz",
+    "size": 64,
+    "layers": 3,
+    "propagation_backend": "fft",
+    "validation_selection": "clean validation accuracy, then contrast, then later epoch",
+    "experiment_stage": "formal_mnist_v1",
+    "output_dir": "artifacts/formal_mnist_v1"
+  },
+  "methods": [
+    {
+      "method_id": "baseline_d2nn",
+      "model_variant": "d2nn",
+      "training_perturbations": {
+        "lateral_shift_max_px": 0.0,
+        "gap_spacing_error_max_m": 0.0,
+        "phase_noise_std_rad": 0.0,
+        "phase_quantization_levels": null,
+        "detector_noise_std_relative": 0.0
+      },
+      "robustness_plan_applicability": "all_frozen_optical_conditions"
+    },
+    {
+      "method_id": "robust_d2nn",
+      "model_variant": "d2nn",
+      "training_perturbations": {
+        "lateral_shift_max_px": 0.5,
+        "gap_spacing_error_max_m": 0.0001,
+        "phase_noise_std_rad": 0.05,
+        "phase_quantization_levels": null,
+        "detector_noise_std_relative": 0.01
+      },
+      "robustness_plan_applicability": "all_frozen_optical_conditions"
+    },
+    {
+      "method_id": "hybrid",
+      "model_variant": "hybrid",
+      "hybrid_pool_size": 8,
+      "hybrid_hidden_dim": 32,
+      "training_perturbations": {
+        "lateral_shift_max_px": 0.0,
+        "gap_spacing_error_max_m": 0.0,
+        "phase_noise_std_rad": 0.0,
+        "phase_quantization_levels": null,
+        "detector_noise_std_relative": 0.0
+      },
+      "robustness_plan_applicability": "all_frozen_optical_conditions"
+    },
+    {
+      "method_id": "electronic",
+      "model_variant": "electronic",
+      "electronic_hidden_dim": 18,
+      "training_perturbations": null,
+      "robustness_plan_applicability": "clean_classification_only; optical perturbations are not applicable"
+    }
+  ],
+  "evaluation": {
+    "sample_scope": "full_test",
+    "batch_size": 128,
+    "num_workers": 0,
+    "device": "cpu",
+    "master_optical_seed": 62001,
+    "master_detector_seed": 62002,
+    "stochastic_draw_count": 3,
+    "deterministic_draw_count": 1,
+    "primary_metrics": ["accuracy", "macro_f1"],
+    "secondary_metrics": ["mean_cross_entropy", "mean_contrast"],
+    "macro_f1_convention": "all_score_classes_zero_division_0",
+    "detector_noise_semantics": "synthetic_relative_additive_simulation_noise",
+    "optical_draw_pairing": "same condition/draw IDs across d2nn and hybrid methods",
+    "detector_noise_pairing": "feature-schema-specific tables; tensors are not claimed identical across model variants"
+  },
+  "conditions": [
+    {
+      "condition_id": "clean_continuous",
+      "draw_count": 1,
+      "perturbation_config": {
+        "lateral_shift_max_px": 0.0,
+        "gap_spacing_error_max_m": 0.0,
+        "phase_noise_std_rad": 0.0,
+        "phase_quantization_levels": null,
+        "detector_noise_std_relative": 0.0
+      }
+    },
+    {
+      "condition_id": "lateral_shift_0p25px",
+      "draw_count": 3,
+      "perturbation_config": {
+        "lateral_shift_max_px": 0.25,
+        "gap_spacing_error_max_m": 0.0,
+        "phase_noise_std_rad": 0.0,
+        "phase_quantization_levels": null,
+        "detector_noise_std_relative": 0.0
+      }
+    },
+    {
+      "condition_id": "lateral_shift_0p50px",
+      "draw_count": 3,
+      "perturbation_config": {
+        "lateral_shift_max_px": 0.5,
+        "gap_spacing_error_max_m": 0.0,
+        "phase_noise_std_rad": 0.0,
+        "phase_quantization_levels": null,
+        "detector_noise_std_relative": 0.0
+      }
+    },
+    {
+      "condition_id": "gap_error_0p1mm",
+      "draw_count": 3,
+      "perturbation_config": {
+        "lateral_shift_max_px": 0.0,
+        "gap_spacing_error_max_m": 0.0001,
+        "phase_noise_std_rad": 0.0,
+        "phase_quantization_levels": null,
+        "detector_noise_std_relative": 0.0
+      }
+    },
+    {
+      "condition_id": "gap_error_0p3mm",
+      "draw_count": 3,
+      "perturbation_config": {
+        "lateral_shift_max_px": 0.0,
+        "gap_spacing_error_max_m": 0.0003,
+        "phase_noise_std_rad": 0.0,
+        "phase_quantization_levels": null,
+        "detector_noise_std_relative": 0.0
+      }
+    },
+    {
+      "condition_id": "phase_noise_0p02rad",
+      "draw_count": 3,
+      "perturbation_config": {
+        "lateral_shift_max_px": 0.0,
+        "gap_spacing_error_max_m": 0.0,
+        "phase_noise_std_rad": 0.02,
+        "phase_quantization_levels": null,
+        "detector_noise_std_relative": 0.0
+      }
+    },
+    {
+      "condition_id": "phase_noise_0p05rad",
+      "draw_count": 3,
+      "perturbation_config": {
+        "lateral_shift_max_px": 0.0,
+        "gap_spacing_error_max_m": 0.0,
+        "phase_noise_std_rad": 0.05,
+        "phase_quantization_levels": null,
+        "detector_noise_std_relative": 0.0
+      }
+    },
+    {
+      "condition_id": "detector_noise_0p01",
+      "draw_count": 3,
+      "perturbation_config": {
+        "lateral_shift_max_px": 0.0,
+        "gap_spacing_error_max_m": 0.0,
+        "phase_noise_std_rad": 0.0,
+        "phase_quantization_levels": null,
+        "detector_noise_std_relative": 0.01
+      }
+    },
+    {
+      "condition_id": "detector_noise_0p03",
+      "draw_count": 3,
+      "perturbation_config": {
+        "lateral_shift_max_px": 0.0,
+        "gap_spacing_error_max_m": 0.0,
+        "phase_noise_std_rad": 0.0,
+        "phase_quantization_levels": null,
+        "detector_noise_std_relative": 0.03
+      }
+    },
+    {
+      "condition_id": "phase_quantization_16",
+      "draw_count": 1,
+      "perturbation_config": {
+        "lateral_shift_max_px": 0.0,
+        "gap_spacing_error_max_m": 0.0,
+        "phase_noise_std_rad": 0.0,
+        "phase_quantization_levels": 16,
+        "detector_noise_std_relative": 0.0
+      }
+    },
+    {
+      "condition_id": "phase_quantization_8",
+      "draw_count": 1,
+      "perturbation_config": {
+        "lateral_shift_max_px": 0.0,
+        "gap_spacing_error_max_m": 0.0,
+        "phase_noise_std_rad": 0.0,
+        "phase_quantization_levels": 8,
+        "detector_noise_std_relative": 0.0
+      }
+    },
+    {
+      "condition_id": "phase_quantization_4",
+      "draw_count": 1,
+      "perturbation_config": {
+        "lateral_shift_max_px": 0.0,
+        "gap_spacing_error_max_m": 0.0,
+        "phase_noise_std_rad": 0.0,
+        "phase_quantization_levels": 4,
+        "detector_noise_std_relative": 0.0
+      }
+    },
+    {
+      "condition_id": "mixed_nominal",
+      "draw_count": 3,
+      "perturbation_config": {
+        "lateral_shift_max_px": 0.25,
+        "gap_spacing_error_max_m": 0.0001,
+        "phase_noise_std_rad": 0.02,
+        "phase_quantization_levels": null,
+        "detector_noise_std_relative": 0.01
+      }
+    },
+    {
+      "condition_id": "mixed_stress",
+      "draw_count": 3,
+      "perturbation_config": {
+        "lateral_shift_max_px": 0.5,
+        "gap_spacing_error_max_m": 0.0003,
+        "phase_noise_std_rad": 0.05,
+        "phase_quantization_levels": null,
+        "detector_noise_std_relative": 0.03
+      }
+    }
+  ],
+  "statistics": {
+    "independent_unit": "training_seed",
+    "n_training_seeds": 3,
+    "within_seed_draw_handling": "mean across frozen deployment draws before cross-seed summaries",
+    "method_comparison": "paired by training seed, condition, and optical draw ID",
+    "reported_uncertainty": "mean, SD, all seed values, and two-sided 95% Student t interval across training seeds",
+    "small_sample_boundary": "three-seed t intervals are imprecise and interpreted as limited-repeat simulation evidence",
+    "hypothesis_tests": "not_performed",
+    "multiple_comparison_claims": "no significance-based selection"
+  },
+  "engineering_scale_notes": {
+    "pixel_pitch_m": 0.0004,
+    "lateral_shift_0p25px_m": 0.0001,
+    "lateral_shift_0p50px_m": 0.0002,
+    "nominal_gap_m": 0.03,
+    "gap_error_0p1mm_fraction": 0.0033333333333333335,
+    "gap_error_0p3mm_fraction": 0.01,
+    "interpretation": "engineering sensitivity grid only; not calibrated to a fabricated system"
+  },
+  "required_artifacts": [
+    "checkpoint_and_adjacent_training_manifest",
+    "frozen_condition_plan",
+    "evaluation_manifest",
+    "per_sample_predictions_jsonl",
+    "draw_metrics_jsonl_with_confusion_matrix",
+    "cross_seed_summary_and_paired_comparisons",
+    "source_and_artifact_sha256"
+  ]
+}

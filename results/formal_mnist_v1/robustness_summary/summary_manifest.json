@@ -1,0 +1,110 @@
+{
+  "artifacts": {
+    "method_summary": {
+      "path": "method_summary.jsonl",
+      "row_count": 42,
+      "sha256": "96f9147d6b3367aca0f888a51c8b3e20bc52c3f33a87dde4f3fc080a46ab0278",
+      "size_bytes": 59735
+    },
+    "paired_comparisons": {
+      "path": "paired_comparisons.jsonl",
+      "row_count": 42,
+      "sha256": "96bad72d9094730fb38e6743b9ba4015109a1d28cdb1177aee97d8864c747a2b",
+      "size_bytes": 67093
+    },
+    "seed_metrics": {
+      "path": "seed_metrics.jsonl",
+      "row_count": 126,
+      "sha256": "cf6a59f3a79ef07ff3a66fc92b2c8879254ee20f8da6566eb38a1ba23f99c81b",
+      "size_bytes": 44430
+    }
+  },
+  "created_at_utc": "2026-08-10T17:52:40.426722+00:00",
+  "evidence": {
+    "dataset_evidence_status": "full_test_evaluations",
+    "inference_status": "cross_training_seed_summary_with_t_intervals",
+    "input_evidence_statuses": [
+      "full_test_evaluation_requires_cross_training_seed_summary"
+    ]
+  },
+  "input_evaluations": [
+    {
+      "evaluation_id": "robustness-evaluation-8bf1cd78894dccdbf8cd",
+      "path": "D:\\\u9879\u76ee\\\u57fa\u4e8eD2NN\\results\\formal_mnist_v1\\robustness\\baseline_d2nn_seed42\\evaluation_manifest.json",
+      "sha256": "15e16a59c8a51d6c6a33139804382dc5f78dbf1af156986a25619d25a41dd6c3"
+    },
+    {
+      "evaluation_id": "robustness-evaluation-741360296a9b75ea4baa",
+      "path": "D:\\\u9879\u76ee\\\u57fa\u4e8eD2NN\\results\\formal_mnist_v1\\robustness\\baseline_d2nn_seed43\\evaluation_manifest.json",
+      "sha256": "693508b4b8f391690b70fe56fff84509399944d839f9a3d6dd4295ff02e10688"
+    },
+    {
+      "evaluation_id": "robustness-evaluation-82d7adcb86c58f253387",
+      "path": "D:\\\u9879\u76ee\\\u57fa\u4e8eD2NN\\results\\formal_mnist_v1\\robustness\\baseline_d2nn_seed44\\evaluation_manifest.json",
+      "sha256": "a5dfde9dcf7eedb2a698824dd1b429ad03708448d46ac967d0e9bdc4d467ab8c"
+    },
+    {
+      "evaluation_id": "robustness-evaluation-4ce1a105cb3204db36f8",
+      "path": "D:\\\u9879\u76ee\\\u57fa\u4e8eD2NN\\results\\formal_mnist_v1\\robustness\\robust_d2nn_seed42\\evaluation_manifest.json",
+      "sha256": "2fcfe6d33aa4840f37893420e9e6c924a3a00fa3488d7a93aaa0742ff406c14d"
+    },
+    {
+      "evaluation_id": "robustness-evaluation-fb5a844ab7768b57a76c",
+      "path": "D:\\\u9879\u76ee\\\u57fa\u4e8eD2NN\\results\\formal_mnist_v1\\robustness\\robust_d2nn_seed43\\evaluation_manifest.json",
+      "sha256": "3f3fe8dac9e9f70cf16ea629316d216600cc93ca82dd31195efd7456d53ae8e1"
+    },
+    {
+      "evaluation_id": "robustness-evaluation-5ac87b5d0541051f3d35",
+      "path": "D:\\\u9879\u76ee\\\u57fa\u4e8eD2NN\\results\\formal_mnist_v1\\robustness\\robust_d2nn_seed44\\evaluation_manifest.json",
+      "sha256": "5742936980251b327e4eed5862b77e67e9f9a9bc38cbed365b932ba42d8b0acc"
+    },
+    {
+      "evaluation_id": "robustness-evaluation-b5541bfcc4fb3100e7e0",
+      "path": "D:\\\u9879\u76ee\\\u57fa\u4e8eD2NN\\results\\formal_mnist_v1\\robustness\\hybrid_seed42\\evaluation_manifest.json",
+      "sha256": "a2d9862212309338cfcc59a820483744fad320e8d5e88b909e4aed9a12064e15"
+    },
+    {
+      "evaluation_id": "robustness-evaluation-63fb71cc31066226c700",
+      "path": "D:\\\u9879\u76ee\\\u57fa\u4e8eD2NN\\results\\formal_mnist_v1\\robustness\\hybrid_seed43\\evaluation_manifest.json",
+      "sha256": "3c61b2d8ce40954384fc1f014d947ce4f12ba0cf2ea512de402d31a5315b7d0e"
+    },
+    {
+      "evaluation_id": "robustness-evaluation-346038371899bba1a386",
+      "path": "D:\\\u9879\u76ee\\\u57fa\u4e8eD2NN\\results\\formal_mnist_v1\\robustness\\hybrid_seed44_retry1\\evaluation_manifest.json",
+      "sha256": "67a0ebe5de7d9fa23500e72d4d39db2adfa1cda65e1bbbee952c49e4c88d9601"
+    }
+  ],
+  "manifest_payload_sha256": "cb5025dcf3a1d49cdcf3e906c3db6032dc9148b47c76888896f4b231b00b4c9d",
+  "plan": {
+    "path": "D:\\\u9879\u76ee\\\u57fa\u4e8eD2NN\\results\\formal_mnist_v1\\robustness_plan.json",
+    "plan_id": "robustness-plan-a8120eb01ea7093419fe",
+    "sha256": "de04e6f7e86b216cc406228c3f2180e03b8b47d17ba3c0b3ab63d1764b03fc71"
+  },
+  "schema_version": "robustness-summary/v2",
+  "scope": "numerical_simulation_only",
+  "software": {
+    "python": "3.11.7 (tags/v3.11.7:fa7a6f2, Dec  4 2023, 19:24:49) [MSC v.1937 64 bit (AMD64)]",
+    "scipy": "1.17.1"
+  },
+  "statistics": {
+    "draw_handling": "aggregate_within_training_seed_before_cross_seed_summary",
+    "hypothesis_tests": "not_performed",
+    "independent_unit": "training_seed",
+    "interval": "two_sided_95_percent_Student_t_CI_across_training_seeds",
+    "method_comparison": "paired_by_training_seed_condition_and_draw_id",
+    "metric_fields": [
+      "accuracy",
+      "mean_cross_entropy",
+      "mean_contrast",
+      "macro_f1"
+    ]
+  },
+  "summary_source_files_sha256": {
+    "robustness_io.py": "f2fd1342dff3ecd8d821708069351bbf5c3e5a90dd02e389a32d1e0762c258a0",
+    "robustness_plan.py": "ef287eea45b6432f6d1b51edbb170f9ca8a9b07856e2e23fff22435eb1ed489b",
+    "robustness_records.py": "8a2b9c9cc7da903cd49b7b7bb78ca34d9eebe640ff77ce327eee0d8fb6db6ed0",
+    "robustness_summary_input.py": "19d62896435d52cc67be53acd0dba7dd6188aecd8db9ee1ea27552b4a3f51e05",
+    "summarize_robustness.py": "a646926da97761a368a2cdea822c06af9369596e408784b4777bd6bab8812476",
+    "training_provenance.py": "9a23224fe36886ca52ed5471b6fa7491492be2309d39364e6af1d62785543259"
+  }
+}

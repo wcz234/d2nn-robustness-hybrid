@@ -1,0 +1,8 @@
+# Conclusion
+
+This study establishes a protocol-bound numerical comparison of baseline D2NN, perturbation-aware D2NN, hybrid optical-electronic, and electronic inference. The central result is a separation between condition-specific robustness and readout capacity. Perturbation-aware training trades 1.33 clean percentage points for gains under stronger displacement, mixed stress, and coarse phase quantization. The hybrid model gains 6.06 clean points over detector-region classification and leads the mean accuracy in 13 of 14 optical-compatible conditions.
+
+The evidence also defines where these findings stop. Four-level phase quantization produces wide seed-level uncertainty and does not resolve the hybrid-versus-robust ranking. Three seeds and MNIST cannot support broad generalization. Fully coherent scalar propagation omits physical fabrication, calibration, partial coherence, device conversion, and measured detector behavior. CPU wall-clock values describe one software simulator and do not measure optical propagation time, edge latency, power, or energy efficiency.
+
+The next decisive tests are larger seed cohorts, additional datasets, component ablations for the hybrid head, and direct comparisons with quantization-aware, phase-filtered, normalized-cutoff-frequency, and sharpness-aware methods. A later physical study must measure alignment, detector noise, conversion latency, and energy on a documented optical platform. Until then, the present contribution is a reproducible simulation benchmark that exposes robustness gains, reversals, and optical-electronic computation boundaries without converting numerical evidence into hardware claims.
+
