@@ -8,6 +8,7 @@ statistics, and changes only the dataset identity plus the robustness-plan cohor
 from __future__ import annotations
 
 from copy import deepcopy
+import argparse
 from datetime import datetime, timezone
 import hashlib
 import json
@@ -15,8 +16,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parent
-V2_PATH = ROOT / "FORMAL_EXPERIMENT_PROTOCOL_V2.json"
-V3_PATH = ROOT / "FORMAL_EXPERIMENT_PROTOCOL_V3.json"
+V2_PATH = ROOT / "docs" / "FORMAL_EXPERIMENT_PROTOCOL_V2.json"
 
 # Optical-compatible methods only: the Fashion-MNIST comparison targets the claim about
 # condition-selective robustness and hybrid readout, which are optical claims. Pure
@@ -33,7 +33,12 @@ def sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
-def main() -> None:
+def main(argv=None) -> None:
+    parser = argparse.ArgumentParser(description="Generate a derived v3 design; frozen files are never overwritten")
+    parser.add_argument("--output", type=Path, required=True)
+    output = parser.parse_args(argv).output
+    if output.exists():
+        raise FileExistsError(f"refusing to overwrite {output}")
     v2 = json.loads(V2_PATH.read_text(encoding="utf-8"))
 
     v3 = deepcopy(v2)
@@ -47,7 +52,8 @@ def main() -> None:
             "and statistics, and changes the dataset identity to Fashion-MNIST."
         ),
     }
-    v3["status"] = "frozen_before_v3_training"
+    v3["status"] = "regenerated_design_not_original_preregistration"
+    v3["reconstruction_notice"] = "Derived from stored files; this is not a byte-identical reproduction or proof of historical preregistration."
     v3["frozen_at_utc"] = datetime.now(timezone.utc).isoformat()
 
     v3["dataset"] = deepcopy(v2["dataset"])
@@ -84,15 +90,17 @@ def main() -> None:
         "MNIST v1 and v2 results are unaffected and remain the primary cohort.",
     ]
 
-    V3_PATH.write_text(json.dumps(v3, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    print(f"wrote {V3_PATH.name}")
+    output.parent.mkdir(parents=True, exist_ok=True)
+    with output.open("x", encoding="utf-8") as handle:
+        handle.write(json.dumps(v3, ensure_ascii=False, indent=2) + "\n")
+    print(f"wrote {output}")
     print(f"  protocol_id : {v3['protocol_id']}")
     print(f"  dataset     : {v3['dataset']['key']} ({v3['dataset']['test_samples']} test samples)")
     print(f"  methods     : {[m['method_id'] for m in v3['methods']]}")
     print(f"  seeds       : {v3['training']['paired_training_seeds']}")
     print(f"  conditions  : {len(v3['conditions'])}  draws: {sum(c['draw_count'] for c in v3['conditions'])}")
     print(f"  evaluation  : device={v3['evaluation']['device']} timing={v3['evaluation']['timing_device']}")
-    print(f"  sha256      : {sha256(V3_PATH)}")
+    print(f"  sha256      : {sha256(output)}")
 
 
 if __name__ == "__main__":

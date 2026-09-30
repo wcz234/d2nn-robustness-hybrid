@@ -1,0 +1,190 @@
+{
+  "artifacts": {
+    "draw_metrics": {
+      "path": "draw_metrics.jsonl",
+      "row_count": 1,
+      "sha256": "d7762a946a7fc7a2223dc8895edafe8036798445df56083127439d47d68df385",
+      "size_bytes": 1628
+    },
+    "predictions": {
+      "path": "predictions.jsonl",
+      "row_count": 10000,
+      "sha256": "1c9d7ad30f2253ce326205e929d87a22d8e63dc57e490cc3a3830efbb185cd78",
+      "size_bytes": 7327850
+    }
+  },
+  "checkpoint": {
+    "path": "/workspace/scratch/58838211abf4/d2nn-robustness-hybrid/artifacts/supplementary_validation/best_mnist.supplementary_qat_deployed_seed42.pth",
+    "sha256": "db58015b9dbc518f3d51b2fd5d1ef45f10a29e42a2481ab763f0b15756ccaefa"
+  },
+  "cli_configuration": {
+    "batch_size": 128,
+    "checkpoint": "artifacts/supplementary_validation/best_mnist.supplementary_qat_deployed_seed42.pth",
+    "command": "run",
+    "data_dir": "/workspace/scratch/58838211abf4/d2nn-robustness-hybrid/simulator/data",
+    "device": "cpu",
+    "include_scores": false,
+    "method_id": "qat_deployed_pilot",
+    "num_workers": 0,
+    "output_dir": "results/supplementary_validation/qat4_evaluation",
+    "plan": "results/supplementary_validation/qat4_plan.json"
+  },
+  "cohort": {
+    "compatible_model_variants": [
+      "d2nn",
+      "hybrid"
+    ],
+    "dataset_key": "mnist",
+    "full_test_samples": 10000,
+    "input_shape": [
+      1,
+      28,
+      28
+    ],
+    "model_version": "rs_v1",
+    "optical_config": {
+      "input_distance": 0.03,
+      "layer_distance": 0.03,
+      "num_layers": 3,
+      "output_distance": 0.03,
+      "pixel_size": 0.0004,
+      "size": 64,
+      "wavelength": 0.00075
+    },
+    "optical_draw_dtype": "float32",
+    "task": "classification"
+  },
+  "condition_summaries": [
+    {
+      "accuracy_max": 0.9078,
+      "accuracy_mean": 0.9078,
+      "accuracy_min": 0.9078,
+      "accuracy_sd_across_draws": null,
+      "condition_id": "phase_quantization_4",
+      "contrast_mean": 0.743164668560028,
+      "contrast_sd_across_draws": null,
+      "draw_count": 1,
+      "statistical_unit_note": "draw variability for one trained model; not an independent training replicate"
+    }
+  ],
+  "created_at_utc": "2026-09-30T02:38:21.560891+00:00",
+  "environment": {
+    "captured_at_utc": "2026-09-30T02:38:21.561614+00:00",
+    "packages": {
+      "Pillow": "12.3.0",
+      "matplotlib": "3.11.1",
+      "numpy": "2.4.6",
+      "torch": "2.10.0+cpu",
+      "torchvision": "0.25.0+cpu"
+    },
+    "platform": {
+      "cpu_count": 9,
+      "machine": "x86_64",
+      "processor": "x86_64",
+      "release": "6.18.44",
+      "system": "Linux"
+    },
+    "python": {
+      "executable": "/workspace/scratch/58838211abf4/d2nn-pinned-venv/bin/python",
+      "version": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]"
+    },
+    "repository": {
+      "commit": "05c8720c043f4be367675d056bd69afa90d81ed1",
+      "diagnostics": {
+        "commit": {
+          "available": true,
+          "value": "05c8720c043f4be367675d056bd69afa90d81ed1"
+        },
+        "status": {
+          "available": true,
+          "value": "M README.md\n M build_protocol_v2.py\n M build_protocol_v3.py\n M build_protocol_v4.py\n M paper/MANUSCRIPT_ZH.md\n M simulator/evaluate_robustness.py\n M simulator/export_fmnist5_phaseonly_aligned_final.py\n M simulator/robustness_evaluation.py\n M simulator/robustness_plan.py\n M simulator/robustness_records.py\n M simulator/train.py\n M simulator/training_runtime.py\n?? docs/MANUSCRIPT_REVISION_NOTES.md\n?? docs/PROTOCOL_ERRATA.md\n?? docs/SUPPLEMENTARY_EXPERIMENTS.md\n?? docs/SUPPLEMENTARY_PROTOCOL_V5_FASHION_MNIST.json\n?? docs/SUPPLEMENTARY_PROTOCOL_V5_MNIST.json\n?? requirements-cpu.txt\n?? results/supplementary_validation/\n?? simulator/audit_protocol_alignment.py\n?? simulator/fixed_front_readout.py\n?? simulator/summarize_supplementary.py\n?? simulator/supplementary_experiments.py\n?? simulator/tests/test_supplementary_validation.py\n?? simulator/validate_optical_numerics.py"
+        }
+      },
+      "dirty": true
+    },
+    "source_files_sha256": {
+      "artifacts.py": "0cbb43f9d1a29c02b7bb899c64a198ea0b76dc6983c4ed25c9a708820a570ec0",
+      "d2nn.py": "b689567247a3b697328926d2d7134539dcec32f0b164d4a541e9a1409307cdde",
+      "model_variants.py": "4af7bef259e284ccf71a6c76df28720904199cf83cc7b5ce5b3d4a9607228daf",
+      "perturbations.py": "f8f8b1af5ab9c845399a217b302a4a26106722f8fd43d309993b70eb2e7a1dc9",
+      "tasks.py": "c3f99eed091f1e2a294564b3b975cef9a5b9bb976435a5509352da5f767084f6",
+      "train.py": "aa5bd56c8e2b59aa7da5dd1b27c4bf3e32be491bdec5943f0eb1d244e25b426a",
+      "train_core.py": "a8d0b2dd0d32cb523eb9adb4d63cb46039cef8ebb3a245e22bf1222192a5ebc5",
+      "training_provenance.py": "9a23224fe36886ca52ed5471b6fa7491492be2309d39364e6af1d62785543259",
+      "training_runtime.py": "3533455249f4abbddab33159a27983b1e0868833b7f83e4ea888221a78806ef2"
+    },
+    "torch_runtime": {
+      "cuda_available": false,
+      "cuda_device_name": null,
+      "cuda_version": null,
+      "cudnn_benchmark": false,
+      "cudnn_deterministic": false,
+      "deterministic_algorithms": true,
+      "device": "cpu",
+      "num_interop_threads": 9,
+      "num_threads": 2
+    }
+  },
+  "evaluation_id": "robustness-evaluation-e8dedad073a1506003ff",
+  "evaluation_source_files_sha256": {
+    "artifacts.py": "0cbb43f9d1a29c02b7bb899c64a198ea0b76dc6983c4ed25c9a708820a570ec0",
+    "d2nn.py": "b689567247a3b697328926d2d7134539dcec32f0b164d4a541e9a1409307cdde",
+    "evaluate_robustness.py": "fbe99e032f1ec1ea9d666cdafc29107f7be709c1e0f9cbce782570a6b296c39a",
+    "model_variants.py": "4af7bef259e284ccf71a6c76df28720904199cf83cc7b5ce5b3d4a9607228daf",
+    "perturbations.py": "f8f8b1af5ab9c845399a217b302a4a26106722f8fd43d309993b70eb2e7a1dc9",
+    "robustness_cohort.py": "1b20b318c9bf53669a9157b7b7d106aafd82eb4bf5a4da806a81df113fc4d8a9",
+    "robustness_evaluation.py": "42fd55fbff4e5dbed6d09b0378a126b2663fd8bede9157304db1aedfad53db80",
+    "robustness_io.py": "f2fd1342dff3ecd8d821708069351bbf5c3e5a90dd02e389a32d1e0762c258a0",
+    "robustness_plan.py": "4f0897b7de6698c350ce6b112abca1d06b48adeefc6c1aaa85cb4f2a2cf26d00",
+    "robustness_records.py": "f7c0eb8b7c416044ff58391eeb582156446ad16da30b7a893b416313e3d0fc65",
+    "robustness_run_manifest.py": "568922f297cd1e281e81857ff49c1db4fa4d0f86a651e1d965e0dc12a58700cc",
+    "robustness_target.py": "38db532c5704270b61412ada2173581095c43b2f0bc1d28687a2dadd7f148f4c",
+    "tasks.py": "c3f99eed091f1e2a294564b3b975cef9a5b9bb976435a5509352da5f767084f6",
+    "training_provenance.py": "9a23224fe36886ca52ed5471b6fa7491492be2309d39364e6af1d62785543259"
+  },
+  "evidence_status": "full_test_evaluation_requires_cross_training_seed_summary",
+  "manifest_payload_sha256": "4609e89ddda6010eb3389315a1ec98642dd350c42c91daa84ad4558d4d89c619",
+  "method_id": "qat_deployed_pilot",
+  "model": {
+    "activation_hparams": {},
+    "activation_positions": [],
+    "activation_type": "none",
+    "class_name": "HybridD2NNClassifier",
+    "detector_feature_count": 64,
+    "feature_schema_id": "pooled_intensity:8x8",
+    "propagation_backend": "fft",
+    "propagation_chunk_size": null,
+    "score_semantics": "softmax_probability",
+    "training_seed": 42,
+    "variant": "hybrid"
+  },
+  "plan": {
+    "path": "/workspace/scratch/58838211abf4/d2nn-robustness-hybrid/results/supplementary_validation/qat4_plan.json",
+    "plan_id": "robustness-plan-e47b682e50dbf0332162",
+    "sha256": "3529d174892aad583a7617705e6051e57ff7998d1a8cdb9fb6f5c1eaadc231eb"
+  },
+  "runtime": {
+    "batch_size": 128,
+    "deterministic_algorithms": true,
+    "device": "cpu",
+    "include_scores": false,
+    "num_workers": 0
+  },
+  "sample_scope": {
+    "full_test_samples": 10000,
+    "sample_count": 10000,
+    "selection": "full_test"
+  },
+  "sampling_protocol": {
+    "detector_noise_scope": "per_sample_feature_table",
+    "detector_noise_semantics": "synthetic_relative_additive_simulation_noise",
+    "feature_schema_pairing": "optical_draws_are_paired; detector_tables_are_feature_schema_specific",
+    "optical_draw_scope": "one_fixed_draw_per_draw_id_across_selected_test_scope"
+  },
+  "schema_version": "robustness-evaluation/v2",
+  "scope": "numerical_simulation_only",
+  "statistics": {
+    "draw_role": "deployment_perturbation_variability_not_independent_training_replicates",
+    "independent_unit": "training_seed"
+  }
+}

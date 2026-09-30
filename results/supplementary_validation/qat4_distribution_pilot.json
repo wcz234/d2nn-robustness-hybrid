@@ -1,0 +1,94 @@
+{
+  "evidence_status": "descriptive_or_subset_only",
+  "input_files": [
+    {
+      "path": "results/supplementary_validation/qat4_evaluation/evaluation_manifest.json",
+      "sha256": "6beab5b4a11688555fadf8b8638daaf1a5945ec6e3e97ddcec38e4c1d1f23e0d"
+    }
+  ],
+  "schema_version": "deployment-distribution-summary/v1",
+  "scope": "numerical_simulation_only",
+  "seed_records": [
+    {
+      "condition_id": "phase_quantization_4",
+      "method_id": "qat_deployed_pilot",
+      "metrics": {
+        "accuracy_drop_from_nominal_pp": 0.0,
+        "accuracy_lower_quantile": 0.9078,
+        "accuracy_mean": 0.9078,
+        "failure_probability": 0.0
+      },
+      "n_deployment_draws": 1,
+      "nominal_reference_condition": "phase_quantization_4",
+      "training_seed": 42
+    }
+  ],
+  "source_sha256": "5af44605ae45e1a89a8beee23e06cf350eb52d6d27b1cc5f9dab1c2220a00064",
+  "statistics": {
+    "draws_aggregated_before_cross_seed_intervals": true,
+    "failure_accuracy_threshold": 0.9,
+    "failure_definition": "accuracy_strictly_below_threshold",
+    "independent_unit": "training_seed",
+    "lower_quantile": 0.05,
+    "nominal_reference_map": {
+      "qat_deployed_pilot": "phase_quantization_4"
+    },
+    "tail_estimator": "empirical linear quantile, descriptive; training-seed CI does not resolve finite deployment-draw tail uncertainty"
+  },
+  "summaries": [
+    {
+      "condition_id": "phase_quantization_4",
+      "method_id": "qat_deployed_pilot",
+      "metrics": {
+        "accuracy_drop_from_nominal_pp": {
+          "ci95_t": null,
+          "mean": 0.0,
+          "n_training_seeds": 1,
+          "sd_across_training_seeds": null,
+          "values_by_training_seed": [
+            {
+              "training_seed": 42,
+              "value": 0.0
+            }
+          ]
+        },
+        "accuracy_lower_quantile": {
+          "ci95_t": null,
+          "mean": 0.9078,
+          "n_training_seeds": 1,
+          "sd_across_training_seeds": null,
+          "values_by_training_seed": [
+            {
+              "training_seed": 42,
+              "value": 0.9078
+            }
+          ]
+        },
+        "accuracy_mean": {
+          "ci95_t": null,
+          "mean": 0.9078,
+          "n_training_seeds": 1,
+          "sd_across_training_seeds": null,
+          "values_by_training_seed": [
+            {
+              "training_seed": 42,
+              "value": 0.9078
+            }
+          ]
+        },
+        "failure_probability": {
+          "ci95_t": null,
+          "mean": 0.0,
+          "n_training_seeds": 1,
+          "sd_across_training_seeds": null,
+          "values_by_training_seed": [
+            {
+              "training_seed": 42,
+              "value": 0.0
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

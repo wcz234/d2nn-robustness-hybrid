@@ -305,7 +305,10 @@ def _metadata_issues(export_root: Path, metadata: dict, repo_root: Path) -> list
 
     checkpoint_value = metadata.get("checkpoint")
     expected_checkpoint = (repo_root / OFFICIAL_PRESET["checkpoint"]).resolve()
-    if checkpoint_value and Path(checkpoint_value).resolve() != expected_checkpoint:
+    observed_checkpoint = Path(checkpoint_value) if checkpoint_value else None
+    if observed_checkpoint is not None and not observed_checkpoint.is_absolute():
+        observed_checkpoint = repo_root / observed_checkpoint
+    if observed_checkpoint is not None and observed_checkpoint.resolve() != expected_checkpoint:
         issues.append(
             "Export checkpoint does not match the frozen official preset: "
             f"{expected_checkpoint}"

@@ -43,6 +43,8 @@ def _add_perturbation_arguments(parser) -> None:
     parser.add_argument("--phase-noise-std-rad", type=float, default=0.0)
     parser.add_argument("--phase-quantization-levels", type=int, default=None)
     parser.add_argument("--detector-noise-std-relative", type=float, default=0.0)
+    parser.add_argument("--phase-filter-std-px", type=float, default=0.0,
+                        help="explicit deployed Gaussian phase smoothing; frozen into this condition")
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -103,6 +105,7 @@ def create_plan(args) -> Path:
         optical_seed=args.optical_seed,
         detector_seed=detector_seed,
         sample_limit=args.sample_limit,
+        phase_filter_std_px=args.phase_filter_std_px,
     )
     write_json_exclusive(output_path, plan)
     return output_path

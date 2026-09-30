@@ -219,12 +219,13 @@ class PerBatchPerturbationFactory:
 
 
 class QuantizedCleanDrawFactory:
-    """Apply deployment quantization during validation/test without random noise."""
+    """Apply a nominal phase path during validation/test without random noise."""
 
-    def __init__(self, model, levels: int):
+    def __init__(self, model, levels: int | None, phase_filter_std_px: float = 0.0):
         self._draw = PerturbationDraw(
             layers=tuple(LayerPerturbation() for _ in model.layers),
             phase_quantization_levels=levels,
+            phase_filter_std_px=phase_filter_std_px,
         )
 
     def __call__(self, *, batch_size: int, dtype: torch.dtype, device) -> PerturbationDraw:
@@ -238,9 +239,12 @@ def build_perturbation_factories(
     *,
     optical_perturbation_seed: int,
     detector_noise_seed: int,
+    validate_training_phase: bool = False,
 ):
     needs_train_factory = perturbations_enabled(config) or training_only_regularization_enabled(config)
-    needs_eval_factory = config.phase_quantization_levels is not None
+    needs_eval_factory = config.phase_quantization_levels is not None or (
+        validate_training_phase and training_only_regularization_enabled(config)
+    )
     if not needs_train_factory and not needs_eval_factory:
         return None, None
     train_factory = PerBatchPerturbationFactory(
@@ -251,8 +255,12 @@ def build_perturbation_factories(
         phase_quantization_levels=config.train_phase_quantization_levels,
     )
     eval_factory = None
-    if config.phase_quantization_levels is not None:
-        eval_factory = QuantizedCleanDrawFactory(model, config.phase_quantization_levels)
+    if needs_eval_factory:
+        levels = config.phase_quantization_levels
+        if validate_training_phase and config.train_phase_quantization_levels is not None:
+            levels = config.train_phase_quantization_levels
+        filter_std = config.train_phase_filter_std_px if validate_training_phase else 0.0
+        eval_factory = QuantizedCleanDrawFactory(model, levels, filter_std)
     return train_factory, eval_factory
 
 
@@ -273,6 +281,18 @@ def classification_run_suffix(args, config: PerturbationConfig, perturbation_see
                 parts.append(f"{key.replace('_', '-')}-{value}")
         parts.append(f"oseed-{perturbation_seeds['optical_perturbation_seed']}")
         parts.append(f"dseed-{perturbation_seeds['detector_noise_seed']}")
+    # These deterministic phase paths also change the experiment identity.
+    # Previously unnamed QAT/filter runs could overwrite the baseline checkpoint.
+    if config.phase_quantization_levels is not None:
+        parts.append(f"deployment-q-{config.phase_quantization_levels}")
+    if config.train_phase_quantization_levels is not None:
+        parts.append(f"qat-{config.train_phase_quantization_levels}")
+    if config.train_phase_filter_std_px:
+        parts.append(f"filter-{config.train_phase_filter_std_px}")
+    if getattr(args, "validate_training_phase", False):
+        parts.append("validate-deployed-phase")
+    if getattr(args, "hybrid_linear_head", False):
+        parts.append("linear-head")
     return "__".join(parts) or None
 
 def model_manifest(model, args, input_shape) -> dict[str, Any]:
@@ -322,8 +342,17 @@ def serialized_perturbation_config(config: PerturbationConfig) -> dict[str, Any]
     return robustness_plan.serialized_perturbation_config(config)
 
 
-def perturbation_manifest(config: PerturbationConfig, seeds: dict[str, int], train_factory) -> dict[str, Any]:
+def perturbation_manifest(
+    config: PerturbationConfig, seeds: dict[str, int], train_factory,
+    *, validate_training_phase: bool = False,
+) -> dict[str, Any]:
     metric_condition = "quantized_clean" if config.phase_quantization_levels is not None else "clean_continuous"
+    nominal_levels = config.phase_quantization_levels
+    nominal_filter = 0.0
+    if validate_training_phase:
+        nominal_levels = config.train_phase_quantization_levels or nominal_levels
+        nominal_filter = config.train_phase_filter_std_px
+        metric_condition = "nominal_deployment_phase"
     stochastic_optical = any(
         value > 0
         for value in (
@@ -349,16 +378,21 @@ def perturbation_manifest(config: PerturbationConfig, seeds: dict[str, int], tra
         "training_phase_quantization_levels": qat_levels,
         "training_phase_filter_std_px": config.train_phase_filter_std_px,
         "phase_filter_training": (
-            f"train_only_gaussian_std_{config.train_phase_filter_std_px}_px_validation_and_test_clean_continuous"
+            f"gaussian_std_{config.train_phase_filter_std_px}_px_validation_and_test_{metric_condition}"
             if config.train_phase_filter_std_px > 0
             else "disabled"
         ),
         "quantization_aware_training": (
-            f"train_only_{qat_levels}_levels_validation_and_test_clean_continuous"
+            f"train_only_{qat_levels}_levels_validation_and_test_{metric_condition}"
             if qat_levels is not None
             else "disabled"
         ),
         "validation_test_condition": metric_condition,
+        "validate_training_phase": validate_training_phase,
+        "nominal_phase_config": {
+            "phase_quantization_levels": nominal_levels,
+            "phase_filter_std_px": nominal_filter,
+        },
         "validation_test_random_perturbations": False,
         "gap_spacing_error_semantics": "independent_inter_layer_gap_spacing_error",
         "detector_noise_semantics": "synthetic_relative_additive_simulation_noise",
