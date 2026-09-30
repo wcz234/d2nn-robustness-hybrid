@@ -5,6 +5,7 @@ from __future__ import annotations
 from datetime import datetime, timezone
 import hashlib
 import json
+import math
 from typing import Any
 
 from perturbations import PerturbationConfig
@@ -116,6 +117,9 @@ def validate_condition_plan(condition: dict) -> None:
     if not condition["condition_id"].strip():
         raise ValueError("condition_id must be non-empty")
     config = plan_perturbation_config(condition)
+    filter_std = condition.get("phase_filter_std_px", 0.0)
+    if isinstance(filter_std, bool) or not isinstance(filter_std, (int, float)) or not math.isfinite(filter_std) or filter_std < 0:
+        raise ValueError("condition phase_filter_std_px must be finite and non-negative")
     draws = condition.get("draws")
     if not isinstance(draws, list) or not draws:
         raise ValueError("condition draws must be a non-empty list")
@@ -163,8 +167,8 @@ def plan_identity_sha256(plan: dict) -> str:
     return canonical_json_sha256(_plan_identity_payload(plan))
 
 
-def _build_condition(*, condition_id, config, draw_count, optical_seed, detector_seed) -> dict:
-    return {
+def _build_condition(*, condition_id, config, draw_count, optical_seed, detector_seed, phase_filter_std_px=0.0) -> dict:
+    condition = {
         "condition_id": condition_id,
         "perturbation_config": serialized_perturbation_config(config),
         "seed_protocol": {
@@ -179,6 +183,9 @@ def _build_condition(*, condition_id, config, draw_count, optical_seed, detector
             detector_seed=detector_seed,
         ),
     }
+    if phase_filter_std_px:
+        condition["phase_filter_std_px"] = phase_filter_std_px
+    return condition
 
 
 def _assemble_plan(*, target, conditions, sample_limit, formal_protocol=None) -> dict[str, Any]:
@@ -213,6 +220,7 @@ def build_robustness_plan(
     optical_seed: int,
     detector_seed: int,
     sample_limit: int | None,
+    phase_filter_std_px: float = 0.0,
 ) -> dict[str, Any]:
     condition = _build_condition(
         condition_id=condition_id,
@@ -220,6 +228,7 @@ def build_robustness_plan(
         draw_count=draw_count,
         optical_seed=optical_seed,
         detector_seed=detector_seed,
+        phase_filter_std_px=phase_filter_std_px,
     )
     return _assemble_plan(target=target, conditions=[condition], sample_limit=sample_limit)
 
@@ -267,6 +276,8 @@ def build_robustness_plan_from_protocol(*, target, protocol: dict, protocol_sha2
                 detector_seed=detector_seed,
             )
         )
+        if "phase_filter_std_px" in specification:
+            conditions[-1]["phase_filter_std_px"] = specification["phase_filter_std_px"]
     formal_protocol = {
         "protocol_schema_version": protocol["protocol_schema_version"],
         "protocol_id": protocol.get("protocol_id"),

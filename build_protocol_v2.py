@@ -1,14 +1,14 @@
 """Create FORMAL_EXPERIMENT_PROTOCOL_V2.json by extending the frozen v1 protocol.
 
 v1 is frozen evidence and must not be edited. v2 adds the LeNet-5 pure-electronic
-reference baseline requested by external review. Everything else (dataset, training
-budget, evaluation, conditions, statistics) is copied unchanged so that v1-cohort
-results remain directly comparable.
+reference baseline requested by external review. Derived outputs correct the known seed/stage metadata discrepancy; they are not
+historical preregistration evidence. The stored protocols stay unchanged.
 """
 
 from __future__ import annotations
 
 from copy import deepcopy
+import argparse
 from datetime import datetime, timezone
 import hashlib
 import json
@@ -16,8 +16,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parent
-V1_PATH = ROOT / "FORMAL_EXPERIMENT_PROTOCOL.json"
-V2_PATH = ROOT / "FORMAL_EXPERIMENT_PROTOCOL_V2.json"
+V1_PATH = ROOT / "docs" / "FORMAL_EXPERIMENT_PROTOCOL.json"
 
 LENET5_METHOD = {
     "method_id": "lenet5",
@@ -65,7 +64,12 @@ def sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
-def main() -> None:
+def main(argv=None) -> None:
+    parser = argparse.ArgumentParser(description="Generate a derived v2 design; frozen files are never overwritten")
+    parser.add_argument("--output", type=Path, required=True)
+    output = parser.parse_args(argv).output
+    if output.exists():
+        raise FileExistsError(f"refusing to overwrite {output}")
     v1 = json.loads(V1_PATH.read_text(encoding="utf-8"))
     if any(method.get("method_id") == "lenet5" for method in v1["methods"]):
         raise ValueError("v1 already contains a lenet5 method; refusing to fork")
@@ -77,12 +81,18 @@ def main() -> None:
         "path": V1_PATH.name,
         "sha256": sha256(V1_PATH),
         "relationship": (
-            "v2 extends v1 by appending one method. Dataset, training budget, evaluation "
-            "settings, conditions, and statistics are byte-identical to v1."
+            "Derived v2 design adds QAT/LeNet-5 and corrects the five-seed stage metadata; "
+            "it does not amend the historical protocol or prove its preregistration."
         ),
     }
-    v2["status"] = "frozen_before_v2_training"
+    v2["status"] = "regenerated_design_not_original_preregistration"
+    v2["reconstruction_notice"] = "Derived from stored files; this is not a byte-identical reproduction or proof of historical preregistration."
     v2["frozen_at_utc"] = datetime.now(timezone.utc).isoformat()
+    v2["training"]["paired_training_seeds"] = list(range(42, 47))
+    v2["training"]["experiment_stage"] = "formal_mnist_v2"
+    v2["training"]["output_dir"] = "artifacts/formal_mnist_v2"
+    v2["training"]["deterministic_algorithms"] = False
+    v2["statistics"]["n_training_seeds"] = 5
 
     # Device assignment for the v2 cohort. Measured before adoption (device_parity_probe.py):
     # CPU and CUDA agree bit-for-bit on clean/lateral/quantization/mixed conditions while
@@ -111,18 +121,20 @@ def main() -> None:
         "Add method_id 'hybrid_qat': quantization-aware hybrid (four-level phase quantization "
         "during training, clean validation/test).",
         "Add method_id 'lenet5': LeNet-5-style pure-electronic CNN reference baseline.",
-        "No change to dataset, training budget, conditions, or statistics.",
+        "Derived design uses five seeds and v2 stage/output metadata; frozen files are untouched.",
         "v1 results stay valid for the v1 cohort; the new methods are evaluated under v2.",
     ]
 
-    V2_PATH.write_text(json.dumps(v2, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    output.parent.mkdir(parents=True, exist_ok=True)
+    with output.open("x", encoding="utf-8") as handle:
+        handle.write(json.dumps(v2, ensure_ascii=False, indent=2) + "\n")
 
-    print(f"wrote {V2_PATH.name}")
+    print(f"wrote {output}")
     print(f"  protocol_id      : {v2['protocol_id']}")
     print(f"  supersedes       : {v2['supersedes']['protocol_id']} (sha256 {v2['supersedes']['sha256'][:12]}...)")
     print(f"  methods          : {[m['method_id'] for m in v2['methods']]}")
     print(f"  conditions       : {len(v2['conditions'])}")
-    print(f"  sha256           : {sha256(V2_PATH)}")
+    print(f"  sha256           : {sha256(output)}")
 
 
 if __name__ == "__main__":

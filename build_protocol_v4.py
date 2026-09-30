@@ -15,6 +15,7 @@ v1, v2 and v3 stay frozen and untouched. v4 adds three methods to the MNIST desi
 from __future__ import annotations
 
 from copy import deepcopy
+import argparse
 from datetime import datetime, timezone
 import hashlib
 import json
@@ -22,8 +23,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parent
-V2_PATH = ROOT / "FORMAL_EXPERIMENT_PROTOCOL_V2.json"
-V4_PATH = ROOT / "FORMAL_EXPERIMENT_PROTOCOL_V4.json"
+V2_PATH = ROOT / "docs" / "FORMAL_EXPERIMENT_PROTOCOL_V2.json"
 
 V4_SEEDS = [42, 43, 44]
 
@@ -84,7 +84,12 @@ def sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
-def main() -> None:
+def main(argv=None) -> None:
+    parser = argparse.ArgumentParser(description="Generate a derived v4 design; frozen files are never overwritten")
+    parser.add_argument("--output", type=Path, required=True)
+    output = parser.parse_args(argv).output
+    if output.exists():
+        raise FileExistsError(f"refusing to overwrite {output}")
     v2 = json.loads(V2_PATH.read_text(encoding="utf-8"))
 
     v4 = deepcopy(v2)
@@ -98,7 +103,8 @@ def main() -> None:
             "and statistics, and appends three review-response methods."
         ),
     }
-    v4["status"] = "frozen_before_v4_training"
+    v4["status"] = "regenerated_design_not_original_preregistration"
+    v4["reconstruction_notice"] = "Derived from stored files; this is not a byte-identical reproduction or proof of historical preregistration."
     v4["frozen_at_utc"] = datetime.now(timezone.utc).isoformat()
     v4["training"] = deepcopy(v2["training"])
     v4["training"]["paired_training_seeds"] = list(V4_SEEDS)
@@ -118,13 +124,15 @@ def main() -> None:
         "MNIST v1/v2 and Fashion-MNIST v3 results are unaffected and stay frozen.",
     ]
 
-    V4_PATH.write_text(json.dumps(v4, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    print(f"wrote {V4_PATH.name}")
+    output.parent.mkdir(parents=True, exist_ok=True)
+    with output.open("x", encoding="utf-8") as handle:
+        handle.write(json.dumps(v4, ensure_ascii=False, indent=2) + "\n")
+    print(f"wrote {output}")
     print(f"  protocol_id : {v4['protocol_id']}")
     print(f"  methods     : {[m['method_id'] for m in v4['methods']]}")
     print(f"  seeds       : {v4['training']['paired_training_seeds']}")
     print(f"  conditions  : {len(v4['conditions'])}  draws: {sum(c['draw_count'] for c in v4['conditions'])}")
-    print(f"  sha256      : {sha256(V4_PATH)}")
+    print(f"  sha256      : {sha256(output)}")
 
 
 if __name__ == "__main__":

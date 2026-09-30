@@ -1,0 +1,143 @@
+{
+  "records": [
+    {
+      "declared_statistical_n": 3,
+      "declared_training_seeds": [
+        42,
+        43,
+        44
+      ],
+      "note": "retrospective check only; does not establish preregistration timing or correct historical records",
+      "observed_seeds_by_method": {
+        "baseline_d2nn": [
+          42,
+          43,
+          44
+        ],
+        "hybrid": [
+          42,
+          43,
+          44
+        ],
+        "robust_d2nn": [
+          42,
+          43,
+          44
+        ]
+      },
+      "protocol": "docs/FORMAL_EXPERIMENT_PROTOCOL.json",
+      "protocol_sha256": "0c1d48d864fc02bbea64ae53c59d92f921cadf2edaee2cb6b73462a0bf386fe1",
+      "seed_alignment": "MATCH",
+      "seed_metrics": "results/formal_mnist_v1/robustness_summary/seed_metrics.jsonl",
+      "seed_metrics_sha256": "cf6a59f3a79ef07ff3a66fc92b2c8879254ee20f8da6566eb38a1ba23f99c81b"
+    },
+    {
+      "declared_statistical_n": 3,
+      "declared_training_seeds": [
+        42,
+        43,
+        44
+      ],
+      "note": "retrospective check only; does not establish preregistration timing or correct historical records",
+      "observed_seeds_by_method": {
+        "baseline_d2nn": [
+          42,
+          43,
+          44,
+          45,
+          46
+        ],
+        "hybrid": [
+          42,
+          43,
+          44,
+          45,
+          46
+        ],
+        "hybrid_qat": [
+          42,
+          43,
+          44,
+          45,
+          46
+        ],
+        "robust_d2nn": [
+          42,
+          43,
+          44,
+          45,
+          46
+        ]
+      },
+      "protocol": "docs/FORMAL_EXPERIMENT_PROTOCOL_V2.json",
+      "protocol_sha256": "856b6fbb5af80c9938c21aac09918bdc414260930420c16ca2540d4c4c75a151",
+      "seed_alignment": "MISMATCH",
+      "seed_metrics": "results/formal_mnist_v2/robustness_summary/seed_metrics.jsonl",
+      "seed_metrics_sha256": "b6ad235363003bba00b07864aadfcda7dc4b363412804d405d4ed44c5449ccea"
+    },
+    {
+      "declared_statistical_n": 3,
+      "declared_training_seeds": [
+        42,
+        43,
+        44
+      ],
+      "note": "retrospective check only; does not establish preregistration timing or correct historical records",
+      "observed_seeds_by_method": {
+        "baseline_d2nn": [
+          42,
+          43,
+          44
+        ],
+        "hybrid": [
+          42,
+          43,
+          44
+        ],
+        "robust_d2nn": [
+          42,
+          43,
+          44
+        ]
+      },
+      "protocol": "docs/FORMAL_EXPERIMENT_PROTOCOL_V3.json",
+      "protocol_sha256": "442ba8bb34c68e26c89f2197f8273c137202aae809dbc812a91a6a918c7dde3e",
+      "seed_alignment": "MATCH",
+      "seed_metrics": "results/formal_fashion_mnist_v3/robustness_summary/seed_metrics.jsonl",
+      "seed_metrics_sha256": "5f710b54889da768793badeaa237fa328028eb6a6db2c4eadff3f359f92e0d4b"
+    },
+    {
+      "declared_statistical_n": 3,
+      "declared_training_seeds": [
+        42,
+        43,
+        44
+      ],
+      "note": "retrospective check only; does not establish preregistration timing or correct historical records",
+      "observed_seeds_by_method": {
+        "hybrid_linear_head": [
+          42,
+          43,
+          44
+        ],
+        "hybrid_pool4": [
+          42,
+          43,
+          44
+        ],
+        "phase_filtered_d2nn": [
+          42,
+          43,
+          44
+        ]
+      },
+      "protocol": "docs/FORMAL_EXPERIMENT_PROTOCOL_V4.json",
+      "protocol_sha256": "2dd4d11d23e025242a35407079ef98472c8f2ea0a0d951c91731561500b52e9f",
+      "seed_alignment": "MATCH",
+      "seed_metrics": "results/formal_mnist_v4/robustness_summary/seed_metrics.jsonl",
+      "seed_metrics_sha256": "2bed441cb02c5076fc56b9abdf1b735b256d1e9ff588718953326c453ffc00a8"
+    }
+  ],
+  "schema_version": "protocol-alignment-audit/v1",
+  "scope": "retrospective_repository_audit"
+}

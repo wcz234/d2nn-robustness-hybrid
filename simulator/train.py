@@ -83,6 +83,13 @@ def validate_training_args(args):
 
     perturbation_config = resolve_training_perturbation_config(args)
     validate_variant_configuration(args, perturbation_config)
+    if args.validate_training_phase and (
+        args.task != "classification" or (
+            perturbation_config.train_phase_quantization_levels is None
+            and perturbation_config.train_phase_filter_std_px == 0
+        )
+    ):
+        raise ValueError("--validate-training-phase requires classification QAT or phase filtering")
 
     if args.optics_preset in CLASSIFICATION_ONLY_OPTICS_PRESETS and args.task != "classification":
         raise ValueError(f"Optics preset {args.optics_preset!r} is only supported for classification")
@@ -251,6 +258,7 @@ def run_classification_training(args, device, data_dir, save_dir):
     train_draw_factory, eval_draw_factory = build_perturbation_factories(
         model,
         perturbation_config,
+        validate_training_phase=args.validate_training_phase,
         **perturbation_seeds,
     )
     run_name_suffix = classification_run_suffix(args, perturbation_config, perturbation_seeds)
@@ -311,6 +319,7 @@ def run_classification_training(args, device, data_dir, save_dir):
         perturbation_config,
         perturbation_seeds,
         train_draw_factory,
+        validate_training_phase=args.validate_training_phase,
     )
     manifest_data = {
         "task": "classification",
@@ -559,6 +568,11 @@ def build_parser():
         ),
     )
     parser.add_argument("--train-detector-noise-std-relative", type=float, default=0.0)
+    parser.add_argument(
+        "--validate-training-phase", action="store_true",
+        help="select checkpoints and test on the nominal QAT/filtered training phase path; "
+             "random training perturbations remain disabled during validation/test",
+    )
     parser.add_argument(
         "--train-phase-filter-std-px",
         type=float,

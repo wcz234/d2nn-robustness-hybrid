@@ -47,6 +47,9 @@ def optical_draw_record(draw: PerturbationDraw) -> dict:
         for layer in draw.layers
     ]
     payload = {"phase_quantization_levels": draw.phase_quantization_levels, "layers": layers}
+    # Preserve fingerprints for legacy, unfiltered records.
+    if draw.phase_filter_std_px:
+        payload["phase_filter_std_px"] = draw.phase_filter_std_px
     canonical = json.dumps(payload, sort_keys=True, separators=(",", ":"), allow_nan=False).encode("utf-8")
     return {**payload, "fingerprint_sha256": hashlib.sha256(canonical).hexdigest()}
 

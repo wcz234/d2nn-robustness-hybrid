@@ -1,0 +1,483 @@
+{
+  "conditions": [
+    {
+      "condition_id": "clean_continuous",
+      "draw_count": 1,
+      "perturbation_config": {
+        "detector_noise_std_relative": 0.0,
+        "gap_spacing_error_max_m": 0.0,
+        "lateral_shift_max_px": 0.0,
+        "phase_noise_std_rad": 0.0,
+        "phase_quantization_levels": null
+      }
+    },
+    {
+      "condition_id": "shift_0.125px",
+      "draw_count": 20,
+      "perturbation_config": {
+        "detector_noise_std_relative": 0.0,
+        "gap_spacing_error_max_m": 0.0,
+        "lateral_shift_max_px": 0.125,
+        "phase_noise_std_rad": 0.0,
+        "phase_quantization_levels": null
+      }
+    },
+    {
+      "condition_id": "shift_0.25px",
+      "draw_count": 20,
+      "perturbation_config": {
+        "detector_noise_std_relative": 0.0,
+        "gap_spacing_error_max_m": 0.0,
+        "lateral_shift_max_px": 0.25,
+        "phase_noise_std_rad": 0.0,
+        "phase_quantization_levels": null
+      }
+    },
+    {
+      "condition_id": "shift_0.5px",
+      "draw_count": 20,
+      "perturbation_config": {
+        "detector_noise_std_relative": 0.0,
+        "gap_spacing_error_max_m": 0.0,
+        "lateral_shift_max_px": 0.5,
+        "phase_noise_std_rad": 0.0,
+        "phase_quantization_levels": null
+      }
+    },
+    {
+      "condition_id": "shift_0.75px",
+      "draw_count": 20,
+      "perturbation_config": {
+        "detector_noise_std_relative": 0.0,
+        "gap_spacing_error_max_m": 0.0,
+        "lateral_shift_max_px": 0.75,
+        "phase_noise_std_rad": 0.0,
+        "phase_quantization_levels": null
+      }
+    },
+    {
+      "condition_id": "shift_1px",
+      "draw_count": 20,
+      "perturbation_config": {
+        "detector_noise_std_relative": 0.0,
+        "gap_spacing_error_max_m": 0.0,
+        "lateral_shift_max_px": 1.0,
+        "phase_noise_std_rad": 0.0,
+        "phase_quantization_levels": null
+      }
+    },
+    {
+      "condition_id": "shift_2px",
+      "draw_count": 20,
+      "perturbation_config": {
+        "detector_noise_std_relative": 0.0,
+        "gap_spacing_error_max_m": 0.0,
+        "lateral_shift_max_px": 2.0,
+        "phase_noise_std_rad": 0.0,
+        "phase_quantization_levels": null
+      }
+    },
+    {
+      "condition_id": "gap_0.0001m",
+      "draw_count": 20,
+      "perturbation_config": {
+        "detector_noise_std_relative": 0.0,
+        "gap_spacing_error_max_m": 0.0001,
+        "lateral_shift_max_px": 0.0,
+        "phase_noise_std_rad": 0.0,
+        "phase_quantization_levels": null
+      }
+    },
+    {
+      "condition_id": "gap_0.0003m",
+      "draw_count": 20,
+      "perturbation_config": {
+        "detector_noise_std_relative": 0.0,
+        "gap_spacing_error_max_m": 0.0003,
+        "lateral_shift_max_px": 0.0,
+        "phase_noise_std_rad": 0.0,
+        "phase_quantization_levels": null
+      }
+    },
+    {
+      "condition_id": "gap_0.001m",
+      "draw_count": 20,
+      "perturbation_config": {
+        "detector_noise_std_relative": 0.0,
+        "gap_spacing_error_max_m": 0.001,
+        "lateral_shift_max_px": 0.0,
+        "phase_noise_std_rad": 0.0,
+        "phase_quantization_levels": null
+      }
+    },
+    {
+      "condition_id": "phase_noise_0.02rad",
+      "draw_count": 20,
+      "perturbation_config": {
+        "detector_noise_std_relative": 0.0,
+        "gap_spacing_error_max_m": 0.0,
+        "lateral_shift_max_px": 0.0,
+        "phase_noise_std_rad": 0.02,
+        "phase_quantization_levels": null
+      }
+    },
+    {
+      "condition_id": "phase_noise_0.05rad",
+      "draw_count": 20,
+      "perturbation_config": {
+        "detector_noise_std_relative": 0.0,
+        "gap_spacing_error_max_m": 0.0,
+        "lateral_shift_max_px": 0.0,
+        "phase_noise_std_rad": 0.05,
+        "phase_quantization_levels": null
+      }
+    },
+    {
+      "condition_id": "phase_noise_0.1rad",
+      "draw_count": 20,
+      "perturbation_config": {
+        "detector_noise_std_relative": 0.0,
+        "gap_spacing_error_max_m": 0.0,
+        "lateral_shift_max_px": 0.0,
+        "phase_noise_std_rad": 0.1,
+        "phase_quantization_levels": null
+      }
+    },
+    {
+      "condition_id": "phase_noise_0.2rad",
+      "draw_count": 20,
+      "perturbation_config": {
+        "detector_noise_std_relative": 0.0,
+        "gap_spacing_error_max_m": 0.0,
+        "lateral_shift_max_px": 0.0,
+        "phase_noise_std_rad": 0.2,
+        "phase_quantization_levels": null
+      }
+    },
+    {
+      "condition_id": "detector_noise_0.01",
+      "draw_count": 20,
+      "perturbation_config": {
+        "detector_noise_std_relative": 0.01,
+        "gap_spacing_error_max_m": 0.0,
+        "lateral_shift_max_px": 0.0,
+        "phase_noise_std_rad": 0.0,
+        "phase_quantization_levels": null
+      }
+    },
+    {
+      "condition_id": "detector_noise_0.03",
+      "draw_count": 20,
+      "perturbation_config": {
+        "detector_noise_std_relative": 0.03,
+        "gap_spacing_error_max_m": 0.0,
+        "lateral_shift_max_px": 0.0,
+        "phase_noise_std_rad": 0.0,
+        "phase_quantization_levels": null
+      }
+    },
+    {
+      "condition_id": "detector_noise_0.1",
+      "draw_count": 20,
+      "perturbation_config": {
+        "detector_noise_std_relative": 0.1,
+        "gap_spacing_error_max_m": 0.0,
+        "lateral_shift_max_px": 0.0,
+        "phase_noise_std_rad": 0.0,
+        "phase_quantization_levels": null
+      }
+    },
+    {
+      "condition_id": "phase_quantization_32",
+      "draw_count": 1,
+      "perturbation_config": {
+        "detector_noise_std_relative": 0.0,
+        "gap_spacing_error_max_m": 0.0,
+        "lateral_shift_max_px": 0.0,
+        "phase_noise_std_rad": 0.0,
+        "phase_quantization_levels": 32
+      }
+    },
+    {
+      "condition_id": "phase_quantization_16",
+      "draw_count": 1,
+      "perturbation_config": {
+        "detector_noise_std_relative": 0.0,
+        "gap_spacing_error_max_m": 0.0,
+        "lateral_shift_max_px": 0.0,
+        "phase_noise_std_rad": 0.0,
+        "phase_quantization_levels": 16
+      }
+    },
+    {
+      "condition_id": "phase_quantization_8",
+      "draw_count": 1,
+      "perturbation_config": {
+        "detector_noise_std_relative": 0.0,
+        "gap_spacing_error_max_m": 0.0,
+        "lateral_shift_max_px": 0.0,
+        "phase_noise_std_rad": 0.0,
+        "phase_quantization_levels": 8
+      }
+    },
+    {
+      "condition_id": "phase_quantization_4",
+      "draw_count": 1,
+      "perturbation_config": {
+        "detector_noise_std_relative": 0.0,
+        "gap_spacing_error_max_m": 0.0,
+        "lateral_shift_max_px": 0.0,
+        "phase_noise_std_rad": 0.0,
+        "phase_quantization_levels": 4
+      }
+    },
+    {
+      "condition_id": "phase_quantization_2",
+      "draw_count": 1,
+      "perturbation_config": {
+        "detector_noise_std_relative": 0.0,
+        "gap_spacing_error_max_m": 0.0,
+        "lateral_shift_max_px": 0.0,
+        "phase_noise_std_rad": 0.0,
+        "phase_quantization_levels": 2
+      }
+    },
+    {
+      "condition_id": "mixed",
+      "draw_count": 20,
+      "perturbation_config": {
+        "detector_noise_std_relative": 0.01,
+        "gap_spacing_error_max_m": 0.0001,
+        "lateral_shift_max_px": 0.5,
+        "phase_noise_std_rad": 0.05,
+        "phase_quantization_levels": null
+      }
+    },
+    {
+      "condition_id": "qat4_mixed",
+      "draw_count": 20,
+      "perturbation_config": {
+        "detector_noise_std_relative": 0.01,
+        "gap_spacing_error_max_m": 0.0001,
+        "lateral_shift_max_px": 0.5,
+        "phase_noise_std_rad": 0.05,
+        "phase_quantization_levels": 4
+      }
+    },
+    {
+      "condition_id": "filtered1_nominal",
+      "draw_count": 1,
+      "perturbation_config": {
+        "detector_noise_std_relative": 0.0,
+        "gap_spacing_error_max_m": 0.0,
+        "lateral_shift_max_px": 0.0,
+        "phase_noise_std_rad": 0.0,
+        "phase_quantization_levels": null
+      },
+      "phase_filter_std_px": 1.0
+    },
+    {
+      "condition_id": "filtered1_mixed",
+      "draw_count": 20,
+      "perturbation_config": {
+        "detector_noise_std_relative": 0.01,
+        "gap_spacing_error_max_m": 0.0001,
+        "lateral_shift_max_px": 0.5,
+        "phase_noise_std_rad": 0.05,
+        "phase_quantization_levels": null
+      },
+      "phase_filter_std_px": 1.0
+    }
+  ],
+  "dataset": {
+    "key": "fashion-mnist",
+    "test_samples": 10000,
+    "validation_samples": 5000
+  },
+  "evaluation": {
+    "deployment_tail_interpretation": "20 draws give descriptive tails; use a separately frozen 100+ draw confirmatory plan for precision",
+    "failure_accuracy_threshold": 0.75,
+    "lower_quantile": 0.05,
+    "master_detector_seed": 72002,
+    "master_optical_seed": 72001,
+    "sample_scope": "full_test"
+  },
+  "excluded_claims": [
+    "hardware latency",
+    "power/energy advantage",
+    "calibrated detector noise",
+    "general validity outside tested datasets and geometry"
+  ],
+  "fixed_front_controls": {
+    "fronts": [
+      "trained",
+      "random",
+      "free",
+      "input"
+    ],
+    "heads": [
+      "linear",
+      "mlp"
+    ],
+    "independent_unit": "source_training_seed",
+    "pools": [
+      4,
+      8
+    ],
+    "readout_epochs": 30,
+    "readout_learning_rate": 0.003,
+    "source_budget": 30,
+    "source_method": "baseline_d2nn"
+  },
+  "frozen_at_utc": "2026-09-30T02:26:43.146095+00:00",
+  "methods": [
+    {
+      "method_id": "baseline_d2nn",
+      "training_cli": []
+    },
+    {
+      "method_id": "robust_shift",
+      "training_cli": [
+        "--train-lateral-shift-max-px",
+        "0.5"
+      ]
+    },
+    {
+      "method_id": "robust_gap",
+      "training_cli": [
+        "--train-gap-spacing-error-max-m",
+        "0.0001"
+      ]
+    },
+    {
+      "method_id": "robust_phase",
+      "training_cli": [
+        "--train-phase-noise-std-rad",
+        "0.05"
+      ]
+    },
+    {
+      "method_id": "robust_detector",
+      "training_cli": [
+        "--train-detector-noise-std-relative",
+        "0.01"
+      ]
+    },
+    {
+      "method_id": "robust_joint",
+      "training_cli": [
+        "--train-lateral-shift-max-px",
+        "0.5",
+        "--train-gap-spacing-error-max-m",
+        "0.0001",
+        "--train-phase-noise-std-rad",
+        "0.05",
+        "--train-detector-noise-std-relative",
+        "0.01"
+      ]
+    },
+    {
+      "method_id": "hybrid",
+      "training_cli": [
+        "--model-variant",
+        "hybrid"
+      ]
+    },
+    {
+      "method_id": "hybrid_robust",
+      "training_cli": [
+        "--model-variant",
+        "hybrid",
+        "--train-lateral-shift-max-px",
+        "0.5",
+        "--train-gap-spacing-error-max-m",
+        "0.0001",
+        "--train-phase-noise-std-rad",
+        "0.05",
+        "--train-detector-noise-std-relative",
+        "0.01"
+      ]
+    },
+    {
+      "method_id": "hybrid_qat_legacy",
+      "training_cli": [
+        "--model-variant",
+        "hybrid",
+        "--train-phase-quantization-levels",
+        "4"
+      ]
+    },
+    {
+      "method_id": "hybrid_qat_deployed",
+      "training_cli": [
+        "--model-variant",
+        "hybrid",
+        "--train-phase-quantization-levels",
+        "4",
+        "--validate-training-phase"
+      ]
+    },
+    {
+      "method_id": "phase_filtered_legacy",
+      "training_cli": [
+        "--train-phase-filter-std-px",
+        "1.0"
+      ]
+    },
+    {
+      "method_id": "phase_filtered_deployed",
+      "training_cli": [
+        "--train-phase-filter-std-px",
+        "1.0",
+        "--validate-training-phase"
+      ]
+    }
+  ],
+  "numerical_gate": {
+    "keep_physical_geometry_fixed": true,
+    "refinement_factors": [
+      1,
+      2,
+      4,
+      8
+    ],
+    "required_interpretation": "independent propagation and successive refinements must be assessed before physical robustness claims"
+  },
+  "protocol_id": "supplementary-fashion-mnist-v5",
+  "protocol_schema_version": "formal-simulation-protocol/v1",
+  "scope": "numerical_simulation_only",
+  "statistics": {
+    "draw_handling": "aggregate distributions within seed, then summarize across seeds",
+    "independent_unit": "training_seed",
+    "intervals": "marginal Student-t; no equivalence or simultaneous significance claims",
+    "n_training_seeds": 5,
+    "nominal_reference_by_method": {
+      "hybrid_qat_deployed": "phase_quantization_4",
+      "phase_filtered_deployed": "filtered1_nominal"
+    }
+  },
+  "status": "prospective_frozen_design_not_completed_results",
+  "training": {
+    "batch_size": 128,
+    "budget_interpretation": "equal epoch count, not equal wall-clock compute; convergence must be inspected, not assumed",
+    "epoch_budgets": [
+      3,
+      30
+    ],
+    "hyperparameter_selection": "none: fixed learning rate; any later validation-only tuning needs a new protocol",
+    "layers": 3,
+    "learning_rate": 0.01,
+    "optics_preset": "d2nn2018_thz",
+    "paired_training_seeds": [
+      42,
+      43,
+      44,
+      45,
+      46
+    ],
+    "propagation_backend": "fft",
+    "scheduler": "StepLR(step_size=5,gamma=0.5)",
+    "size": 64,
+    "validation_selection": "accuracy_then_contrast_then_later_epoch_on_explicit_phase_path"
+  }
+}

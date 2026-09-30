@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import math
 from typing import Callable
+from dataclasses import replace
 
 import torch
 import torch.nn.functional as F
@@ -61,6 +62,7 @@ def _compose_batch_draw(optical_draw: PerturbationDraw, detector_noise: torch.Te
         layers=optical_draw.layers,
         phase_quantization_levels=optical_draw.phase_quantization_levels,
         detector_noise_relative=detector_noise,
+        phase_filter_std_px=optical_draw.phase_filter_std_px,
     )
 
 
@@ -224,6 +226,7 @@ def evaluate_condition(
             **draw_plan,
         }
         optical_draw = materialize_optical_draw(model, config, seed=draw_plan["optical_seed"], device=device)
+        optical_draw = replace(optical_draw, phase_filter_std_px=condition.get("phase_filter_std_px", 0.0))
         detector_table = build_detector_noise_table(
             sample_count=len(loader.dataset),
             feature_count=model.detector_feature_count,
@@ -247,7 +250,7 @@ def evaluate_condition(
 
 def _validate_clean_only_condition(condition: dict) -> None:
     validate_condition_plan(condition)
-    if plan_perturbation_config(condition) != PerturbationConfig():
+    if plan_perturbation_config(condition) != PerturbationConfig() or condition.get("phase_filter_std_px", 0.0):
         raise ValueError("clean-only evaluation rejects optical, quantization, and detector perturbations")
 
 
